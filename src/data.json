@@ -1,0 +1,74 @@
+{
+  "Cabinets": {
+    "Large": {
+      "Kisok": {
+        "weight": 136,
+        "maxPanels": 9
+      },
+      "Addon": {
+        "weight": 130,
+        "maxPanels": 10
+      },
+      "Small": {
+        "Kisok": {
+          "weight": 82,
+          "maxPanels": 4
+        },
+        "Addon": {
+          "weight": 74,
+          "maxPanels": 4
+        }
+      }
+    }
+  },
+  "Panels": {
+    "MX": {
+      "panelWeight": 2,
+      "positions": 32
+    },
+    "HC": {
+      "panelWeight": null,
+      "positions": 56
+    },
+    "Xi": {
+      "panelWeight": 5,
+      "positions": 32
+    },
+    "DP": {
+      "panelWeight": 2,
+      "positions": 16,
+      "maxPanels": {
+        "large": 4,
+        "small": 2
+      }
+    }
+  },
+  "Other": {
+    "3256XC": 60,
+    "3256HC": 59,
+    "3256iC": 67,
+    "case": 36
+  },
+  "Stand": {
+    "A600": 60
+  },
+  "Accs": {
+    "Wallboard": {
+      "AAX010": 30,
+      "AAX020": 18,
+      "AAX056": 12
+    },
+    "APC": {
+      "ATX020": 6,
+      "ATX009": 14
+    },
+    "Zebra": {
+      "ATM015": 10
+    }
+  },
+  "Pallets": {
+    "56x42": 35,
+    "48x40": 40,
+    "36x36": 35
+  }
+}

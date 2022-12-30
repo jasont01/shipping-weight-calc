@@ -1,5 +1,5 @@
 {
-  "name": "shipping-weights",
+  "name": "shipping-weight-calculator",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
