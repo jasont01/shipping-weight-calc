@@ -1,10 +1,28 @@
+import { useState, useEffect } from 'react'
 import Box from '@mui/material/Box'
 import InputLabel from '@mui/material/InputLabel'
 import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
 import Select from '@mui/material/Select'
 
-const Dropdown = ({ label, items, value, onChange }) => {
+const Dropdown = ({ label, maxPanels, value, onChange, panelPositions }) => {
+  const [options, setOptions] = useState([
+    { panels: value, positions: panelPositions * value },
+  ])
+
+  useEffect(() => {
+    let opts = []
+
+    for (let i = maxPanels; i > 0; i--) {
+      opts.push({
+        panels: i,
+        positions: panelPositions * i,
+      })
+    }
+
+    setOptions(opts)
+  }, [maxPanels, panelPositions])
+
   return (
     <Box sx={{ minWidth: 120 }}>
       <FormControl fullWidth>
@@ -16,9 +34,9 @@ const Dropdown = ({ label, items, value, onChange }) => {
           size={'small'}
           onChange={(e) => onChange(e.target.value)}
         >
-          {items.map((item, idx) => (
-            <MenuItem key={idx} value={item}>
-              {item.type}
+          {options.map((option) => (
+            <MenuItem key={option.positions} value={option.panels}>
+              {option.positions}
             </MenuItem>
           ))}
         </Select>

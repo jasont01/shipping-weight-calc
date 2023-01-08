@@ -1,74 +1,59 @@
 {
-  "Cabinets": {
-    "Large": {
-      "Kisok": {
-        "weight": 136,
-        "maxPanels": 9
-      },
-      "Addon": {
-        "weight": 130,
-        "maxPanels": 10
-      },
-      "Small": {
-        "Kisok": {
-          "weight": 82,
-          "maxPanels": 4
-        },
-        "Addon": {
-          "weight": 74,
-          "maxPanels": 4
-        }
-      }
-    }
-  },
-  "Panels": {
-    "MX": {
-      "panelWeight": 2,
-      "positions": 32
-    },
-    "HC": {
-      "panelWeight": null,
-      "positions": 56
-    },
-    "Xi": {
-      "panelWeight": 5,
-      "positions": 32
-    },
-    "DP": {
-      "panelWeight": 2,
+  "panels": [
+    { "type": "MX", "weight": 2, "positions": 32 },
+    { "type": "HC", "weight": 0, "positions": 56 },
+    { "type": "Xi", "weight": 5, "positions": 32 },
+    {
+      "type": "DP",
+      "weight": 2,
       "positions": 16,
-      "maxPanels": {
-        "large": 4,
-        "small": 2
-      }
+      "panelSize": 2,
+      "interiorOnly": true
     }
-  },
-  "Other": {
-    "3256XC": 60,
-    "3256HC": 59,
-    "3256iC": 67,
-    "case": 36
-  },
-  "Stand": {
-    "A600": 60
-  },
-  "Accs": {
-    "Wallboard": {
-      "AAX010": 30,
-      "AAX020": 18,
-      "AAX056": 12
+  ],
+  "cabinets": [
+    { "type": "Large", "weight": 136, "interiorPanels": 5, "doorPanels": 4 },
+    { "type": "Small", "weight": 82, "interiorPanels": 3, "doorPanels": 1 },
+    { "type": "Mini", "weight": 58, "interiorPanels": 1, "doorPanels": 0 }
+  ],
+  "config": [
+    { "type": "Kiosk", "weight": null, "extraPanels": null },
+    { "type": "Addon", "weight": -6, "extraPanels": 1 }
+  ],
+  "mount": [
+    { "type": "Wall", "weight": null },
+    { "type": "Stand", "weight": null },
+    { "type": "None", "weight": null }
+  ],
+  "pannelBlank": null,
+  "accessories": [
+    {
+      "type": "Wallboard",
+      "items": [
+        { "item": "AAX010", "weight": 30 },
+        { "item": "AAX020", "weight": 18 },
+        { "item": "AAX056", "weight": 12 }
+      ]
     },
-    "APC": {
-      "ATX020": 6,
-      "ATX009": 14
+    { "type": "Stand", "items": [{ "part": "A600", "weight": 60 }] },
+    {
+      "type": "APC",
+      "items": [
+        { "item": "ATX020", "weight": 6 },
+        { "item": "ATX009", "weight": 14 }
+      ]
     },
-    "Zebra": {
-      "ATM015": 10
-    }
-  },
-  "Pallets": {
-    "56x42": 35,
-    "48x40": 40,
-    "36x36": 35
-  }
+    { "type": "Zebra", "item": [{ "part": "ATM015", "weight": 10 }] }
+  ],
+  "shipping": [
+    {
+      "type": "Pallets",
+      "items": [
+        { "item": "56x42", "weight": 35 },
+        { "item": "48x40", "weight": 40 },
+        { "item": "36x36", "weight": 35 }
+      ]
+    },
+    { "type": "Other", "items": [{ "item": "Pelican", "weight": 36 }] }
+  ]
 }

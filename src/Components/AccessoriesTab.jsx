@@ -12,7 +12,7 @@ const AccessoriesTab = () => {
         type='number'
         InputProps={{ inputProps: { min: 0 } }}
         defaultValue={0}
-        sx={{ width: '5em', mr: 2 }}
+        sx={{ width: '5em', m: 1 }}
         size={'small'}
       />
       <TextField
@@ -21,7 +21,7 @@ const AccessoriesTab = () => {
         type='number'
         InputProps={{ inputProps: { min: 0 } }}
         defaultValue={0}
-        sx={{ width: '5em' }}
+        sx={{ width: '5em', m: 1 }}
         size={'small'}
       />
       <Typography variant='subtitle2' sx={{ my: 2 }}>
@@ -33,7 +33,7 @@ const AccessoriesTab = () => {
         type='number'
         InputProps={{ inputProps: { min: 0 } }}
         defaultValue={0}
-        sx={{ width: '5em' }}
+        sx={{ width: '5em', m: 1 }}
         size={'small'}
       />
       <Typography variant='subtitle2' sx={{ my: 2 }}>
@@ -45,7 +45,7 @@ const AccessoriesTab = () => {
         type='number'
         InputProps={{ inputProps: { min: 0 } }}
         defaultValue={0}
-        sx={{ width: '5em' }}
+        sx={{ width: '5em', m: 1 }}
         size={'small'}
       />
       <TextField
@@ -54,7 +54,7 @@ const AccessoriesTab = () => {
         type='number'
         InputProps={{ inputProps: { min: 0 } }}
         defaultValue={0}
-        sx={{ width: '5em', mx: 2 }}
+        sx={{ width: '5em', m: 1 }}
         size={'small'}
       />
       <TextField
@@ -63,7 +63,7 @@ const AccessoriesTab = () => {
         type='number'
         InputProps={{ inputProps: { min: 0 } }}
         defaultValue={0}
-        sx={{ width: '5em' }}
+        sx={{ width: '5em', m: 1 }}
         size={'small'}
       />
       <Typography variant='subtitle2' sx={{ my: 2 }}>
@@ -75,7 +75,7 @@ const AccessoriesTab = () => {
         type='number'
         InputProps={{ inputProps: { min: 0 } }}
         defaultValue={0}
-        sx={{ width: '5em' }}
+        sx={{ width: '5em', m: 1 }}
         size={'small'}
       />
     </>

@@ -12,7 +12,7 @@ const ShippingTab = () => {
         type='number'
         InputProps={{ inputProps: { min: 0 } }}
         defaultValue={0}
-        sx={{ width: '5em' }}
+        sx={{ width: '5em', m: 1 }}
         size={'small'}
       />
       <TextField
@@ -21,7 +21,7 @@ const ShippingTab = () => {
         type='number'
         InputProps={{ inputProps: { min: 0 } }}
         defaultValue={0}
-        sx={{ width: '5em', mx: 2 }}
+        sx={{ width: '5em', m: 1 }}
         size={'small'}
       />
       <TextField
@@ -30,7 +30,7 @@ const ShippingTab = () => {
         type='number'
         InputProps={{ inputProps: { min: 0 } }}
         defaultValue={0}
-        sx={{ width: '5em' }}
+        sx={{ width: '5em', m: 1 }}
         size={'small'}
       />
     </>
