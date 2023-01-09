@@ -1,39 +1,34 @@
-import { Typography, TextField } from '@mui/material'
+import { Box, Typography, TextField, Divider, Button } from '@mui/material'
 
-const ShippingTab = () => {
+const ShippingTab = ({ data: materials, addToShipment }) => {
   return (
-    <>
-      <Typography variant='subtitle2' sx={{ mb: 2 }}>
-        Pallets
-      </Typography>
-      <TextField
-        id='PBX028'
-        label='56x42'
-        type='number'
-        InputProps={{ inputProps: { min: 0 } }}
-        defaultValue={0}
-        sx={{ width: '5em', m: 1 }}
-        size={'small'}
-      />
-      <TextField
-        id='PBX021'
-        label='48x40'
-        type='number'
-        InputProps={{ inputProps: { min: 0 } }}
-        defaultValue={0}
-        sx={{ width: '5em', m: 1 }}
-        size={'small'}
-      />
-      <TextField
-        id='PBX003'
-        label='36x36'
-        type='number'
-        InputProps={{ inputProps: { min: 0 } }}
-        defaultValue={0}
-        sx={{ width: '5em', m: 1 }}
-        size={'small'}
-      />
-    </>
+    <Box>
+      {materials.map((material) => (
+        <Box sx={{ mb: 2 }}>
+          <Typography variant='subtitle2' sx={{ mb: 1 }}>
+            {material.type}
+          </Typography>
+          {material.items.map((item) => (
+            <TextField
+              id={item.desc}
+              label={item.desc}
+              type='number'
+              InputProps={{ inputProps: { min: 0 } }}
+              defaultValue={0}
+              sx={{ width: '5em', m: 1 }}
+              size={'small'}
+            />
+          ))}
+        </Box>
+      ))}
+      <Divider sx={{ m: 3 }} />
+      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+        <Button variant='contained' onClick={addToShipment}>
+          Add
+        </Button>
+      </Box>
+    </Box>
   )
 }
+
 export default ShippingTab

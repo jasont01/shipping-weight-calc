@@ -36,7 +36,7 @@ const Items = () => {
           </TableHead>
           <TableBody>
             {items.map((item) => (
-              <Item key={item.id} item={item} />
+              <Item key={item.part} item={item} />
             ))}
           </TableBody>
         </Table>

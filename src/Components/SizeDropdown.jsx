@@ -1,6 +1,6 @@
 import { Box, InputLabel, MenuItem, FormControl, Select } from '@mui/material'
 
-const Dropdown = ({ label, items, value, onChange }) => {
+const Dropdown = ({ label, items, value, onChange, panelSize }) => {
   return (
     <Box sx={{ minWidth: 120 }}>
       <FormControl fullWidth>
@@ -11,13 +11,12 @@ const Dropdown = ({ label, items, value, onChange }) => {
           label={label}
           size={'small'}
           onChange={(e) => onChange(e.target.value)}
-          sx={{ textTransform: 'capitalize' }}
         >
           {items.map((item, idx) => (
             <MenuItem
               key={idx}
               value={item}
-              sx={{ textTransform: 'capitalize' }}
+              disabled={item.interiorPanels < panelSize}
             >
               {item.type}
             </MenuItem>

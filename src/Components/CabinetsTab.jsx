@@ -1,17 +1,16 @@
 import { useState, useEffect } from 'react'
-import { FormControl, TextField } from '@mui/material'
+import { Box, FormControl, TextField, Divider, Button } from '@mui/material'
 import Dropdown from './Dropdown'
+import PanelDropdown from './PanelDropdown'
 import PositionsDropdown from './PositionsDropdown'
-import data from '../data.json'
+import SizeDropdown from './SizeDropdown'
 
-const CabinetsTab = () => {
-  const [panelType, setPanelType] = useState(data.panels[0])
-  const [panels, setPanels] = useState(9)
-  const [size, setSize] = useState(data.cabinets[0])
-  const [config, setConfig] = useState(data.config[0])
-  const [mount, setMount] = useState(data.mount[0])
-  const [qty, setQty] = useState(1)
-  const [maxPanels, setMaxPanels] = useState(10)
+const CabinetsTab = ({ data, build, setBuild, addToShipment }) => {
+  const { panelType, panels, size, config, mount, qty } = build
+
+  const [maxPanels, setMaxPanels] = useState(
+    size.interiorPanels + size.doorPanels
+  )
 
   useEffect(() => {
     let panelCount = size.interiorPanels
@@ -26,17 +25,18 @@ const CabinetsTab = () => {
   }, [panelType, size, config])
 
   useEffect(() => {
-    if (panels > maxPanels) setPanels(maxPanels)
-  }, [maxPanels, panels])
+    if (panels > maxPanels) setBuild({ ...build, panels: maxPanels })
+  }, [maxPanels, panels, build, setBuild])
 
   return (
-    <>
+    <Box>
       <FormControl size='sm' sx={{ m: 1 }}>
-        <Dropdown
+        <PanelDropdown
           label={'Panel'}
           items={data.panels}
-          onChange={setPanelType}
+          onChange={(value) => setBuild({ ...build, panelType: value })}
           value={panelType}
+          maxPanels={size.interiorPanels}
         />
       </FormControl>
       <FormControl size='sm' sx={{ m: 1 }}>
@@ -44,23 +44,24 @@ const CabinetsTab = () => {
           label={'Positions'}
           maxPanels={maxPanels}
           value={panels}
-          onChange={setPanels}
+          onChange={(value) => setBuild({ ...build, panels: value })}
           panelPositions={panelType.positions}
         />
       </FormControl>
       <FormControl size='sm' sx={{ m: 1 }}>
-        <Dropdown
+        <SizeDropdown
           label={'Size'}
-          items={data.cabinets}
-          onChange={setSize}
+          items={data.size}
+          onChange={(value) => setBuild({ ...build, size: value })}
           value={size}
+          panelSize={panelType?.panelSize || 1}
         />
       </FormControl>
       <FormControl size='sm' sx={{ m: 1 }}>
         <Dropdown
           label={'Config'}
           items={data.config}
-          onChange={setConfig}
+          onChange={(value) => setBuild({ ...build, config: value })}
           value={config}
         />
       </FormControl>
@@ -68,7 +69,7 @@ const CabinetsTab = () => {
         <Dropdown
           label={'Mount'}
           items={data.mount}
-          onChange={setMount}
+          onChange={(value) => setBuild({ ...build, mount: value })}
           value={mount}
         />
       </FormControl>
@@ -77,14 +78,22 @@ const CabinetsTab = () => {
           id='qty'
           label='Qty'
           type='number'
-          InputProps={{ inputProps: { min: 0 } }}
+          InputProps={{ inputProps: { min: 1 } }}
           defaultValue={qty}
-          onChange={(e) => setQty(e.target.value)}
+          onChange={(e) =>
+            setBuild({ ...build, qty: parseInt(e.target.value) })
+          }
           sx={{ width: '5em', m: 1 }}
           size={'small'}
         />
       </FormControl>
-    </>
+      <Divider sx={{ m: 3 }} />
+      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+        <Button variant='contained' onClick={addToShipment}>
+          Add
+        </Button>
+      </Box>
+    </Box>
   )
 }
 

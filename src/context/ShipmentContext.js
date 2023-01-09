@@ -5,19 +5,33 @@ export const ShipmentContext = createContext()
 const shipmentReducer = (state, action) => {
   switch (action.type) {
     case 'ADD_ITEM':
-      return { ...state, items: [...state.items, action.payload] }
+      const exists = state.items.find(
+        (item) => item.part === action.payload.part
+      )
+      if (exists) {
+        return {
+          ...state,
+          items: state.items.map((item) =>
+            item.part === action.payload.part
+              ? { ...item, qty: item.qty + action.payload.qty }
+              : item
+          ),
+        }
+      } else {
+        return { ...state, items: [...state.items, action.payload] }
+      }
 
     case 'REMOVE_ITEM':
       return {
         ...state,
-        items: state.items.filter((item) => item.id !== action.payload),
+        items: state.items.filter((item) => item.part !== action.payload),
       }
 
     case 'INCREMENT':
       return {
         ...state,
         items: state.items.map((item) =>
-          item.id === action.payload ? { ...item, qty: item.qty + 1 } : item
+          item.part === action.payload ? { ...item, qty: item.qty + 1 } : item
         ),
       }
 
@@ -25,7 +39,7 @@ const shipmentReducer = (state, action) => {
       return {
         ...state,
         items: state.items.map((item) =>
-          item.id === action.payload ? { ...item, qty: item.qty - 1 } : item
+          item.part === action.payload ? { ...item, qty: item.qty - 1 } : item
         ),
       }
 
@@ -37,20 +51,9 @@ const shipmentReducer = (state, action) => {
   }
 }
 
-//=======================================================
-const testData = [
-  { id: 'MKE228XC', desc: 'MX288C', qty: 1, weight: 280 },
-  { id: 'AAX010', desc: 'Large Wallboard', qty: 1, weight: 35 },
-  { id: 'MKE112HC', desc: 'HC112', qty: 1, weight: 160 },
-  { id: 'AAX020', desc: 'Small Wallboard', qty: 1, weight: 18 },
-  { id: 'A600', desc: 'Stand', qty: 42, weight: 60 },
-  { id: 'ATX020', desc: 'APC', qty: 1, weight: 6 },
-]
-//=========================================================
-
 const ShipmentContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(shipmentReducer, {
-    items: [...testData],
+    items: [],
   })
 
   return (

@@ -3,18 +3,23 @@ import RemoveCircleIcon from '@mui/icons-material/RemoveCircle'
 import AddCircleIcon from '@mui/icons-material/AddCircle'
 import { useShipmentContext } from '../hooks/useShipmentContext'
 
-const Counter = ({ id, qty }) => {
+const Counter = ({ part, qty }) => {
   const { dispatch } = useShipmentContext()
 
-  const increment = () => dispatch({ type: 'INCREMENT', payload: id })
+  const increment = () => dispatch({ type: 'INCREMENT', payload: part })
 
   const decrement = () => {
-    if (qty > 0) dispatch({ type: 'DECREMENT', payload: id })
+    if (qty > 1) dispatch({ type: 'DECREMENT', payload: part })
   }
 
   return (
     <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-      <IconButton size='small' onClick={decrement} color='primary'>
+      <IconButton
+        size='small'
+        onClick={decrement}
+        color='primary'
+        disabled={qty < 2}
+      >
         <RemoveCircleIcon />
       </IconButton>
       <Box
