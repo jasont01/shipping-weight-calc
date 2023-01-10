@@ -34,7 +34,7 @@ const AccessoriesTab = ({ categories, accessories, setAccessories }) => {
               label={item.part}
               type='number'
               InputProps={{ inputProps: { min: 0 } }}
-              defaultValue={0}
+              value={accessories.find((a) => a.part === item.part).qty}
               sx={{ width: '5em', m: 1 }}
               size={'small'}
               onChange={onChange}

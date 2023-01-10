@@ -35,6 +35,7 @@ const ShippingTab = ({
               key={item.part}
               id={item.part}
               label={item.desc}
+              value={shippingMaterials.find((a) => a.part === item.part).qty}
               type='number'
               InputProps={{ inputProps: { min: 0 } }}
               defaultValue={0}
