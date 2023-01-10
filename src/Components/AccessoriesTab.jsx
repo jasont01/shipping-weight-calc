@@ -5,7 +5,9 @@ const AccessoriesTab = ({ categories, accessories, setAccessories }) => {
   const { dispatch } = useShipmentContext()
 
   const handleClick = () => {
-    accessories.map((item) => dispatch({ type: 'ADD_ITEM', payload: item }))
+    accessories.map(
+      (item) => item.qty > 0 && dispatch({ type: 'ADD_ITEM', payload: item })
+    )
   }
 
   const onChange = (e) => {
@@ -33,7 +35,6 @@ const AccessoriesTab = ({ categories, accessories, setAccessories }) => {
               type='number'
               InputProps={{ inputProps: { min: 0 } }}
               defaultValue={0}
-              //value={item.qty}
               sx={{ width: '5em', m: 1 }}
               size={'small'}
               onChange={onChange}

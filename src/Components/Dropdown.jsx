@@ -2,7 +2,7 @@ import { Box, InputLabel, MenuItem, FormControl, Select } from '@mui/material'
 
 const Dropdown = ({ label, items, value, onChange }) => {
   return (
-    <Box sx={{ minWidth: 120 }}>
+    <Box sx={{ minWidth: 100 }}>
       <FormControl fullWidth>
         <InputLabel id='select-label'>{label}</InputLabel>
         <Select

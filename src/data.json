@@ -76,14 +76,14 @@
     {
       "type": "Pallets",
       "items": [
-        { "desc": "56x42", "part": "", "weight": 35 },
-        { "desc": "48x40", "part": "", "weight": 40 },
-        { "desc": "36x36", "part": "", "weight": 35 }
+        { "desc": "56x42", "part": "PBX000", "weight": 35 },
+        { "desc": "48x40", "part": "PBX001", "weight": 40 },
+        { "desc": "36x36", "part": "PBX002", "weight": 35 }
       ]
     },
     {
       "type": "Other",
-      "items": [{ "desc": "Pelican", "part": "", "weight": 36 }]
+      "items": [{ "desc": "Pelican", "part": "PBX003", "weight": 36 }]
     }
   ]
 }

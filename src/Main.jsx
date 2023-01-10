@@ -38,10 +38,11 @@ const Main = () => {
       .map((category) => category.items.map((item) => ({ ...item, qty: 0 })))
       .flat()
   )
-  const [shipping, setShipping] = useState([
-    { desc: '56x42', part: '', weight: 35, qty: 2 },
-    { desc: '36x36', part: '', weight: 35, qty: 1 },
-  ])
+  const [shippingMaterials, setShippingMaterials] = useState(
+    data.shipping
+      .map((category) => category.items.map((item) => ({ ...item, qty: 0 })))
+      .flat()
+  )
 
   const addToShipment = () => {
     //Cabinet
@@ -80,10 +81,6 @@ const Main = () => {
 
       dispatch({ type: 'ADD_ITEM', payload: { ...mountItem, qty: build.qty } })
     }
-
-    //TODO: Accessories & shipping
-    //accessories.map((item) => dispatch({ type: 'ADD_ITEM', payload: item }))
-    //shipping.map((item) => dispatch({ type: 'ADD_ITEM', payload: item }))
   }
 
   return (
@@ -113,9 +110,9 @@ const Main = () => {
         </TabPanel>
         <TabPanel tab={tab} index={2}>
           <ShippingTab
-            data={data.shipping}
-            selections={shipping}
-            onChange={setShipping}
+            categories={data.shipping}
+            shippingMaterials={shippingMaterials}
+            setShippingMaterials={setShippingMaterials}
           />
         </TabPanel>
       </Box>

@@ -20,7 +20,7 @@ const Dropdown = ({ label, maxPanels, value, onChange, panelPositions }) => {
   }, [maxPanels, panelPositions])
 
   return (
-    <Box sx={{ minWidth: 120 }}>
+    <Box sx={{ minWidth: 80 }}>
       <FormControl fullWidth>
         <InputLabel id='select-label'>{label}</InputLabel>
         <Select

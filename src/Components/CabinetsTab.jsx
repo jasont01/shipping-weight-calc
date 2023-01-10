@@ -83,7 +83,7 @@ const CabinetsTab = ({ data, build, setBuild, addToShipment }) => {
           onChange={(e) =>
             setBuild({ ...build, qty: parseInt(e.target.value) })
           }
-          sx={{ width: '5em', m: 1 }}
+          sx={{ width: '4em', m: 1 }}
           size={'small'}
         />
       </FormControl>
