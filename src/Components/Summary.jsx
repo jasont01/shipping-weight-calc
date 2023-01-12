@@ -9,7 +9,9 @@ const Summary = () => {
   useEffect(() => {
     if (!items) return
 
-    setTotal(items.reduce((sum, item) => sum + item.weight * item.qty, 0))
+    setTotal(
+      Math.round(items.reduce((sum, item) => sum + item.weight * item.qty, 0))
+    )
   }, [items])
 
   return (
