@@ -20,7 +20,7 @@ const TabPanel = (props) => {
 const Main = () => {
   const { dispatch } = useShipmentContext()
 
-  const { cabinets } = data
+  const { cabinets, shipping } = data
 
   const [tab, setTab] = useState(0)
 
@@ -38,11 +38,10 @@ const Main = () => {
       .map((category) => category.items.map((item) => ({ ...item, qty: 0 })))
       .flat()
   )
-  const [shippingMaterials, setShippingMaterials] = useState(
-    data.shipping
-      .map((category) => category.items.map((item) => ({ ...item, qty: 0 })))
-      .flat()
-  )
+  const [shippingMaterials, setShippingMaterials] = useState([
+    ...shipping.pallets.map((size) => ({ ...size, qty: 0 })),
+    ...shipping.misc.map((item) => ({ ...item, qty: 0 })),
+  ])
 
   const addToShipment = () => {
     //Cabinet
@@ -54,10 +53,22 @@ const Main = () => {
       build.panels * build.panelType.positions
     ).padStart(3, '0')}${build.panelType.suffix}${build.config.suffix}`
 
+    const totalPanels =
+      build.size.interiorPanels +
+      build.size.doorPanels +
+      build.config.extraPanels
+
+    const box =
+      build.mount.type === 'stand'
+        ? shipping.boxes.find((box) => box.desc === 'Stand').weight
+        : shipping.boxes.find((box) => box.part === build.size.box).weight
+
     const buildWeight =
       build.panelType.weight * build.panels +
       build.size.weight +
-      build.config.weight
+      build.config.weight +
+      (totalPanels - build.panels) * cabinets.panelBlank +
+      box
 
     dispatch({
       type: 'ADD_ITEM',
@@ -110,7 +121,8 @@ const Main = () => {
         </TabPanel>
         <TabPanel tab={tab} index={2}>
           <ShippingTab
-            categories={data.shipping}
+            pallets={data.shipping.pallets}
+            misc={data.shipping.misc}
             shippingMaterials={shippingMaterials}
             setShippingMaterials={setShippingMaterials}
           />
