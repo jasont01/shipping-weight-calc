@@ -1,59 +1,62 @@
 {
   "cabinets": {
     "panels": [
-      { "type": "MX", "weight": 2, "positions": 32, "suffix": "X" },
-      { "type": "HC", "weight": 0, "positions": 56, "suffix": "H" },
-      { "type": "Xi", "weight": 5, "positions": 32, "suffix": "I" },
+      { "type": "MX", "weight": 4.5, "positions": 32, "suffix": "X" },
+      { "type": "HC", "weight": 2.6, "positions": 56, "suffix": "H" },
+      { "type": "Xi", "weight": 7.7, "positions": 32, "suffix": "I" },
       {
         "type": "DP",
-        "weight": 2,
+        "weight": 5,
         "positions": 16,
         "panelSize": 2,
         "interiorOnly": true,
         "suffix": "D"
       }
     ],
+    "panelBlank": 3.0,
     "size": [
       {
         "type": "Large",
-        "weight": 136,
+        "weight": 102.6,
         "interiorPanels": 5,
         "doorPanels": 4,
-        "mount": { "wall": "AAX010", "stand": "A600" }
+        "mount": { "wall": "AAX010", "stand": "A600" },
+        "box": "BOX001"
       },
       {
         "type": "Small",
         "weight": 82,
         "interiorPanels": 3,
         "doorPanels": 1,
-        "mount": { "wall": "AAX020", "stand": "A600" }
+        "mount": { "wall": "AAX020", "stand": "A600" },
+        "box": "BOX002"
       },
       {
         "type": "Mini",
-        "weight": 58,
+        "weight": 44.8,
         "interiorPanels": 1,
         "doorPanels": 0,
-        "mount": { "wall": "AAX056", "stand": "A600" }
+        "mount": { "wall": "AAX056", "stand": "A600" },
+        "box": "BOX003"
       }
     ],
     "config": [
-      { "type": "Kiosk", "weight": null, "extraPanels": null, "suffix": "C" },
-      { "type": "Addon", "weight": -6, "extraPanels": 1, "suffix": "A" }
+      { "type": "Kiosk", "weight": 9.0, "extraPanels": null, "suffix": "C" },
+      { "type": "Addon", "weight": 0.2, "extraPanels": 1, "suffix": "A" }
     ],
     "mount": [
       { "type": "wall", "accessoryType": "Wallboard" },
       { "type": "stand", "accessoryType": "Stand" },
       { "type": "none", "accessoryType": null }
-    ],
-    "pannelBlank": null
+    ]
   },
   "accessories": [
     {
       "type": "Wallboard",
       "items": [
-        { "desc": "Large Wallboard", "part": "AAX010", "weight": 30 },
-        { "desc": "Small Wallboard", "part": "AAX020", "weight": 18 },
-        { "desc": "Mini Wallboard", "part": "AAX056", "weight": 12 }
+        { "desc": "Large Wallboard", "part": "AAX010", "weight": 29.4 },
+        { "desc": "Small Wallboard", "part": "AAX020", "weight": 17.3 },
+        { "desc": "Mini Wallboard", "part": "AAX056", "weight": 12.6 }
       ]
     },
     {
@@ -64,7 +67,8 @@
       "type": "APC",
       "items": [
         { "desc": "APC", "part": "ATX020", "weight": 6 },
-        { "desc": "APC", "part": "ATX009", "weight": 14 }
+        { "desc": "APC", "part": "ATX009", "weight": 14 },
+        { "desc": "APC Shelf", "part": "AMX169", "weight": 10.8 }
       ]
     },
     {
@@ -72,19 +76,19 @@
       "items": [{ "desc": "Zebra Printer", "part": "ATM015", "weight": 10 }]
     }
   ],
-  "shipping": [
-    {
-      "type": "Pallets",
-      "items": [
-        { "desc": "56x42", "part": "PBX028", "weight": 35 },
-        { "desc": "48x40", "part": "PBX021", "weight": 40 },
-        { "desc": "36x36", "part": "PBX003", "weight": 30 },
-        { "desc": "International", "part": "PBX000", "weight": 35 }
-      ]
-    },
-    {
-      "type": "Other",
-      "items": [{ "desc": "Pelican", "part": "xxx", "weight": 36 }]
-    }
-  ]
+  "shipping": {
+    "pallets": [
+      { "desc": "56x42", "part": "PBX028", "weight": 40 },
+      { "desc": "48x40", "part": "PBX021", "weight": 35 },
+      { "desc": "36x36", "part": "PBX003", "weight": 30 },
+      { "desc": "Int'l", "part": "N/A", "weight": 35 }
+    ],
+    "boxes": [
+      { "desc": "Stand", "part": "BOX000", "weight": 20.2 },
+      { "desc": "Large", "part": "BOX001", "weight": 12.4 },
+      { "desc": "Small", "part": "BOX002", "weight": 7.3 },
+      { "desc": "Mini", "part": "BOX003", "weight": 6.7 }
+    ],
+    "misc": [{ "desc": "Pelican", "part": "MPT006", "weight": 36 }]
+  }
 }
