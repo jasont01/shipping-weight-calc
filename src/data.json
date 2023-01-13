@@ -3,10 +3,10 @@
     "panels": [
       { "type": "MX", "weight": 4.5, "positions": 32, "suffix": "X" },
       { "type": "HC", "weight": 2.6, "positions": 56, "suffix": "H" },
-      { "type": "Xi", "weight": 7.7, "positions": 32, "suffix": "I" },
+      { "type": "Xi", "weight": 8.7, "positions": 32, "suffix": "I" },
       {
         "type": "DP",
-        "weight": 5,
+        "weight": 5.3,
         "positions": 16,
         "panelSize": 2,
         "interiorOnly": true,
@@ -17,7 +17,7 @@
     "size": [
       {
         "type": "Large",
-        "weight": 102.6,
+        "weight": 103.1,
         "interiorPanels": 5,
         "doorPanels": 4,
         "mount": { "wall": "AAX010", "stand": "A600" },
@@ -74,13 +74,17 @@
     {
       "type": "Zebra",
       "items": [{ "desc": "Zebra Printer", "part": "ATM015", "weight": 10 }]
+    },
+    {
+      "type": "Puck Lock",
+      "items": [{ "desc": "Puck Lock", "part": "XXX123", "weight": 4.0 }]
     }
   ],
   "shipping": {
     "pallets": [
-      { "desc": "56x42", "part": "PBX028", "weight": 40 },
-      { "desc": "48x40", "part": "PBX021", "weight": 35 },
-      { "desc": "36x36", "part": "PBX003", "weight": 30 },
+      { "desc": "56x42", "part": "PBX028", "weight": 44 },
+      { "desc": "48x40", "part": "PBX021", "weight": 38 },
+      { "desc": "36x36", "part": "PBX003", "weight": 32 },
       { "desc": "Int'l", "part": "N/A", "weight": 35 }
     ],
     "boxes": [
