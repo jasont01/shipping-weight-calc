@@ -17,7 +17,7 @@ const Item = ({ item: { part, desc, qty, weight } }) => {
       <TableCell align='right'>
         <Counter part={part} qty={qty} />
       </TableCell>
-      <TableCell align='right'>{weight}</TableCell>
+      <TableCell align='right'>{weight.toFixed(1)}</TableCell>
       <TableCell width={'2em'} align='right'>
         <IconButton
           size='small'
