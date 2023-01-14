@@ -21,7 +21,7 @@
         "interiorPanels": 5,
         "doorPanels": 4,
         "mount": { "wall": "AAX010", "stand": "A600" },
-        "box": "BOX001"
+        "box": "PBX015"
       },
       {
         "type": "Small",
@@ -29,7 +29,7 @@
         "interiorPanels": 3,
         "doorPanels": 1,
         "mount": { "wall": "AAX020", "stand": "A600" },
-        "box": "BOX002"
+        "box": "PBX016"
       },
       {
         "type": "Mini",
@@ -37,7 +37,7 @@
         "interiorPanels": 1,
         "doorPanels": 0,
         "mount": { "wall": "AAX056", "stand": "A600" },
-        "box": "BOX003"
+        "box": "PBX0xx"
       }
     ],
     "config": [
@@ -88,10 +88,10 @@
       { "desc": "Int'l", "part": "N/A", "weight": 35 }
     ],
     "boxes": [
-      { "desc": "Stand", "part": "BOX000", "weight": 20.2 },
-      { "desc": "Large", "part": "BOX001", "weight": 12.4 },
-      { "desc": "Small", "part": "BOX002", "weight": 7.3 },
-      { "desc": "Mini", "part": "BOX003", "weight": 6.7 }
+      { "desc": "Stand", "part": "PBX020", "weight": 20.2 },
+      { "desc": "Large", "part": "PBX015", "weight": 12.4 },
+      { "desc": "Small", "part": "PBX016", "weight": 7.3 },
+      { "desc": "Mini", "part": "PBX0xx", "weight": 6.7 }
     ],
     "misc": [{ "desc": "Pelican", "part": "MPT006", "weight": 36 }]
   }
