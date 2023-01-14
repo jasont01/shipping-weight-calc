@@ -15,10 +15,7 @@ const DEFAULT_STATE = {
   accessories: data.accessories
     .map((category) => category.items.map((item) => ({ ...item, qty: 0 })))
     .flat(),
-  shipping: [
-    ...data.shipping.pallets.map((size) => ({ ...size, qty: 0 })),
-    ...data.shipping.misc.map((item) => ({ ...item, qty: 0 })),
-  ],
+  shipping: [...data.pallets.map((size) => ({ ...size, qty: 0 }))],
 }
 
 export const BuildContext = createContext()

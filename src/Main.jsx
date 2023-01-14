@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { Box, Tab, Tabs, Paper } from '@mui/material'
 import CabinetsTab from './Components/CabinetsTab'
 import AccessoriesTab from './Components/AccessoriesTab'
-import ShippingTab from './Components/ShippingTab'
 import { useShipmentContext } from './hooks/useShipmentContext'
 
 import data from './data.json'
@@ -20,7 +19,7 @@ const TabPanel = (props) => {
 const Main = () => {
   const { dispatch } = useShipmentContext()
 
-  const { cabinets, shipping } = data
+  const { cabinets, boxes } = data
 
   const [tab, setTab] = useState(0)
 
@@ -38,10 +37,6 @@ const Main = () => {
       .map((category) => category.items.map((item) => ({ ...item, qty: 0 })))
       .flat()
   )
-  const [shippingMaterials, setShippingMaterials] = useState([
-    ...shipping.pallets.map((size) => ({ ...size, qty: 0 })),
-    ...shipping.misc.map((item) => ({ ...item, qty: 0 })),
-  ])
 
   const addToShipment = () => {
     //Cabinet
@@ -60,8 +55,8 @@ const Main = () => {
 
     const box =
       build.mount.type === 'stand'
-        ? shipping.boxes.find((box) => box.desc === 'Stand').weight
-        : shipping.boxes.find((box) => box.part === build.size.box).weight
+        ? boxes.find((box) => box.desc === 'Stand').weight
+        : boxes.find((box) => box.part === build.size.box).weight
 
     const buildWeight =
       build.panelType.weight * build.panels +
@@ -106,7 +101,6 @@ const Main = () => {
           >
             <Tab label='Cabinets' />
             <Tab label='Accessories' />
-            <Tab label='Shipping Materials' />
           </Tabs>
         </Box>
         <TabPanel tab={tab} index={0}>
@@ -122,14 +116,6 @@ const Main = () => {
             categories={data.accessories}
             accessories={accessories}
             setAccessories={setAccessories}
-          />
-        </TabPanel>
-        <TabPanel tab={tab} index={2}>
-          <ShippingTab
-            pallets={data.shipping.pallets}
-            misc={data.shipping.misc}
-            shippingMaterials={shippingMaterials}
-            setShippingMaterials={setShippingMaterials}
           />
         </TabPanel>
       </Box>

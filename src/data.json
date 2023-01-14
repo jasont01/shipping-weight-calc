@@ -67,9 +67,12 @@
       "type": "APC",
       "items": [
         { "desc": "APC", "part": "ATX020", "weight": 6 },
-        { "desc": "APC", "part": "ATX009", "weight": 14 },
-        { "desc": "APC Shelf", "part": "AMX169", "weight": 10.8 }
+        { "desc": "APC", "part": "ATX009", "weight": 14 }
       ]
+    },
+    {
+      "type": "APC Shelf",
+      "items": [{ "desc": "APC Shelf", "part": "AMX169", "weight": 10.8 }]
     },
     {
       "type": "Zebra",
@@ -78,21 +81,22 @@
     {
       "type": "Puck Lock",
       "items": [{ "desc": "Puck Lock", "part": "XXX123", "weight": 4.0 }]
+    },
+    {
+      "type": "Pelican",
+      "items": [{ "desc": "Pelican", "part": "MPT006", "weight": 36 }]
     }
   ],
-  "shipping": {
-    "pallets": [
-      { "desc": "56x42", "part": "PBX028", "weight": 44 },
-      { "desc": "48x40", "part": "PBX021", "weight": 38 },
-      { "desc": "36x36", "part": "PBX003", "weight": 32 },
-      { "desc": "Int'l", "part": "N/A", "weight": 35 }
-    ],
-    "boxes": [
-      { "desc": "Stand", "part": "PBX020", "weight": 20.2 },
-      { "desc": "Large", "part": "PBX015", "weight": 12.4 },
-      { "desc": "Small", "part": "PBX016", "weight": 7.3 },
-      { "desc": "Mini", "part": "PBX0xx", "weight": 6.7 }
-    ],
-    "misc": [{ "desc": "Pelican", "part": "MPT006", "weight": 36 }]
-  }
+  "pallets": [
+    { "size": "56x42", "part": "PBX028", "weight": 44 },
+    { "size": "48x40", "part": "PBX021", "weight": 38 },
+    { "size": "36x36", "part": "PBX003", "weight": 32 },
+    { "size": "Int'l", "part": "N/A", "weight": 35 }
+  ],
+  "boxes": [
+    { "size": "Stand", "part": "PBX020", "weight": 20.2 },
+    { "size": "Large", "part": "PBX015", "weight": 12.4 },
+    { "size": "Small", "part": "PBX016", "weight": 7.3 },
+    { "size": "Mini", "part": "PBX0xx", "weight": 6.7 }
+  ]
 }

@@ -19,29 +19,31 @@ const AccessoriesTab = ({ categories, accessories, setAccessories }) => {
       )
     )
   }
-
+  //TODO: Grid
   return (
     <>
-      {categories.map((category) => (
-        <Box sx={{ mb: 2 }} key={category.type}>
-          <Typography variant='subtitle2' sx={{ mb: 1 }}>
-            {category.type}
-          </Typography>
-          {category.items.map((item) => (
-            <TextField
-              key={item.part}
-              id={item.part}
-              label={item.part}
-              type='number'
-              InputProps={{ inputProps: { min: 0 } }}
-              value={accessories.find((a) => a.part === item.part).qty}
-              sx={{ width: '5em', m: 1 }}
-              size={'small'}
-              onChange={onChange}
-            />
-          ))}
-        </Box>
-      ))}
+      <Box sx={{ display: 'grid' }}>
+        {categories.map((category) => (
+          <Box sx={{ mb: 2 }} key={category.type}>
+            <Typography variant='subtitle2' sx={{ mb: 1 }}>
+              {category.type}
+            </Typography>
+            {category.items.map((item) => (
+              <TextField
+                key={item.part}
+                id={item.part}
+                label={item.part}
+                type='number'
+                InputProps={{ inputProps: { min: 0 } }}
+                value={accessories.find((a) => a.part === item.part).qty}
+                sx={{ width: '5em', m: 1 }}
+                size={'small'}
+                onChange={onChange}
+              />
+            ))}
+          </Box>
+        ))}
+      </Box>
       <Divider sx={{ m: 3 }} />
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
         <Button variant='contained' onClick={handleClick}>

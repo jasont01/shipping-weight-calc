@@ -1,4 +1,5 @@
 import {
+  Box,
   Table,
   TableBody,
   TableCell,
@@ -9,6 +10,7 @@ import {
   Button,
 } from '@mui/material'
 import Item from './Item'
+import PalletButtons from './PalletButtons'
 import Summary from './Summary'
 import { useShipmentContext } from '../hooks/useShipmentContext'
 
@@ -20,8 +22,9 @@ const Items = () => {
   if (!items || items.length === 0) return
 
   return (
-    <>
-      <TableContainer component={Paper} sx={{ mt: 6 }}>
+    <Box sx={{ mt: 4 }}>
+      <PalletButtons />
+      <TableContainer component={Paper}>
         <Table sx={{ minWidth: 700 }} size='small'>
           <TableHead>
             <TableRow>
@@ -45,7 +48,7 @@ const Items = () => {
         Reset
       </Button>
       <Summary />
-    </>
+    </Box>
   )
 }
 
