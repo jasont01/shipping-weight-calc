@@ -1,8 +1,6 @@
 import { Box, Typography, Button } from '@mui/material'
-
+import { useDataContext } from '../hooks/useDataContext'
 import { useShipmentContext } from '../hooks/useShipmentContext'
-
-import data from '../data.json'
 
 const PalletButton = ({ pallet }) => {
   const { dispatch } = useShipmentContext()
@@ -22,6 +20,8 @@ const PalletButton = ({ pallet }) => {
 }
 
 const PalletButtons = () => {
+  const { data } = useDataContext()
+
   return (
     <Box
       sx={{
