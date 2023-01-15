@@ -1,92 +1,79 @@
-import { useState, useEffect } from 'react'
-import { Box, FormControl, TextField, Divider, Button } from '@mui/material'
-import Dropdown from './Dropdown'
+import { Box, Divider, Button } from '@mui/material'
 import PanelDropdown from './PanelDropdown'
 import PositionsDropdown from './PositionsDropdown'
 import SizeDropdown from './SizeDropdown'
+import ConfigDropdown from './ConfigDropdown'
+import MountDropdown from './MountDropdown'
+import Qty from './Qty'
 
-const CabinetsTab = ({ data, build, setBuild, addToShipment }) => {
-  const { panelType, panels, size, config, mount, qty } = build
+import { useBuildContext } from '../hooks/useBuildContext'
+import { useShipmentContext } from '../hooks/useShipmentContext'
 
-  const [maxPanels, setMaxPanels] = useState(
-    size.interiorPanels + size.doorPanels
-  )
+const CabinetsTab = ({ data }) => {
+  const { panelType, panels, size, config, mount, qty } = useBuildContext()
+  const { dispatch } = useShipmentContext()
 
-  useEffect(() => {
-    let panelCount = size.interiorPanels
+  const addToShipment = () => {
+    //Cabinet
+    const buildDesc = `${panelType.type}${panels * panelType.positions} ${
+      size.type
+    } ${config.type}`
 
-    panelCount += panelType?.interiorOnly
-      ? null
-      : size.doorPanels + config.extraPanels
+    const positions = panels * panelType.positions
 
-    panelCount = Math.floor(panelCount / (panelType?.panelSize || 1))
+    const buildPart = `MKE${String(positions).padStart(3, '0')}${
+      panelType.suffix
+    }${config.suffix}`
 
-    setMaxPanels(panelCount)
-  }, [panelType, size, config])
+    const totalPanels =
+      size.interiorPanels + size.doorPanels + config.extraPanels
 
-  useEffect(() => {
-    if (panels > maxPanels) setBuild({ ...build, panels: maxPanels })
-  }, [maxPanels, panels, build, setBuild])
+    const panelBlank = data.panels.find((panel) => panel.type === 'Blank')
+
+    const box =
+      mount.type === 'stand'
+        ? data.boxes.find((box) => box.size === 'Stand').weight
+        : data.boxes.find((box) => box.part === size.box).weight
+
+    const buildWeight =
+      panelType.weight * panels +
+      size.weight +
+      config.weight +
+      (totalPanels - panels) * panelBlank.weight +
+      box
+
+    dispatch({
+      type: 'ADD_ITEM',
+      payload: {
+        desc: buildDesc,
+        part: buildPart,
+        qty: qty,
+        weight: buildWeight,
+      },
+    })
+
+    //Mount
+    if (mount.type !== 'none') {
+      const mountAccessories = data.accessories.find(
+        (accessory) => accessory.type === mount.accessoryType
+      )
+
+      const mountItem = mountAccessories.items.find(
+        (item) => item.part === size.mount[mount.type]
+      )
+
+      dispatch({ type: 'ADD_ITEM', payload: { ...mountItem, qty: qty } })
+    }
+  }
 
   return (
     <Box>
-      <FormControl size='sm' sx={{ m: 1 }}>
-        <PanelDropdown
-          label={'Panel'}
-          items={data.panels}
-          onChange={(value) => setBuild({ ...build, panelType: value })}
-          value={panelType}
-          maxPanels={size.interiorPanels}
-        />
-      </FormControl>
-      <FormControl size='sm' sx={{ m: 1 }}>
-        <PositionsDropdown
-          label={'Positions'}
-          maxPanels={maxPanels}
-          value={panels}
-          onChange={(value) => setBuild({ ...build, panels: value })}
-          panelPositions={panelType.positions}
-        />
-      </FormControl>
-      <FormControl size='sm' sx={{ m: 1 }}>
-        <SizeDropdown
-          label={'Size'}
-          items={data.size}
-          onChange={(value) => setBuild({ ...build, size: value })}
-          value={size}
-          panelSize={panelType?.panelSize || 1}
-        />
-      </FormControl>
-      <FormControl size='sm' sx={{ m: 1 }}>
-        <Dropdown
-          label={'Config'}
-          items={data.config}
-          onChange={(value) => setBuild({ ...build, config: value })}
-          value={config}
-        />
-      </FormControl>
-      <FormControl size='sm' sx={{ m: 1 }}>
-        <Dropdown
-          label={'Mount'}
-          items={data.mount}
-          onChange={(value) => setBuild({ ...build, mount: value })}
-          value={mount}
-        />
-      </FormControl>
-      <FormControl>
-        <TextField
-          id='qty'
-          label='Qty'
-          type='number'
-          InputProps={{ inputProps: { min: 1 } }}
-          defaultValue={qty}
-          onChange={(e) =>
-            setBuild({ ...build, qty: parseInt(e.target.value) })
-          }
-          sx={{ width: '4em', m: 1 }}
-          size={'small'}
-        />
-      </FormControl>
+      <PanelDropdown panels={data.panels} />
+      <PositionsDropdown />
+      <SizeDropdown cabinets={data.cabinets} />
+      <ConfigDropdown options={data.config} />
+      <MountDropdown options={data.mount} />
+      <Qty />
       <Divider sx={{ m: 3 }} />
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
         <Button variant='contained' onClick={addToShipment}>

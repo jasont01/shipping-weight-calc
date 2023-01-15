@@ -12,19 +12,26 @@ import {
 import Item from './Item'
 import PalletButtons from './PalletButtons'
 import Summary from './Summary'
+
 import { useShipmentContext } from '../hooks/useShipmentContext'
+import { useBuildContext } from '../hooks/useBuildContext'
 
-const Items = () => {
-  const { items, dispatch } = useShipmentContext()
+const Shipment = ({ setTab }) => {
+  const { items, dispatch: resetShipment } = useShipmentContext()
+  const { dispatch: resetBuild } = useBuildContext()
 
-  const handleReset = () => dispatch({ type: 'RESET' })
+  const handleReset = () => {
+    resetShipment({ type: 'RESET' })
+    resetBuild({ type: 'RESET' })
+    setTab(0)
+  }
 
   if (!items || items.length === 0) return
 
   return (
     <Box sx={{ mt: 4 }}>
       <PalletButtons />
-      <TableContainer component={Paper}>
+      <TableContainer component={Paper} sx={{ p: 1, pb: 0 }}>
         <Table sx={{ minWidth: 700 }} size='small'>
           <TableHead>
             <TableRow>
@@ -44,7 +51,7 @@ const Items = () => {
           </TableBody>
         </Table>
       </TableContainer>
-      <Button sx={{ mt: 2 }} onClick={handleReset}>
+      <Button sx={{ mt: 2, position: 'absolute' }} onClick={handleReset}>
         Reset
       </Button>
       <Summary />
@@ -52,4 +59,4 @@ const Items = () => {
   )
 }
 
-export default Items
+export default Shipment

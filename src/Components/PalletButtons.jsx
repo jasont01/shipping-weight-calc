@@ -1,19 +1,21 @@
 import { Box, Typography, Button } from '@mui/material'
 
-const TEMP = [
-  { desc: '56x42', part: 'PBX028', weight: 44, qty: 1 },
-  { desc: '48x40', part: 'PBX021', weight: 38, qty: 0 },
-  { desc: '36x36', part: 'PBX003', weight: 32, qty: 0 },
-  { desc: "Int'l", part: 'N/A', weight: 35, qty: 0 },
-]
+import { useShipmentContext } from '../hooks/useShipmentContext'
+
+import data from '../data.json'
 
 const PalletButton = ({ pallet }) => {
+  const { dispatch } = useShipmentContext()
+
   const handleClick = () => {
-    console.log(pallet.part)
+    dispatch({
+      type: 'ADD_ITEM',
+      payload: { ...pallet, desc: `${pallet.desc} Pallet`, qty: 1 },
+    })
   }
 
   return (
-    <Button variant='text' size='small' sx={{ mx: 2 }} onClick={handleClick}>
+    <Button variant='text' size='small' sx={{ ml: 3 }} onClick={handleClick}>
       {pallet.desc}
     </Button>
   )
@@ -31,11 +33,12 @@ const PalletButtons = () => {
         sx={{
           display: 'flex',
           borderRadius: '10px 10px 0 0',
-          backgroundColor: 'white',
+          backgroundColor: '#fff',
           pl: 3,
           pt: 2,
           pb: 1,
-          borderBottom: '1px solid rgba(224, 224, 224, 1)',
+          pr: 3,
+          borderBottom: '1px solid rgb(224, 224, 224)',
         }}
       >
         <Typography
@@ -45,8 +48,8 @@ const PalletButtons = () => {
           Pallets:
         </Typography>
         <Box>
-          {TEMP.map((pallet) => (
-            <PalletButton pallet={pallet} />
+          {data.pallets.map((pallet) => (
+            <PalletButton key={pallet.part} pallet={pallet} />
           ))}
         </Box>
       </Box>

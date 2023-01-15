@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import {
   Box,
   ThemeProvider,
@@ -18,14 +19,16 @@ const theme = createTheme({
 })
 
 const App = () => {
+  const [tab, setTab] = useState(0)
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Box sx={{ backgroundColor: '#efefef', height: '100vh' }}>
+      <Box>
         <Header />
         <Container maxWidth='lg' sx={{ mt: 8 }}>
-          <Main />
-          <Shipment />
+          <Main tab={tab} setTab={setTab} />
+          <Shipment setTab={setTab} />
         </Container>
       </Box>
     </ThemeProvider>

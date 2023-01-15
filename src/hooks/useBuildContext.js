@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { BuildContext } from '../context/BuildContext'
 
-export const useBuildCOntext = () => {
+export const useBuildContext = () => {
   const context = useContext(BuildContext)
 
   if (!context) {
