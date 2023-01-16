@@ -13,7 +13,6 @@ const Accessory = ({ item }) => {
 
   return (
     <TextField
-      key={item.part}
       id={item.part}
       label={item.part}
       type='number'

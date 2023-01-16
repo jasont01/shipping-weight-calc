@@ -30,7 +30,7 @@ const AccessoriesTab = ({ categories }) => {
               {category.type}
             </Typography>
             {category.items.map((item) => (
-              <Accessory item={item} />
+              <Accessory key={item.part} item={item} />
             ))}
           </Box>
         ))}
