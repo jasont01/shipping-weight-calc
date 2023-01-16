@@ -8,6 +8,7 @@ import {
   TableRow,
   Paper,
   Button,
+  useMediaQuery,
 } from '@mui/material'
 import Item from './Item'
 import PalletButtons from './PalletButtons'
@@ -19,6 +20,12 @@ import { useBuildContext } from '../hooks/useBuildContext'
 const Shipment = ({ setTab }) => {
   const { items, dispatch: resetShipment } = useShipmentContext()
   const { dispatch: resetBuild } = useBuildContext()
+
+  const isMobile = useMediaQuery('(max-width: 600px)')
+
+  const resetBtnStyles = isMobile
+    ? { display: 'flex', justifyContent: 'center' }
+    : { display: 'block', position: 'relative', bottom: '8em' }
 
   const handleReset = () => {
     resetShipment({ type: 'RESET' })
@@ -51,10 +58,12 @@ const Shipment = ({ setTab }) => {
           </TableBody>
         </Table>
       </TableContainer>
-      <Button sx={{ mt: 2, position: 'absolute' }} onClick={handleReset}>
-        Reset
-      </Button>
       <Summary />
+      <Box sx={resetBtnStyles}>
+        <Button sx={{ mt: '1em' }} onClick={handleReset}>
+          Reset
+        </Button>
+      </Box>
     </Box>
   )
 }

@@ -3,7 +3,7 @@ import { useDataContext } from '../hooks/useDataContext'
 import { useShipmentContext } from '../hooks/useShipmentContext'
 
 const PalletButton = ({ pallet }) => {
-  const isMobile = useMediaQuery('(max-width: 600px')
+  const isMobile = useMediaQuery('(max-width: 600px)')
   const { dispatch } = useShipmentContext()
 
   const handleClick = () => {
