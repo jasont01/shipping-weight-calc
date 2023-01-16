@@ -13,12 +13,19 @@ const AccessoriesTab = ({ categories }) => {
     )
   }
 
-  //TODO: Grid
   return (
     <>
-      <Box sx={{ display: 'grid' }}>
-        {categories.map((category) => (
-          <Box sx={{ mb: 2 }} key={category.type}>
+      <Box
+        sx={{
+          display: 'grid',
+          gridTemplateColumns: '1fr 1fr 15%',
+        }}
+      >
+        {categories.map((category, idx) => (
+          <Box
+            sx={{ mb: 2, gridColumnStart: (idx % 2) + 1 }}
+            key={category.type}
+          >
             <Typography variant='subtitle2' sx={{ mb: 1 }}>
               {category.type}
             </Typography>
