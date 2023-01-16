@@ -3,6 +3,7 @@ import { createContext, useReducer } from 'react'
 import data from '../data.json'
 
 const DEFAULT_STATE = {
+  data,
   panelType: data.panels[0],
   panels: data.cabinets[0].interiorPanels + data.cabinets[0].doorPanels,
   size: data.cabinets[0],
@@ -43,6 +44,9 @@ const buildReducer = (state, action) => {
           accessory.part === action.payload.part ? action.payload : accessory
         ),
       }
+
+    // case 'SET_DATA':
+    //   return { ...state, data }
 
     case 'RESET':
       return DEFAULT_STATE
