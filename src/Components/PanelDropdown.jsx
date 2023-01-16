@@ -1,30 +1,40 @@
 import { Box, InputLabel, MenuItem, FormControl, Select } from '@mui/material'
+import { useBuildContext } from '../hooks/useBuildContext'
 
-const Dropdown = ({ label, items, value, onChange, maxPanels }) => {
+const PanelDropdown = ({ panels }) => {
+  const { panelType, size, dispatch } = useBuildContext()
+
   return (
-    <Box sx={{ minWidth: 80 }}>
-      <FormControl fullWidth>
-        <InputLabel id='select-label'>{label}</InputLabel>
-        <Select
-          labelId='select-label'
-          value={value}
-          label={label}
-          size={'small'}
-          onChange={(e) => onChange(e.target.value)}
-        >
-          {items.map((item, idx) => (
-            <MenuItem
-              key={idx}
-              value={item}
-              disabled={item?.panelSize > maxPanels}
-            >
-              {item.type}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-    </Box>
+    <FormControl size='sm' sx={{ m: 1 }}>
+      <Box sx={{ minWidth: 80 }}>
+        <FormControl fullWidth>
+          <InputLabel id='panelType-select-label'>Panel</InputLabel>
+          <Select
+            labelId='panelType-select-label'
+            value={panelType}
+            label='Panel'
+            size={'small'}
+            onChange={(e) =>
+              dispatch({ type: 'SET_PANEL_TYPE', payload: e.target.value })
+            }
+          >
+            {panels.map(
+              (panel) =>
+                !panel.hidden && (
+                  <MenuItem
+                    key={panel.type}
+                    value={panel}
+                    disabled={panel?.panelSize > size.interiorPanels}
+                  >
+                    {panel.type}
+                  </MenuItem>
+                )
+            )}
+          </Select>
+        </FormControl>
+      </Box>
+    </FormControl>
   )
 }
 
-export default Dropdown
+export default PanelDropdown

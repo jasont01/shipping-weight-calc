@@ -1,29 +1,36 @@
 import { Box, InputLabel, MenuItem, FormControl, Select } from '@mui/material'
+import { useBuildContext } from '../hooks/useBuildContext'
 
-const Dropdown = ({ label, items, value, onChange, panelSize }) => {
+const Dropdown = ({ cabinets }) => {
+  const { size, panelType, dispatch } = useBuildContext()
+
   return (
-    <Box sx={{ minWidth: 80 }}>
-      <FormControl fullWidth>
-        <InputLabel id='select-label'>{label}</InputLabel>
-        <Select
-          labelId='select-label'
-          value={value}
-          label={label}
-          size={'small'}
-          onChange={(e) => onChange(e.target.value)}
-        >
-          {items.map((item, idx) => (
-            <MenuItem
-              key={idx}
-              value={item}
-              disabled={item.interiorPanels < panelSize}
-            >
-              {item.type}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-    </Box>
+    <FormControl size='sm' sx={{ m: 1 }}>
+      <Box sx={{ minWidth: 80 }}>
+        <FormControl fullWidth>
+          <InputLabel id='size-select-label'>Size</InputLabel>
+          <Select
+            labelId='size-select-label'
+            value={size}
+            label='Size'
+            size={'small'}
+            onChange={(e) =>
+              dispatch({ type: 'SET_CABINET_SIZE', payload: e.target.value })
+            }
+          >
+            {cabinets.map((cabinet) => (
+              <MenuItem
+                key={cabinet.type}
+                value={cabinet}
+                disabled={cabinet.interiorPanels < (panelType?.panelSize || 1)}
+              >
+                {cabinet.type}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      </Box>
+    </FormControl>
   )
 }
 

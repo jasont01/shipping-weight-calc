@@ -13,7 +13,7 @@ const Summary = () => {
   }, [items])
 
   return (
-    <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 3 }}>
+    <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 1 }}>
       <Paper sx={{ px: 4, py: 5, display: 'flex' }}>
         <Typography sx={{ fontSize: 'x-large', display: 'flex', mr: 1 }}>
           Shipment Weight:
