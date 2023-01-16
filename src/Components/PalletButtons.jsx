@@ -1,8 +1,9 @@
-import { Box, Typography, Button } from '@mui/material'
+import { Box, Typography, Button, useMediaQuery } from '@mui/material'
 import { useDataContext } from '../hooks/useDataContext'
 import { useShipmentContext } from '../hooks/useShipmentContext'
 
 const PalletButton = ({ pallet }) => {
+  const isMobile = useMediaQuery('(max-width: 600px')
   const { dispatch } = useShipmentContext()
 
   const handleClick = () => {
@@ -13,7 +14,12 @@ const PalletButton = ({ pallet }) => {
   }
 
   return (
-    <Button variant='text' size='small' sx={{ ml: 3 }} onClick={handleClick}>
+    <Button
+      variant='text'
+      size='small'
+      sx={{ ml: isMobile ? 0 : 3 }}
+      onClick={handleClick}
+    >
       {pallet.desc}
     </Button>
   )
