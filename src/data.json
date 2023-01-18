@@ -30,7 +30,7 @@
     },
     {
       "type": "Small",
-      "weight": 82,
+      "weight": 56.6,
       "interiorPanels": 3,
       "doorPanels": 1,
       "mount": { "wall": "AAX020", "stand": "A600" },
@@ -84,11 +84,11 @@
     },
     {
       "type": "Puck Lock",
-      "items": [{ "desc": "Puck Lock", "part": "XXX123", "weight": 4.0 }]
+      "items": [{ "desc": "Puck Lock", "part": "AMX152", "weight": 4.0 }]
     },
     {
       "type": "Pelican",
-      "items": [{ "desc": "Pelican", "part": "MPT006", "weight": 36 }]
+      "items": [{ "desc": "Pelican", "part": "MPT006", "weight": 29.3 }]
     }
   ],
   "pallets": [
