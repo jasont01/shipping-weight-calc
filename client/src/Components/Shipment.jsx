@@ -33,7 +33,7 @@ const Shipment = ({ setTab }) => {
     setTab(0)
   }
 
-  if (!items || items.length === 0) return
+  if (!items || items.length === 0) return null
 
   return (
     <Box sx={{ mt: 4 }}>

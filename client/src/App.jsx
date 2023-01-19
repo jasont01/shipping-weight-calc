@@ -25,10 +25,10 @@ const App = () => {
   const [loading, setLoading] = useState(false)
   const [tab, setTab] = useState(0)
 
-  useEffect(() => {
-    //dispatch({ type: 'SET_DATA', payload: data })
-    setLoading(false)
-  }, [])
+  // useEffect(() => {
+  //   dispatch({ type: 'SET_DATA', payload: data })
+  //   setLoading(false)
+  // }, [])
 
   const Spinner = () => (
     <Box
