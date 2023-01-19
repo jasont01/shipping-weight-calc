@@ -1,5 +1,5 @@
 import { Box, Typography, Button, useMediaQuery } from '@mui/material'
-import { useDataContext } from '../hooks/useDataContext'
+import { useBuildContext } from '../hooks/useBuildContext'
 import { useShipmentContext } from '../hooks/useShipmentContext'
 
 const PalletButton = ({ pallet }) => {
@@ -26,7 +26,7 @@ const PalletButton = ({ pallet }) => {
 }
 
 const PalletButtons = () => {
-  const { data } = useDataContext()
+  const { data } = useBuildContext()
 
   return (
     <Box

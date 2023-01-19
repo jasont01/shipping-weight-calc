@@ -1,7 +1,7 @@
 import { Box, Tab, Tabs, Paper } from '@mui/material'
 import CabinetsTab from './Components/CabinetsTab'
 import AccessoriesTab from './Components/AccessoriesTab'
-import { useDataContext } from './hooks/useDataContext'
+import { useBuildContext } from './hooks/useBuildContext'
 
 const TabPanel = (props) => {
   const { children, tab, index } = props
@@ -14,7 +14,7 @@ const TabPanel = (props) => {
 }
 
 const Main = ({ tab, setTab }) => {
-  const { data } = useDataContext()
+  const { data } = useBuildContext()
 
   return (
     <Paper elevation={2} sx={{ p: 4, pt: 2 }}>

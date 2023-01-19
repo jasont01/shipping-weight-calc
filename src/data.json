@@ -30,7 +30,7 @@
     },
     {
       "type": "Small",
-      "weight": 82,
+      "weight": 56.6,
       "interiorPanels": 3,
       "doorPanels": 1,
       "mount": { "wall": "AAX020", "stand": "A600" },
@@ -65,7 +65,7 @@
     },
     {
       "type": "Stand",
-      "items": [{ "desc": "Stand", "part": "A600", "weight": 60 }]
+      "items": [{ "desc": "Stand", "part": "A600", "weight": 60.4 }]
     },
     {
       "type": "APC",
@@ -84,17 +84,17 @@
     },
     {
       "type": "Puck Lock",
-      "items": [{ "desc": "Puck Lock", "part": "XXX123", "weight": 4.0 }]
+      "items": [{ "desc": "Puck Lock", "part": "AMX152", "weight": 4.0 }]
     },
     {
       "type": "Pelican",
-      "items": [{ "desc": "Pelican", "part": "MPT006", "weight": 36 }]
+      "items": [{ "desc": "Pelican", "part": "MPT006", "weight": 29.3 }]
     }
   ],
   "pallets": [
-    { "desc": "56x42", "part": "PBX028", "weight": 44 },
-    { "desc": "48x40", "part": "PBX021", "weight": 38 },
-    { "desc": "36x36", "part": "PBX003", "weight": 32 },
+    { "desc": "56x42", "part": "PBX028", "weight": 38.9 },
+    { "desc": "48x40", "part": "PBX021", "weight": 28.9 },
+    { "desc": "36x36", "part": "PBX003", "weight": 29.5 },
     { "desc": "Int'l", "part": "N/A", "weight": 35 }
   ],
   "boxes": [

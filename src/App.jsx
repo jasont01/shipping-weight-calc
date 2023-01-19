@@ -10,10 +10,7 @@ import {
 import Main from './Main'
 import Header from './Components/Header'
 import Shipment from './Components/Shipment'
-import { useDataContext } from './hooks/useDataContext'
-
-//TODO: move data to db
-import data from './data.json'
+//import { useBuildContext } from './hooks/useBuildContext'
 
 const theme = createTheme({
   palette: {
@@ -24,14 +21,14 @@ const theme = createTheme({
 })
 
 const App = () => {
-  const { dispatch } = useDataContext()
-  const [loading, setLoading] = useState(true)
+  //const { dispatch } = useBuildContext()
+  const [loading, setLoading] = useState(false)
   const [tab, setTab] = useState(0)
 
   useEffect(() => {
-    dispatch({ type: 'SET_DATA', payload: data })
+    //dispatch({ type: 'SET_DATA', payload: data })
     setLoading(false)
-  }, [dispatch])
+  }, [])
 
   const Spinner = () => (
     <Box
