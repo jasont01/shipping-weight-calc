@@ -43,6 +43,12 @@ const shipmentReducer = (state, action) => {
         ),
       }
 
+    case 'SET_TOTAL':
+      return {
+        ...state,
+        total: action.payload,
+      }
+
     case 'RESET':
       return { ...state, items: [] }
 
@@ -54,6 +60,7 @@ const shipmentReducer = (state, action) => {
 const ShipmentContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(shipmentReducer, {
     items: [],
+    total: 0,
   })
 
   return (

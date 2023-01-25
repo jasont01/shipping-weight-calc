@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { getData } from './api/dataAPI'
 import {
   Box,
   ThemeProvider,
@@ -10,7 +11,7 @@ import {
 import Main from './Main'
 import Header from './Components/Header'
 import Shipment from './Components/Shipment'
-//import { useBuildContext } from './hooks/useBuildContext'
+import { useBuildContext } from './hooks/useBuildContext'
 
 const theme = createTheme({
   palette: {
@@ -21,14 +22,17 @@ const theme = createTheme({
 })
 
 const App = () => {
-  //const { dispatch } = useBuildContext()
-  const [loading, setLoading] = useState(false)
+  const { dispatch } = useBuildContext()
+  const [loading, setLoading] = useState(true)
   const [tab, setTab] = useState(0)
 
-  // useEffect(() => {
-  //   dispatch({ type: 'SET_DATA', payload: data })
-  //   setLoading(false)
-  // }, [])
+  useEffect(() => {
+    if (!loading) return
+    getData().then((data) => {
+      dispatch({ type: 'SET_DATA', payload: data })
+      setLoading(false)
+    })
+  }, [dispatch, loading])
 
   const Spinner = () => (
     <Box

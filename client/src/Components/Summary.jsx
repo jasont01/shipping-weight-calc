@@ -1,16 +1,18 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { Box, Typography, Paper, Tooltip } from '@mui/material'
 import { useShipmentContext } from '../hooks/useShipmentContext'
 
 const Summary = () => {
-  const { items } = useShipmentContext()
-  const [total, setTotal] = useState(0)
+  const { items, total, dispatch } = useShipmentContext()
 
   useEffect(() => {
     if (!items) return
 
-    setTotal(items.reduce((sum, item) => sum + item.weight * item.qty, 0))
-  }, [items])
+    dispatch({
+      type: 'SET_TOTAL',
+      payload: items.reduce((sum, item) => sum + item.weight * item.qty, 0),
+    })
+  }, [items, dispatch])
 
   return (
     <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 1 }}>

@@ -1,19 +1,19 @@
 import { createContext, useReducer } from 'react'
 
-import data from '../data.json'
+//import data from '../data.json'
 
-const DEFAULT_STATE = {
-  data,
-  panelType: data.panels[0],
-  panels: data.cabinets[0].interiorPanels + data.cabinets[0].doorPanels,
-  size: data.cabinets[0],
-  config: data.config[0],
-  mount: data.mount[0],
-  qty: 1,
-  accessories: data.accessories
-    .map((category) => category.items.map((item) => ({ ...item, qty: 0 })))
-    .flat(),
-}
+// const DEFAULT_STATE = {
+//   data,
+//   panelType: data.panels[0],
+//   panels: data.cabinets[0].interiorPanels + data.cabinets[0].doorPanels,
+//   size: data.cabinets[0],
+//   config: data.config[0],
+//   mount: data.mount[0],
+//   qty: 1,
+//   accessories: data.accessories
+//     .map((category) => category.items.map((item) => ({ ...item, qty: 0 })))
+//     .flat(),
+// }
 
 export const BuildContext = createContext()
 
@@ -45,11 +45,41 @@ const buildReducer = (state, action) => {
         ),
       }
 
-    // case 'SET_DATA':
-    //   return { ...state, data }
+    case 'SET_DATA':
+      return {
+        data: action.payload,
+        panelType: action.payload.panels[0],
+        panels:
+          action.payload.cabinets[0].interiorPanels +
+          action.payload.cabinets[0].doorPanels,
+        size: action.payload.cabinets[0],
+        config: action.payload.config[0],
+        mount: action.payload.mount[0],
+        qty: 1,
+        accessories: action.payload.accessories
+          .map((category) =>
+            category.items.map((item) => ({ ...item, qty: 0 }))
+          )
+          .flat(),
+      }
 
     case 'RESET':
-      return DEFAULT_STATE
+      return {
+        ...state,
+        panelType: state.data.panels[0],
+        panels:
+          state.data.cabinets[0].interiorPanels +
+          state.data.cabinets[0].doorPanels,
+        size: state.data.cabinets[0],
+        config: state.data.config[0],
+        mount: state.data.mount[0],
+        qty: 1,
+        accessories: state.data.accessories
+          .map((category) =>
+            category.items.map((item) => ({ ...item, qty: 0 }))
+          )
+          .flat(),
+      }
 
     default:
       return state
@@ -57,7 +87,7 @@ const buildReducer = (state, action) => {
 }
 
 const BuildContextProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(buildReducer, DEFAULT_STATE)
+  const [state, dispatch] = useReducer(buildReducer, {})
 
   return (
     <BuildContext.Provider value={{ ...state, dispatch }}>
