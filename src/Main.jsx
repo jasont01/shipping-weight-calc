@@ -2,16 +2,7 @@ import { Box, Tab, Tabs, Paper } from '@mui/material'
 import CabinetsTab from './Components/CabinetsTab'
 import AccessoriesTab from './Components/AccessoriesTab'
 import { useBuildContext } from './hooks/useBuildContext'
-
-const TabPanel = (props) => {
-  const { children, tab, index } = props
-
-  return (
-    <div role='tabpanel' hidden={tab !== index} id={`tabpanel-${index}`}>
-      {tab === index && <Box sx={{ p: 3 }}>{children}</Box>}
-    </div>
-  )
-}
+import TabPanel from './Components/TabPanel'
 
 const Main = ({ tab, setTab }) => {
   const { data } = useBuildContext()
