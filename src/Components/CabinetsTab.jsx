@@ -23,7 +23,7 @@ const CabinetsTab = ({ data }) => {
 
     const buildPart = `MKE${String(positions).padStart(3, '0')}${
       panelType.suffix
-    }${config.suffix}`
+    }${config.suffix}|${size.type}`
 
     const totalPanels =
       size.interiorPanels + size.doorPanels + config.extraPanels

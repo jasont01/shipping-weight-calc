@@ -13,7 +13,7 @@ const Item = ({ item: { part, desc, qty, weight } }) => {
   return (
     <TableRow key={part}>
       <TableCell>{desc}</TableCell>
-      <TableCell align='right'>{part}</TableCell>
+      <TableCell align='right'>{part.split('|')[0]}</TableCell>
       <TableCell align='right'>
         <Counter part={part} qty={qty} />
       </TableCell>
