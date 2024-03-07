@@ -3,6 +3,7 @@
     { "type": "MX", "weight": 4.5, "positions": 32, "suffix": "X" },
     { "type": "HC", "weight": 2.6, "positions": 56, "suffix": "H" },
     { "type": "Xi", "weight": 8.7, "positions": 32, "suffix": "I" },
+{ "type": "XU", "weight": 8.0, "positions": 32, "suffix": "U" },
     {
       "type": "DP",
       "weight": 5.3,
