@@ -21,9 +21,9 @@ const CabinetsTab = ({ data }) => {
 
     const positions = panels * panelType.positions
 
-    const buildPart = `MKE${String(positions).padStart(3, '0')}${
-      panelType.suffix
-    }${config.suffix}|${size.type}`
+    const partPrefix = `MKE${size.type === 'Mini' ? '3256' : String(positions)}`
+
+    const buildPart = `${partPrefix}${panelType.suffix}${config.suffix}|${size.type}`
 
     const totalPanels =
       size.interiorPanels + size.doorPanels + config.extraPanels
