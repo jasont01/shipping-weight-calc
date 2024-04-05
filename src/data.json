@@ -70,10 +70,7 @@
     },
     {
       "type": "APC",
-      "items": [
-        { "desc": "APC", "part": "ATX020", "weight": 6 },
-        { "desc": "APC", "part": "ATX009", "weight": 14 }
-      ]
+      "items": [{ "desc": "APC", "part": "ATX020", "weight": 6 }]
     },
     {
       "type": "APC Shelf",

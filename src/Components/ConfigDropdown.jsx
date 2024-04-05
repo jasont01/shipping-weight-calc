@@ -2,7 +2,7 @@ import { Box, InputLabel, MenuItem, FormControl, Select } from '@mui/material'
 import { useBuildContext } from '../hooks/useBuildContext'
 
 const ConfigDropdown = ({ options }) => {
-  const { config, dispatch } = useBuildContext()
+  const { config, size, dispatch } = useBuildContext()
 
   return (
     <FormControl size='sm' sx={{ m: 1 }}>
@@ -24,6 +24,7 @@ const ConfigDropdown = ({ options }) => {
                 key={option.type}
                 value={option}
                 sx={{ textTransform: 'capitalize' }}
+                disabled={size.type === 'Mini' && option.type === 'Addon'}
               >
                 {option.type}
               </MenuItem>
