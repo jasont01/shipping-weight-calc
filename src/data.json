@@ -2,53 +2,65 @@
   "panels": [
     { "type": "MX", "weight": 4.5, "positions": 32, "suffix": "X" },
     { "type": "HC", "weight": 2.6, "positions": 56, "suffix": "H" },
-    { "type": "Xi", "weight": 8.7, "positions": 32, "suffix": "I" },
+    { "type": "MXi", "weight": 8.7, "positions": 32, "suffix": "I" },
     { "type": "XU", "weight": 8.0, "positions": 32, "suffix": "U" },
-    {
-      "type": "DP",
-      "weight": 5.3,
-      "positions": 16,
-      "panelSize": 2,
-      "interiorOnly": true,
-      "suffix": "D"
-    },
     {
       "type": "Blank",
       "weight": 3.0,
       "positions": null,
       "suffix": null,
       "hidden": true
+    },
+    {
+      "type": "DP",
+      "weight": 5.3,
+      "positions": 16,
+      "suffix": "DP",
+      "hidden": true
+    }
+  ],
+  "hybrids": [
+    {
+      "type": "DP",
+      "weight": 5.3,
+      "positions": 32,
+      "hybridPositions": 16,
+      "suffix": "1MD"
+    },
+    {
+      "type": "Xi",
+      "weight": 8.7,
+      "positions": 32,
+      "hybridPositions": 32,
+      "suffix": "1MI"
     }
   ],
   "cabinets": [
     {
-      "type": "Large",
+      "size": "Large",
       "weight": 103.1,
-      "interiorPanels": 5,
-      "doorPanels": 4,
+      "maxPanels": 9,
       "mount": { "wall": "AAX010", "stand": "A600" },
       "box": "PBX015"
     },
     {
-      "type": "Small",
+      "size": "Small",
       "weight": 56.6,
-      "interiorPanels": 3,
-      "doorPanels": 1,
+      "maxPanels": 4,
       "mount": { "wall": "AAX020", "stand": "A600" },
       "box": "PBX016"
     },
     {
-      "type": "Mini",
+      "size": "Mini",
       "weight": 44.8,
-      "interiorPanels": 1,
-      "doorPanels": 0,
+      "maxPanels": 1,
       "mount": { "wall": "AAX056", "stand": "A600" },
       "box": "PBX0xx"
     }
   ],
   "config": [
-    { "type": "Kiosk", "weight": 9.0, "extraPanels": null, "suffix": "C" },
-    { "type": "Addon", "weight": 0.2, "extraPanels": 1, "suffix": "A" }
+    { "type": "Kiosk", "weight": 9.0, "suffix": "C" },
+    { "type": "Addon", "weight": 0.2, "suffix": "A" }
   ],
   "mount": [
     { "type": "wall", "accessoryType": "Wallboard" },

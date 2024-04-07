@@ -2,7 +2,7 @@ import { Box, InputLabel, MenuItem, FormControl, Select } from '@mui/material'
 import { useBuildContext } from '../hooks/useBuildContext'
 
 const Dropdown = ({ cabinets }) => {
-  const { size, panelType, dispatch } = useBuildContext()
+  const { size, panelType, dispatch, isHybrid } = useBuildContext()
 
   return (
     <FormControl size='sm' sx={{ m: 1 }}>
@@ -20,11 +20,11 @@ const Dropdown = ({ cabinets }) => {
           >
             {cabinets.map((cabinet) => (
               <MenuItem
-                key={cabinet.type}
+                key={cabinet.size}
                 value={cabinet}
-                disabled={cabinet.interiorPanels < (panelType?.panelSize || 1)}
+                disabled={cabinet.size === 'Mini' && isHybrid}
               >
-                {cabinet.type}
+                {cabinet.size}
               </MenuItem>
             ))}
           </Select>

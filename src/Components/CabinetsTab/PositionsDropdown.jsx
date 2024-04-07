@@ -1,37 +1,28 @@
 import { useState, useEffect } from 'react'
-import { Box, InputLabel, MenuItem, FormControl, Select } from '@mui/material'
-import { useBuildContext } from '../hooks/useBuildContext'
+import {
+  Box,
+  InputLabel,
+  MenuItem,
+  FormControl,
+  Select,
+  ListSubheader,
+} from '@mui/material'
+
+import { useBuildContext } from '../../hooks/useBuildContext'
 
 const Dropdown = () => {
-  const { panels, panelType, size, config, dispatch } = useBuildContext()
+  const { panels, panelType, cabinet, dispatch, isHybrid, isAddon } =
+    useBuildContext()
 
   const [options, setOptions] = useState([
     { panels: panels, positions: panelType.positions * panels },
   ])
 
-  const [maxPanels, setMaxPanels] = useState(
-    size.interiorPanels + size.doorPanels
-  )
-
-  useEffect(() => {
-    let panelCount = size.interiorPanels
-
-    panelCount += panelType?.interiorOnly
-      ? null
-      : size.doorPanels + config.extraPanels
-
-    panelCount = Math.floor(panelCount / (panelType?.panelSize || 1))
-
-    if (panels > panelCount)
-      dispatch({ type: 'SET_PANELS', payload: panelCount })
-
-    setMaxPanels(panelCount)
-  }, [panelType, size, config, panels, dispatch])
-
   useEffect(() => {
     let opts = []
 
-    for (let i = maxPanels; i > 0; i--) {
+    let i = isAddon ? cabinet.maxPanels + 1 : cabinet.maxPanels
+    for (i; i > 0; i--) {
       opts.push({
         panels: i,
         positions: panelType.positions * i,
@@ -39,7 +30,14 @@ const Dropdown = () => {
     }
 
     setOptions(opts)
-  }, [maxPanels, panelType.positions])
+  }, [panelType, isHybrid, isAddon])
+
+  // const renderSelectGroup = (size) => {
+  //   const options = size.options.map((opt) => {
+  //     return <MenuItem value={opt}>{opt}</MenuItem>
+  //   })
+  //   return [<ListSubheader>{size.size}</ListSubheader>, options]
+  // }
 
   return (
     <FormControl size='sm' sx={{ m: 1 }}>

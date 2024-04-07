@@ -9,7 +9,7 @@ import {
 } from '@mui/material'
 import Main from './Main'
 import Header from './Components/Header'
-import Shipment from './Components/Shipment'
+import Shipment from './Components/Shipment/Shipment'
 //import { useBuildContext } from './hooks/useBuildContext'
 
 const theme = createTheme({
@@ -44,7 +44,7 @@ const App = () => {
   )
 
   const Content = () => (
-    <Container maxWidth='lg' sx={{ mt: 8 }}>
+    <Container maxWidth='md' sx={{ mt: 8 }}>
       <Main tab={tab} setTab={setTab} />
       <Shipment setTab={setTab} />
     </Container>

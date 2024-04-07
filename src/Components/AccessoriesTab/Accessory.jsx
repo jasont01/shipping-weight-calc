@@ -1,5 +1,5 @@
 import { TextField } from '@mui/material'
-import { useBuildContext } from '../hooks/useBuildContext'
+import { useBuildContext } from '../../hooks/useBuildContext'
 
 const Accessory = ({ item }) => {
   const { accessories, dispatch } = useBuildContext()

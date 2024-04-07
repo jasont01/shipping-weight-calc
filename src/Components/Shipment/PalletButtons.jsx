@@ -1,6 +1,6 @@
 import { Box, Typography, Button, useMediaQuery } from '@mui/material'
-import { useBuildContext } from '../hooks/useBuildContext'
-import { useShipmentContext } from '../hooks/useShipmentContext'
+import { useBuildContext } from '../../hooks/useBuildContext'
+import { useShipmentContext } from '../../hooks/useShipmentContext'
 
 const PalletButton = ({ pallet }) => {
   const isMobile = useMediaQuery('(max-width: 600px)')

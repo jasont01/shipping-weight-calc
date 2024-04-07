@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Box, Typography, Paper, Tooltip } from '@mui/material'
-import { useShipmentContext } from '../hooks/useShipmentContext'
+import { useShipmentContext } from '../../hooks/useShipmentContext'
 
 const Summary = () => {
   const { items } = useShipmentContext()

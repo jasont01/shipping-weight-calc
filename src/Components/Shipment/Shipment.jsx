@@ -14,8 +14,8 @@ import Item from './Item'
 import PalletButtons from './PalletButtons'
 import Summary from './Summary'
 
-import { useShipmentContext } from '../hooks/useShipmentContext'
-import { useBuildContext } from '../hooks/useBuildContext'
+import { useShipmentContext } from '../../hooks/useShipmentContext'
+import { useBuildContext } from '../../hooks/useBuildContext'
 
 const Shipment = ({ setTab }) => {
   const { items, dispatch: resetShipment } = useShipmentContext()
@@ -43,6 +43,7 @@ const Shipment = ({ setTab }) => {
           <TableHead>
             <TableRow>
               <TableCell>Desc</TableCell>
+              <TableCell>Size</TableCell>
               <TableCell align='right'>Part</TableCell>
               <TableCell align='right' sx={{ pr: '4em' }}>
                 Qty

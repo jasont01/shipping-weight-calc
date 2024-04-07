@@ -1,7 +1,7 @@
 import { Box, IconButton } from '@mui/material'
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle'
 import AddCircleIcon from '@mui/icons-material/AddCircle'
-import { useShipmentContext } from '../hooks/useShipmentContext'
+import { useShipmentContext } from '../../hooks/useShipmentContext'
 
 const Counter = ({ part, qty }) => {
   const { dispatch } = useShipmentContext()

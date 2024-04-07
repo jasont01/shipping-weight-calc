@@ -1,7 +1,7 @@
 import { Box, Typography, Divider, Button } from '@mui/material'
 import Accessory from './Accessory'
-import { useBuildContext } from '../hooks/useBuildContext'
-import { useShipmentContext } from '../hooks/useShipmentContext'
+import { useBuildContext } from '../../hooks/useBuildContext'
+import { useShipmentContext } from '../../hooks/useShipmentContext'
 
 const AccessoriesTab = ({ categories }) => {
   const { accessories } = useBuildContext()

@@ -1,9 +1,9 @@
 import { TableCell, TableRow, IconButton } from '@mui/material'
 import Counter from './Counter'
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline'
-import { useShipmentContext } from '../hooks/useShipmentContext'
+import { useShipmentContext } from '../../hooks/useShipmentContext'
 
-const Item = ({ item: { part, desc, qty, weight } }) => {
+const Item = ({ item: { part, size, desc, qty, weight } }) => {
   const { dispatch } = useShipmentContext()
 
   const handleRemove = () => {
@@ -13,6 +13,7 @@ const Item = ({ item: { part, desc, qty, weight } }) => {
   return (
     <TableRow key={part}>
       <TableCell>{desc}</TableCell>
+      <TableCell>{size}</TableCell>
       <TableCell align='right'>{part.split('|')[0]}</TableCell>
       <TableCell align='right'>
         <Counter part={part} qty={qty} />
