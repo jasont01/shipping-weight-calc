@@ -2,29 +2,28 @@ import { Box, InputLabel, MenuItem, FormControl, Select } from '@mui/material'
 
 import { useBuildContext } from '../../hooks/useBuildContext'
 
-const Dropdown = ({ options, disabled = false }) => {
-  const { panelCount, dispatch } = useBuildContext()
+import { useState, useEffect } from 'react'
+const Dropdown = ({ options: zz, disabled = false }) => {
+  const { panelCount, panelType, cabinet, dispatch, isAddon } =
+    useBuildContext()
 
-  // const { panelCount, panelType, cabinet, dispatch, isAddon } =
-  //   useBuildContext()
+  const [options, setOptions] = useState([
+    { panels: panelCount, positions: panelType.positions * panelCount },
+  ])
 
-  // const [options, setOptions] = useState([
-  //   { panels: panelCount, positions: panelType.positions * panelCount },
-  // ])
+  useEffect(() => {
+    let opts = []
 
-  // useEffect(() => {
-  //   let opts = []
+    let i = isAddon ? cabinet.maxPanels + 1 : cabinet.maxPanels
+    for (i; i > 0; i--) {
+      opts.push({
+        panels: i,
+        positions: panelType.positions * i,
+      })
+    }
 
-  //   let i = isAddon ? cabinet.maxPanels + 1 : cabinet.maxPanels
-  //   for (i; i > 0; i--) {
-  //     opts.push({
-  //       panels: i,
-  //       positions: panelType.positions * i,
-  //     })
-  //   }
-
-  //   setOptions(opts)
-  // }, [panelType, isAddon])
+    setOptions(opts)
+  }, [panelType, isAddon, cabinet])
 
   return (
     <FormControl size='sm' sx={{ m: 1 }}>

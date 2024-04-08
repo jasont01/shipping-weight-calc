@@ -90,6 +90,10 @@ const buildReducer = (state, action) => {
         ...state,
         panelCount: 1,
         cabinet: data.cabinets[2],
+        config: data.config[0],
+        isAddon: false,
+        isHybrid: false,
+        isUpgrade: false,
       }
 
     // case 'SET_DATA':
