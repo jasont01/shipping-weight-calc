@@ -3,15 +3,13 @@ import { Box, InputLabel, MenuItem, FormControl, Select } from '@mui/material'
 import { useBuildContext } from '../../hooks/useBuildContext'
 
 const PanelDropdown = ({ panels }) => {
-  const { panelType, dispatch, isHybrid } = useBuildContext()
-
-  const label = isHybrid ? 'Type' : 'Panel'
+  const { panelType, dispatch } = useBuildContext()
 
   return (
     <FormControl size='sm' sx={{ m: 1 }}>
       <Box sx={{ minWidth: 80 }}>
         <FormControl fullWidth>
-          <InputLabel id='panelType-select-label'>{label}</InputLabel>
+          <InputLabel id='panelType-select-label'>Panel</InputLabel>
           <Select
             labelId='panelType-select-label'
             value={panelType}

@@ -1,52 +1,39 @@
-import { useState, useEffect } from 'react'
-import {
-  Box,
-  InputLabel,
-  MenuItem,
-  FormControl,
-  Select,
-  ListSubheader,
-} from '@mui/material'
+import { Box, InputLabel, MenuItem, FormControl, Select } from '@mui/material'
 
 import { useBuildContext } from '../../hooks/useBuildContext'
 
-const Dropdown = () => {
-  const { panels, panelType, cabinet, dispatch, isHybrid, isAddon } =
-    useBuildContext()
+const Dropdown = ({ options, disabled = false }) => {
+  const { panelCount, dispatch } = useBuildContext()
 
-  const [options, setOptions] = useState([
-    { panels: panels, positions: panelType.positions * panels },
-  ])
+  // const { panelCount, panelType, cabinet, dispatch, isAddon } =
+  //   useBuildContext()
 
-  useEffect(() => {
-    let opts = []
+  // const [options, setOptions] = useState([
+  //   { panels: panelCount, positions: panelType.positions * panelCount },
+  // ])
 
-    let i = isAddon ? cabinet.maxPanels + 1 : cabinet.maxPanels
-    for (i; i > 0; i--) {
-      opts.push({
-        panels: i,
-        positions: panelType.positions * i,
-      })
-    }
+  // useEffect(() => {
+  //   let opts = []
 
-    setOptions(opts)
-  }, [panelType, isHybrid, isAddon])
+  //   let i = isAddon ? cabinet.maxPanels + 1 : cabinet.maxPanels
+  //   for (i; i > 0; i--) {
+  //     opts.push({
+  //       panels: i,
+  //       positions: panelType.positions * i,
+  //     })
+  //   }
 
-  // const renderSelectGroup = (size) => {
-  //   const options = size.options.map((opt) => {
-  //     return <MenuItem value={opt}>{opt}</MenuItem>
-  //   })
-  //   return [<ListSubheader>{size.size}</ListSubheader>, options]
-  // }
+  //   setOptions(opts)
+  // }, [panelType, isAddon])
 
   return (
     <FormControl size='sm' sx={{ m: 1 }}>
       <Box sx={{ minWidth: 80 }}>
-        <FormControl fullWidth>
+        <FormControl fullWidth disabled={disabled}>
           <InputLabel id='panels-select-label'>Positions</InputLabel>
           <Select
             labelId='panels-select-label'
-            value={panels}
+            value={panelCount}
             label='Positions'
             size={'small'}
             onChange={(e) =>

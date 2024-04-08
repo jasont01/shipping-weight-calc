@@ -5,7 +5,7 @@ import data from '../data.json'
 const DEFAULT_STATE = {
   data,
   panelType: data.panels[0],
-  panels: data.cabinets[0].maxPanels,
+  panelCount: data.cabinets[0].maxPanels,
   cabinet: data.cabinets[0],
   config: data.config[0],
   mount: data.mount[0],
@@ -28,7 +28,7 @@ const buildReducer = (state, action) => {
     case 'SET_PANELS':
       return {
         ...state,
-        panels: action.payload,
+        panelCount: action.payload,
         cabinet:
           action.payload > data.cabinets[1].maxPanels
             ? data.cabinets[0]
@@ -38,12 +38,6 @@ const buildReducer = (state, action) => {
             ? false
             : state.isUpgrade,
       }
-
-    // case 'SET_CABINET_SIZE':
-    //   return { ...state, size: action.payload }
-
-    // case 'SET_CONFIG':
-    //   return { ...state, config: action.payload }
 
     case 'SET_MOUNT':
       return { ...state, mount: action.payload }
@@ -62,20 +56,21 @@ const buildReducer = (state, action) => {
     case 'SET_ADDON':
       return {
         ...state,
-        panels:
-          state.panels > state.cabinet.maxPanels
+        panelCount:
+          state.panelCount > state.cabinet.maxPanels
             ? state.cabinet.maxPanels
-            : state.panels,
+            : state.panelCount,
         config: action.payload ? data.config[1] : data.config[0],
         isAddon: action.payload,
       }
 
     case 'SET_HYBRID':
-      let numPanels = data.cabinets[0].maxPanels
       return {
         ...state,
         panelType: action.payload ? data.hybrids[0] : data.panels[0],
-        panels: action.payload ? numPanels - 2 : numPanels,
+        panelCount: action.payload
+          ? data.cabinets[0].maxPanels - 2
+          : data.cabinets[0].maxPanels,
         isHybrid: action.payload,
         isUpgrade: false,
       }
@@ -84,10 +79,17 @@ const buildReducer = (state, action) => {
       return {
         ...state,
         cabinet:
-          action.payload || state.panels > data.cabinets[1]
+          action.payload || state.panelCount > data.cabinets[1]
             ? data.cabinets[0]
             : data.cabinets[1],
         isUpgrade: action.payload,
+      }
+
+    case 'LOAD_MINI':
+      return {
+        ...state,
+        panelCount: 1,
+        cabinet: data.cabinets[2],
       }
 
     // case 'SET_DATA':

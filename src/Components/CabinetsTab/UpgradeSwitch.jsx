@@ -4,13 +4,13 @@ import { Switch, FormGroup, FormControlLabel } from '@mui/material'
 import { useBuildContext } from '../../hooks/useBuildContext'
 
 const UpgradeSwitch = () => {
-  const { isUpgrade, panels, data, dispatch } = useBuildContext()
+  const { isUpgrade, panelCount, data, dispatch } = useBuildContext()
 
   const [disabled, setdisabled] = useState(true)
 
   useEffect(() => {
-    setdisabled(panels > data.cabinets[1].maxPanels)
-  }, [panels])
+    setdisabled(panelCount > data.cabinets[1].maxPanels)
+  }, [panelCount])
 
   const toggleUpgrade = () => {
     dispatch({ type: 'SET_UPGRADE', payload: !isUpgrade })

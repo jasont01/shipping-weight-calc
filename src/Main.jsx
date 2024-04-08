@@ -33,9 +33,9 @@ const Main = ({ tab, setTab }) => {
             onChange={(e, newValue) => setTab(newValue)}
           >
             <Tab label='Cabinets' />
-            <Tab label='Hybrids' />
+            <Tab label='Hybrid' />
             <Tab label='DealerPlate' />
-            <Tab label='Minis' />
+            <Tab label='Mini' />
             <Tab label='Accessories' />
             <Tab label='Mechanical' />
           </Tabs>
@@ -50,7 +50,7 @@ const Main = ({ tab, setTab }) => {
           <DealerPlateTab />
         </TabPanel>
         <TabPanel tab={tab} index={3}>
-          <MiniTab />
+          <MiniTab data={data} />
         </TabPanel>
         <TabPanel tab={tab} index={4}>
           <AccessoriesTab categories={data.accessories} />
