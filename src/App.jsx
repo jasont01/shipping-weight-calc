@@ -7,9 +7,13 @@ import {
   Container,
   CircularProgress,
 } from '@mui/material'
+
 import Main from './Main'
 import Header from './Components/Header'
 import Shipment from './Components/Shipment/Shipment'
+
+import BuildContextProvider from './context/BuildContext'
+import ShipmentContextProvider from './context/ShipmentContext'
 //import { useBuildContext } from './hooks/useBuildContext'
 
 const theme = createTheme({
@@ -51,13 +55,17 @@ const App = () => {
   )
 
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Box>
-        <Header />
-        {loading ? <Spinner /> : <Content />}
-      </Box>
-    </ThemeProvider>
+    <BuildContextProvider>
+      <ShipmentContextProvider>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <Box>
+            <Header />
+            {loading ? <Spinner /> : <Content />}
+          </Box>
+        </ThemeProvider>
+      </ShipmentContextProvider>
+    </BuildContextProvider>
   )
 }
 
