@@ -1,13 +1,13 @@
 import { Box, Tab, Tabs, Paper } from '@mui/material'
 
-import CabinetsTab from './Components/CabinetsTab/CabinetsTab'
-import AccessoriesTab from './Components/AccessoriesTab/AccessoriesTab'
-import HybridsTab from './Components/HybridsTab/HybridsTab'
-import DealerPlateTab from './Components/DealerPlateTab/DealerPlateTab'
-import MiniTab from './Components/MiniTab/MiniTab'
-import MechanicalTab from './Components/MechanicalTab/MechanicalTab'
+import CabinetsTab from './CabinetsTab/CabinetsTab'
+import AccessoriesTab from './AccessoriesTab/AccessoriesTab'
+import HybridsTab from './HybridsTab/HybridsTab'
+import DealerPlateTab from './DealerPlateTab/DealerPlateTab'
+import MiniTab from './MiniTab/MiniTab'
+import MechanicalTab from './MechanicalTab/MechanicalTab'
 
-import { useBuildContext } from './hooks/useBuildContext'
+import { useBuildContext } from '../hooks/useBuildContext'
 
 const TabPanel = (props) => {
   const { children, tab, index } = props
@@ -19,7 +19,7 @@ const TabPanel = (props) => {
   )
 }
 
-const Main = ({ tab, setTab }) => {
+const Tabs = ({ tab, setTab }) => {
   const { data } = useBuildContext()
 
   return (
@@ -63,4 +63,4 @@ const Main = ({ tab, setTab }) => {
   )
 }
 
-export default Main
+export default Tabs

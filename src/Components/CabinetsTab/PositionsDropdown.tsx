@@ -3,7 +3,7 @@ import { Box, InputLabel, MenuItem, FormControl, Select } from '@mui/material'
 import { useBuildContext } from '../../hooks/useBuildContext'
 
 import { useState, useEffect } from 'react'
-const Dropdown = ({ options: zz, disabled = false }) => {
+const Dropdown = ({ disabled = false }) => {
   const { panelCount, panelType, cabinet, dispatch, isAddon } =
     useBuildContext()
 
