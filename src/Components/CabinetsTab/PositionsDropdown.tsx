@@ -1,42 +1,50 @@
+import { useState, useEffect } from 'react'
+
 import { Box, InputLabel, MenuItem, FormControl, Select } from '@mui/material'
 
 import { useBuildContext } from '../../hooks/useBuildContext'
 
-import { useState, useEffect } from 'react'
 const Dropdown = ({ disabled = false }) => {
-  const { panelCount, panelType, cabinet, dispatch, isAddon } =
-    useBuildContext()
+  const { state, dispatch } = useBuildContext()
 
   const [options, setOptions] = useState([
-    { panels: panelCount, positions: panelType.positions * panelCount },
+    {
+      panels: state.panelCount,
+      positions: state.panelType.positions * state.panelCount,
+    },
   ])
 
   useEffect(() => {
-    let opts = []
+    const opts = []
 
-    let i = isAddon ? cabinet.maxPanels + 1 : cabinet.maxPanels
+    let i = state.isAddon
+      ? state.cabinet.maxPanels + 1
+      : state.cabinet.maxPanels
     for (i; i > 0; i--) {
       opts.push({
         panels: i,
-        positions: panelType.positions * i,
+        positions: state.panelType.positions * i,
       })
     }
 
     setOptions(opts)
-  }, [panelType, isAddon, cabinet])
+  }, [state.panelType, state.isAddon, state.cabinet])
 
   return (
-    <FormControl size='sm' sx={{ m: 1 }}>
+    <FormControl size='small' sx={{ m: 1 }}>
       <Box sx={{ minWidth: 80 }}>
         <FormControl fullWidth disabled={disabled}>
           <InputLabel id='panels-select-label'>Positions</InputLabel>
           <Select
             labelId='panels-select-label'
-            value={panelCount}
+            value={state.panelCount}
             label='Positions'
             size={'small'}
             onChange={(e) =>
-              dispatch({ type: 'SET_PANELS', payload: e.target.value })
+              dispatch({
+                type: 'SET_PANEL_COUNT',
+                payload: Number(e.target.value),
+              })
             }
           >
             {options.map((option) => (

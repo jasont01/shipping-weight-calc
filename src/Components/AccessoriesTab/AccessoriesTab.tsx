@@ -1,14 +1,22 @@
 import { Box, Typography, Divider, Button } from '@mui/material'
+
 import Accessory from './Accessory'
+
 import { useBuildContext } from '../../hooks/useBuildContext'
 import { useShipmentContext } from '../../hooks/useShipmentContext'
 
-const AccessoriesTab = ({ categories }) => {
-  const { accessories } = useBuildContext()
+import { AccessoryGroup } from '../../types/dataFile'
+
+interface Props {
+  categories: AccessoryGroup[]
+}
+
+const AccessoriesTab = ({ categories }: Props) => {
+  const { state } = useBuildContext()
   const { dispatch } = useShipmentContext()
 
   const addToShipment = () => {
-    accessories.map(
+    state.accessories.map(
       (item) => item.qty > 0 && dispatch({ type: 'ADD_ITEM', payload: item })
     )
   }

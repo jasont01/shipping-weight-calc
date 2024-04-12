@@ -10,6 +10,7 @@ import {
   Button,
   useMediaQuery,
 } from '@mui/material'
+
 import Item from './Item'
 import PalletButtons from './PalletButtons'
 import Summary from './Summary'
@@ -17,15 +18,24 @@ import Summary from './Summary'
 import { useShipmentContext } from '../../hooks/useShipmentContext'
 import { useBuildContext } from '../../hooks/useBuildContext'
 
-const Shipment = ({ setTab }) => {
-  const { items, dispatch: resetShipment } = useShipmentContext()
+interface Props {
+  setTab: React.Dispatch<React.SetStateAction<number>>
+}
+
+const Shipment = ({ setTab }: Props) => {
+  const { state, dispatch: resetShipment } = useShipmentContext()
   const { dispatch: resetBuild } = useBuildContext()
 
   const isMobile = useMediaQuery('(max-width: 600px)')
 
   const resetBtnStyles = isMobile
     ? { display: 'flex', justifyContent: 'center' }
-    : { display: 'block', position: 'relative', bottom: '8em' }
+    : {
+        display: 'block',
+        justifyContent: '',
+        position: 'relative',
+        bottom: '8em',
+      }
 
   const handleReset = () => {
     resetShipment({ type: 'RESET' })
@@ -33,7 +43,7 @@ const Shipment = ({ setTab }) => {
     setTab(0)
   }
 
-  if (!items || items.length === 0) return
+  if (!state.items || state.items.length === 0) return
 
   return (
     <Box sx={{ mt: 4 }}>
@@ -53,7 +63,7 @@ const Shipment = ({ setTab }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {items.map((item) => (
+            {state.items.map((item) => (
               <Item key={item.part} item={item} />
             ))}
           </TableBody>

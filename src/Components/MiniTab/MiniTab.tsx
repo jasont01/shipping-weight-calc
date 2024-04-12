@@ -5,16 +5,22 @@ import PanelDropdown from '../CabinetsTab/PanelDropdown'
 import PositionsDropdown from '../CabinetsTab/PositionsDropdown'
 import MountDropdown from '../CabinetsTab/MountDropdown'
 import Qty from '../CabinetsTab/Qty'
-import AddCabinet from '../../AddCabinet'
+import AddCabinet from '../AddCabinet'
 
 import { useBuildContext } from '../../hooks/useBuildContext'
 
-const MiniTab = ({ data }) => {
+import DataFile from '../../types/dataFile'
+
+interface Props {
+  data: DataFile
+}
+
+const MiniTab = ({ data }: Props) => {
   const { dispatch } = useBuildContext()
 
   useEffect(() => {
     dispatch({ type: 'LOAD_MINI' })
-  }, [])
+  }, [dispatch])
 
   return (
     <Box>

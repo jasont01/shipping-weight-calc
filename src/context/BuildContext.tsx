@@ -1,4 +1,6 @@
-import { createContext, useReducer } from 'react'
+import { Dispatch, createContext, useReducer } from 'react'
+
+import { PanelType, Cabinet, Mount, Accessory } from '../types/types'
 
 import data from '../data.json'
 
@@ -18,14 +20,37 @@ const DEFAULT_STATE = {
   isUpgrade: false,
 }
 
-export const BuildContext = createContext()
+interface State {
+  panelType: PanelType
+  panelCount: number
+  cabinet: Cabinet
+  config: { type: string; weight: number; suffix: string }
+  mount: Mount
+  qty: number
+  accessories: Accessory[]
+  isAddon: boolean
+  isHybrid: boolean
+  isUpgrade: boolean
+}
 
-const buildReducer = (state, action) => {
+type Action =
+  | { type: 'SET_PANEL_TYPE'; payload: PanelType }
+  | { type: 'SET_PANEL_COUNT'; payload: number }
+  | { type: 'SET_MOUNT'; payload: Mount }
+  | { type: 'SET_QTY'; payload: number }
+  | { type: 'SET_ACCESSORIES'; payload: Accessory }
+  | { type: 'SET_ADDON'; payload: boolean }
+  | { type: 'SET_HYBRID'; payload: boolean }
+  | { type: 'SET_UPGRADE'; payload: boolean }
+  | { type: 'LOAD_MINI' }
+  | { type: 'RESET' }
+
+const buildReducer = (state: State, action: Action) => {
   switch (action.type) {
     case 'SET_PANEL_TYPE':
       return { ...state, panelType: action.payload }
 
-    case 'SET_PANELS':
+    case 'SET_PANEL_COUNT':
       return {
         ...state,
         panelCount: action.payload,
@@ -79,7 +104,7 @@ const buildReducer = (state, action) => {
       return {
         ...state,
         cabinet:
-          action.payload || state.panelCount > data.cabinets[1]
+          action.payload || state.panelCount > data.cabinets[1].maxPanels
             ? data.cabinets[0]
             : data.cabinets[1],
         isUpgrade: action.payload,
@@ -96,9 +121,6 @@ const buildReducer = (state, action) => {
         isUpgrade: false,
       }
 
-    // case 'SET_DATA':
-    //   return { ...state, data }
-
     case 'RESET':
       return DEFAULT_STATE
 
@@ -107,11 +129,21 @@ const buildReducer = (state, action) => {
   }
 }
 
-const BuildContextProvider = ({ children }) => {
+interface BuildContextInterface {
+  state: State
+  dispatch: Dispatch<Action>
+}
+
+export const BuildContext = createContext<BuildContextInterface>({
+  state: DEFAULT_STATE,
+  dispatch: () => {},
+})
+
+const BuildContextProvider = ({ children }: { children: React.ReactNode }) => {
   const [state, dispatch] = useReducer(buildReducer, DEFAULT_STATE)
 
   return (
-    <BuildContext.Provider value={{ ...state, dispatch }}>
+    <BuildContext.Provider value={{ state, dispatch }}>
       {children}
     </BuildContext.Provider>
   )

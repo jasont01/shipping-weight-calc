@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Box, Divider } from '@mui/material'
 
 import PanelDropdown from './PanelDropdown'
@@ -7,16 +7,28 @@ import MountDropdown from './MountDropdown'
 import AddonSwitch from './AddonSwitch'
 import UpgradeSwitch from './UpgradeSwitch'
 import Qty from './Qty'
-import AddCabinet from '../../AddCabinet'
+import AddCabinet from '../AddCabinet'
 
 import { useBuildContext } from '../../hooks/useBuildContext'
 
-const CabinetsTab = ({ data }) => {
-  const { dispatch } = useBuildContext()
+import DataFile from '../../types/dataFile'
+
+interface Props {
+  data: DataFile
+}
+
+const CabinetsTab = ({ data }: Props) => {
+  const { state, dispatch } = useBuildContext()
+
+  const [upgradeAvailable, setUpgradeAvailable] = useState(false)
+
+  useEffect(() => {
+    setUpgradeAvailable(state.panelCount > data.cabinets[1].maxPanels)
+  }, [state.panelCount, data.cabinets])
 
   useEffect(() => {
     dispatch({ type: 'RESET' })
-  }, [])
+  }, [dispatch])
 
   return (
     <Box>
@@ -34,7 +46,7 @@ const CabinetsTab = ({ data }) => {
           marginLeft={'2em'}
         >
           <AddonSwitch />
-          <UpgradeSwitch />
+          <UpgradeSwitch disabled={!upgradeAvailable} />
         </Box>
       </Box>
       <Divider sx={{ m: 3 }} />

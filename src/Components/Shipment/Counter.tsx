@@ -1,9 +1,15 @@
 import { Box, IconButton } from '@mui/material'
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle'
 import AddCircleIcon from '@mui/icons-material/AddCircle'
+
 import { useShipmentContext } from '../../hooks/useShipmentContext'
 
-const Counter = ({ part, qty }) => {
+interface Props {
+  part: string
+  qty: number
+}
+
+const Counter = ({ part, qty }: Props) => {
   const { dispatch } = useShipmentContext()
 
   const increment = () => dispatch({ type: 'INCREMENT', payload: part })

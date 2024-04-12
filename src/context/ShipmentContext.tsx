@@ -1,10 +1,29 @@
-import { createContext, useReducer } from 'react'
+import { Dispatch, createContext, useReducer } from 'react'
 
-export const ShipmentContext = createContext()
+const DEFAULT_STATE = { items: [] }
 
-const shipmentReducer = (state, action) => {
+export type Item = {
+  desc: string
+  size?: string
+  part: string
+  weight: number
+  qty: number
+}
+
+interface State {
+  items: Item[]
+}
+
+type Action =
+  | { type: 'ADD_ITEM'; payload: Item }
+  | { type: 'REMOVE_ITEM'; payload: string }
+  | { type: 'INCREMENT'; payload: string }
+  | { type: 'DECREMENT'; payload: string }
+  | { type: 'RESET' }
+
+const shipmentReducer = (state: State, action: Action) => {
   switch (action.type) {
-    case 'ADD_ITEM':
+    case 'ADD_ITEM': {
       const exists = state.items.find(
         (item) => item.part === action.payload.part
       )
@@ -20,6 +39,7 @@ const shipmentReducer = (state, action) => {
       } else {
         return { ...state, items: [...state.items, action.payload] }
       }
+    }
 
     case 'REMOVE_ITEM':
       return {
@@ -44,23 +64,33 @@ const shipmentReducer = (state, action) => {
       }
 
     case 'RESET':
-      return { ...state, items: [] }
+      return DEFAULT_STATE
 
     default:
       return state
   }
 }
 
-const ShipmentContextProvider = ({ children }) => {
+interface ShipmentContextInterface {
+  state: State
+  dispatch: Dispatch<Action>
+}
+
+export const ShipmentContext = createContext<ShipmentContextInterface>({
+  state: DEFAULT_STATE,
+  dispatch: () => {},
+})
+
+const ShipmentProvider = ({ children }: { children: React.ReactNode }) => {
   const [state, dispatch] = useReducer(shipmentReducer, {
     items: [],
   })
 
   return (
-    <ShipmentContext.Provider value={{ ...state, dispatch }}>
+    <ShipmentContext.Provider value={{ state, dispatch }}>
       {children}
     </ShipmentContext.Provider>
   )
 }
 
-export default ShipmentContextProvider
+export default ShipmentProvider

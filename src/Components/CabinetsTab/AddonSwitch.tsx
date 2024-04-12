@@ -3,22 +3,17 @@ import { Switch, FormGroup, FormControlLabel } from '@mui/material'
 import { useBuildContext } from '../../hooks/useBuildContext'
 
 const AddonSwitch = () => {
-  const { dispatch, isAddon } = useBuildContext()
+  const { state, dispatch } = useBuildContext()
 
   const toggleAddon = () => {
-    dispatch({ type: 'SET_ADDON', payload: !isAddon })
+    dispatch({ type: 'SET_ADDON', payload: !state.isAddon })
   }
 
   return (
     <FormGroup>
       <FormControlLabel
         control={
-          <Switch
-            label='Addon'
-            checked={isAddon}
-            onChange={toggleAddon}
-            size='small'
-          />
+          <Switch checked={state.isAddon} onChange={toggleAddon} size='small' />
         }
         label='Addon'
       />

@@ -8,7 +8,7 @@ import {
   CircularProgress,
 } from '@mui/material'
 
-import Tabs from './Components/Tabs'
+import TabPanel from './TabPanel'
 import Header from './Components/Header'
 import Shipment from './Components/Shipment/Shipment'
 
@@ -49,7 +49,7 @@ const App = () => {
 
   const Content = () => (
     <Container maxWidth='md' sx={{ mt: 8 }}>
-      <Tabs tab={tab} setTab={setTab} />
+      <TabPanel tab={tab} setTab={setTab} />
       <Shipment setTab={setTab} />
     </Container>
   )

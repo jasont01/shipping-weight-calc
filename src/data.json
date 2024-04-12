@@ -7,8 +7,8 @@
     {
       "type": "Blank",
       "weight": 3.0,
-      "positions": null,
-      "suffix": null,
+      "positions": 0,
+      "suffix": "",
       "hidden": true
     },
     {
@@ -24,14 +24,12 @@
       "type": "DP",
       "weight": 5.3,
       "positions": 32,
-      "hybridPositions": 16,
       "suffix": "1MD"
     },
     {
       "type": "Xi",
       "weight": 8.7,
       "positions": 32,
-      "hybridPositions": 32,
       "suffix": "1MI"
     }
   ],

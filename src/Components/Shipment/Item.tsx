@@ -1,9 +1,16 @@
 import { TableCell, TableRow, IconButton } from '@mui/material'
-import Counter from './Counter'
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline'
-import { useShipmentContext } from '../../hooks/useShipmentContext'
 
-const Item = ({ item: { part, size, desc, qty, weight } }) => {
+import Counter from './Counter'
+
+import { useShipmentContext } from '../../hooks/useShipmentContext'
+import { Item as ItemType } from '../../context/ShipmentContext'
+
+interface Props {
+  item: ItemType
+}
+
+const Item = ({ item: { part, size, desc, qty, weight } }: Props) => {
   const { dispatch } = useShipmentContext()
 
   const handleRemove = () => {
