@@ -1,20 +1,21 @@
 import { Dispatch, createContext, useReducer } from 'react'
 
-import { PanelType, Cabinet, Mount, Accessory } from '../types/types'
+import { PanelType, Cabinet, Config, Accessory } from '../types/types'
 
 import data from '../data.json'
 
 const DEFAULT_STATE = {
-  data,
   panelType: data.panels[0],
   panelCount: data.cabinets[0].maxPanels,
   cabinet: data.cabinets[0],
   config: data.config[0],
   mount: data.mount[0],
   qty: 1,
-  accessories: data.accessories
-    .map((category) => category.items.map((item) => ({ ...item, qty: 0 })))
-    .flat(),
+  accessories: [
+    ...data.cabinets.map((cab) => ({ ...cab.wallboard, qty: 0 })),
+    { ...data.stand, qty: 0 },
+    ...data.accessories.map((item) => ({ ...item, qty: 0 })),
+  ],
   isAddon: false,
   isHybrid: false,
   isUpgrade: false,
@@ -24,8 +25,8 @@ interface State {
   panelType: PanelType
   panelCount: number
   cabinet: Cabinet
-  config: { type: string; weight: number; suffix: string }
-  mount: Mount
+  config: Config
+  mount: string
   qty: number
   accessories: Accessory[]
   isAddon: boolean
@@ -36,7 +37,7 @@ interface State {
 type Action =
   | { type: 'SET_PANEL_TYPE'; payload: PanelType }
   | { type: 'SET_PANEL_COUNT'; payload: number }
-  | { type: 'SET_MOUNT'; payload: Mount }
+  | { type: 'SET_MOUNT'; payload: string }
   | { type: 'SET_QTY'; payload: number }
   | { type: 'SET_ACCESSORIES'; payload: Accessory }
   | { type: 'SET_ADDON'; payload: boolean }
@@ -129,7 +130,7 @@ const buildReducer = (state: State, action: Action) => {
   }
 }
 
-interface BuildContextInterface {
+export interface BuildContextInterface {
   state: State
   dispatch: Dispatch<Action>
 }

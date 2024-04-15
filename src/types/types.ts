@@ -1,4 +1,4 @@
-export type PanelType = {
+export interface PanelType {
   type: string
   weight: number
   positions: number
@@ -6,19 +6,38 @@ export type PanelType = {
   hidden?: boolean | undefined
 }
 
-export type Cabinet = {
+export interface Cabinet {
   size: string
   weight: number
   maxPanels: number
-  mount: { wall: string; stand: string }
-  box: string
+  wallboard: Item
+  box: Item
 }
 
-export type Mount = { type: string; accessoryType: string | null }
+export interface Config {
+  type: string
+  weight: number
+  suffix: string
+}
 
-export type Accessory = {
+export interface Item {
   desc: string
   part: string
   weight: number
+}
+
+export interface Accessory extends Item {
   qty: number
+}
+
+export default interface DataFile {
+  panels: PanelType[]
+  blank: { weight: number }
+  hybrids: PanelType[]
+  cabinets: Cabinet[]
+  config: Config[]
+  mount: string[]
+  stand: Item & { box: Item }
+  accessories: Item[]
+  pallets: Item[]
 }

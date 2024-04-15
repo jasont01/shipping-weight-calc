@@ -4,10 +4,10 @@ import { useShipmentContext } from '../../hooks/useShipmentContext'
 
 import data from '../../data.json'
 
-import { Pallet } from '../../types/dataFile'
+import { Item } from '../../types/types'
 
 interface Props {
-  pallet: Pallet
+  pallet: Item
 }
 
 const PalletButton = ({ pallet }: Props) => {

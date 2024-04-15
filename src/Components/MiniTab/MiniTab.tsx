@@ -9,7 +9,7 @@ import AddCabinet from '../AddCabinet'
 
 import { useBuildContext } from '../../hooks/useBuildContext'
 
-import DataFile from '../../types/dataFile'
+import DataFile from '../../types/types'
 
 interface Props {
   data: DataFile
@@ -27,7 +27,7 @@ const MiniTab = ({ data }: Props) => {
       <Box display={'flex'} justifyContent={'center'}>
         <Box>
           <PanelDropdown panels={data.panels} />
-          <PositionsDropdown disabled={true} />
+          <PositionsDropdown maxPanels={1} disabled={true} />
           <MountDropdown options={data.mount} />
           <Qty />
         </Box>

@@ -61,7 +61,11 @@ const TabPanel = ({ tab, setTab }: TabPanelProps) => (
         <MiniTab data={data} />
       </Panel>
       <Panel tab={tab} index={4}>
-        <AccessoriesTab categories={data.accessories} />
+        <AccessoriesTab
+          wallboards={data.cabinets.map((cab) => cab.wallboard)}
+          stand={data.stand}
+          accessories={data.accessories}
+        />
       </Panel>
       <Panel tab={tab} index={5}>
         <MechanicalTab />

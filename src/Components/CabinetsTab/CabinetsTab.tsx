@@ -11,31 +11,27 @@ import AddCabinet from '../AddCabinet'
 
 import { useBuildContext } from '../../hooks/useBuildContext'
 
-import DataFile from '../../types/dataFile'
+import DataFile from '../../types/types'
 
 interface Props {
   data: DataFile
 }
 
 const CabinetsTab = ({ data }: Props) => {
-  const { state, dispatch } = useBuildContext()
+  const { state } = useBuildContext()
 
   const [upgradeAvailable, setUpgradeAvailable] = useState(false)
 
   useEffect(() => {
-    setUpgradeAvailable(state.panelCount > data.cabinets[1].maxPanels)
+    setUpgradeAvailable(state.panelCount <= data.cabinets[1].maxPanels)
   }, [state.panelCount, data.cabinets])
-
-  useEffect(() => {
-    dispatch({ type: 'RESET' })
-  }, [dispatch])
 
   return (
     <Box>
       <Box display={'flex'} justifyContent={'center'}>
         <Box>
           <PanelDropdown panels={data.panels} />
-          <PositionsDropdown />
+          <PositionsDropdown maxPanels={data.cabinets[0].maxPanels} />
           <MountDropdown options={data.mount} />
           <Qty />
         </Box>

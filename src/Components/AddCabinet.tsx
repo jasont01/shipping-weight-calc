@@ -10,7 +10,6 @@ const AddCabinet = () => {
   const { dispatch } = useShipmentContext()
 
   const addToShipment = () => {
-    //Cabinet
     const buildDesc = `${state.panelType.type}${
       state.panelCount * state.panelType.positions
     } ${state.isAddon ? 'Addon' : 'Complete'}`
@@ -21,25 +20,25 @@ const AddCabinet = () => {
         : String(state.panelCount * state.panelType.positions)
     }`
 
-    const buildPart = `${partPrefix}${state.panelType.suffix}${state.config.suffix}|${state.cabinet.size}`
+    const partSuffix =
+      state.cabinet.size === 'Mini'
+        ? `${state.panelType.type}`
+        : `${state.panelType.suffix}${state.config.suffix}`
+
+    const buildPart = `${partPrefix}${partSuffix}|${state.cabinet.size}`
 
     const maxPanels = state.isAddon
       ? state.cabinet.maxPanels + 1
       : state.cabinet.maxPanels
 
-    const panelBlank = data.panels.find((panel) => panel.type === 'Blank')
-
-    const box =
-      state.mount.type === 'stand'
-        ? data.boxes.find((box) => box.size === 'Stand').weight
-        : data.boxes.find((box) => box.part === state.cabinet.box).weight
+    const box = state.mount === 'stand' ? data.stand.box : state.cabinet.box
 
     const buildWeight =
       state.panelType.weight * state.panelCount +
       state.cabinet.weight +
       state.config.weight +
-      (maxPanels - state.panelCount) * panelBlank.weight +
-      box
+      (maxPanels - state.panelCount) * data.blank.weight +
+      box.weight
 
     dispatch({
       type: 'ADD_ITEM',
@@ -52,19 +51,18 @@ const AddCabinet = () => {
       },
     })
 
-    //Mount
-    if (state.mount.type !== 'none') {
-      const mountAccessories = data.accessories.find(
-        (a) => a.type === state.mount.accessoryType
-      )
+    if (state.mount === 'wall') {
+      dispatch({
+        type: 'ADD_ITEM',
+        payload: { ...state.cabinet.wallboard, qty: state.qty },
+      })
+    }
 
-      const mountItem = mountAccessories.items.find(
-        (item) => item.part === state.cabinet.mount[state.mount.type]
-      )
-
-      dispatch({ type: 'ADD_ITEM', payload: { ...mountItem, qty: state.qty } })
+    if (state.mount === 'stand') {
+      dispatch({ type: 'ADD_ITEM', payload: { ...data.stand, qty: state.qty } })
     }
   }
+
   return (
     <Button variant='contained' onClick={addToShipment}>
       Add

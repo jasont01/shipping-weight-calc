@@ -2,10 +2,10 @@ import { TextField } from '@mui/material'
 
 import { useBuildContext } from '../../hooks/useBuildContext'
 
-import { Accessory as AccessoryType } from '../../types/dataFile'
+import { Item } from '../../types/types'
 
 interface Props {
-  item: AccessoryType
+  item: Item
 }
 
 const Accessory = ({ item }: Props) => {

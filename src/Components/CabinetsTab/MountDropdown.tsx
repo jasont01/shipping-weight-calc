@@ -2,10 +2,8 @@ import { Box, InputLabel, MenuItem, FormControl, Select } from '@mui/material'
 
 import { useBuildContext } from '../../hooks/useBuildContext'
 
-import { Mount } from '../../types/types'
-
 interface Props {
-  options: Mount[]
+  options: string[]
 }
 
 const MountDropdown = ({ options }: Props) => {
@@ -18,25 +16,24 @@ const MountDropdown = ({ options }: Props) => {
           <InputLabel id='mount-select-label'>Mount</InputLabel>
           <Select
             labelId='mount-select-label'
-            value={state.mount.type}
+            value={state.mount}
             label='Mount'
             size={'small'}
             onChange={(e) =>
               dispatch({
                 type: 'SET_MOUNT',
-                payload:
-                  options.find((o) => o.type === e.target.value) ?? options[0],
+                payload: e.target.value,
               })
             }
             sx={{ textTransform: 'capitalize' }}
           >
             {options.map((option) => (
               <MenuItem
-                key={option.type}
-                value={option.type}
+                key={option}
+                value={option}
                 sx={{ textTransform: 'capitalize' }}
               >
-                {option.type}
+                {option}
               </MenuItem>
             ))}
           </Select>
