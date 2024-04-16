@@ -28,3 +28,8 @@ export enum Accessory {
   Zebra = 2,
   Puck = 3,
 }
+
+export enum Hybrid {
+  DP = 0,
+  Xi = 1,
+}

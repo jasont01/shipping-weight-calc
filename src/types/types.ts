@@ -3,7 +3,6 @@ export interface PanelType {
   weight: number
   positions: number
   suffix: string
-  hidden?: boolean | undefined
 }
 
 export interface Cabinet {
@@ -30,8 +29,9 @@ export interface Accessory extends Item {
   qty: number
 }
 
-export default interface DataFile {
+export interface DataFile {
   panels: PanelType[]
+  dealerPlate: PanelType
   blank: { weight: number }
   hybrids: PanelType[]
   cabinets: Cabinet[]

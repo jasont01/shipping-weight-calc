@@ -29,14 +29,11 @@ const PanelDropdown = ({ panels }: Props) => {
               })
             }
           >
-            {panels.map(
-              (panel) =>
-                !panel.hidden && (
-                  <MenuItem key={panel.type} value={panel.type}>
-                    {panel.type}
-                  </MenuItem>
-                )
-            )}
+            {panels.map((panel) => (
+              <MenuItem key={panel.type} value={panel.type}>
+                {panel.type}
+              </MenuItem>
+            ))}
           </Select>
         </FormControl>
       </Box>
