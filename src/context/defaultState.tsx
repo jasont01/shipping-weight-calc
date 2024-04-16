@@ -1,5 +1,5 @@
 import data from '../data.json'
-import { Panel, Cabinet, Config, Mount } from '../tests/enums'
+import { Panel, Cabinet, Config, Mount } from '../enums'
 
 const DEFAULT_STATE = {
   panelType: data.panels[Panel.MX],

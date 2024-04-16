@@ -4,7 +4,7 @@ import { render, screen } from '@testing-library/react'
 import AddCabinet from '../Components/AddCabinet'
 
 import data from '../data.json'
-import { Panel, Cabinet, Config } from './enums'
+import { Panel, Cabinet, Config } from '../enums'
 
 import DEFAULT_STATE from '../context/defaultState'
 
