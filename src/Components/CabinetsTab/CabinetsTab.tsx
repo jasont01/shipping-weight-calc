@@ -11,7 +11,7 @@ import AddCabinet from '../AddCabinet'
 
 import { useBuildContext } from '../../hooks/useBuildContext'
 
-import DataFile from '../../types/types'
+import { DataFile } from '../../types/types'
 
 interface Props {
   data: DataFile

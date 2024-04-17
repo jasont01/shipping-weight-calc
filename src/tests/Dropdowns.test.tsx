@@ -6,6 +6,31 @@ import CabinetsTab from '../Components/CabinetsTab/CabinetsTab'
 import { Panel } from '../enums'
 import data from '../data.json'
 
+describe('Panel Dropdown', () => {
+  const scenarios = data.panels.map((panel) => ({
+    scenario: `${panel.type} Panel`,
+    stateChanges: { panelType: panel },
+    expectedValue: `${panel.type}`,
+  }))
+
+  scenarios.forEach(({ scenario, stateChanges, expectedValue }) => {
+    it(`${scenario}`, () => {
+      render(
+        <BuildContext.Provider
+          value={{
+            state: { ...DEFAULT_STATE, ...stateChanges },
+            dispatch: () => {},
+          }}
+        >
+          <CabinetsTab data={data} />
+        </BuildContext.Provider>
+      )
+
+      expect(screen.getByLabelText('Panel')).toHaveTextContent(expectedValue)
+    })
+  })
+})
+
 describe('Positions Dropdown', () => {
   const scenarios = []
 
@@ -57,6 +82,31 @@ describe('Positions Dropdown', () => {
       expect(screen.getByLabelText('Positions')).toHaveTextContent(
         expectedValue
       )
+    })
+  })
+})
+
+describe('Mount Dropdown', () => {
+  const scenarios = data.mount.map((type) => ({
+    scenario: `${type}`,
+    stateChanges: { mount: type },
+    expectedValue: `${type}`,
+  }))
+
+  scenarios.forEach(({ scenario, stateChanges, expectedValue }) => {
+    it(`${scenario}`, () => {
+      render(
+        <BuildContext.Provider
+          value={{
+            state: { ...DEFAULT_STATE, ...stateChanges },
+            dispatch: () => {},
+          }}
+        >
+          <CabinetsTab data={data} />
+        </BuildContext.Provider>
+      )
+
+      expect(screen.getByLabelText('Mount')).toHaveTextContent(expectedValue)
     })
   })
 })
