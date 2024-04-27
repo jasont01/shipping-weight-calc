@@ -1,4 +1,4 @@
-import { Box, Tab, Tabs as MuiTabs, Paper } from '@mui/material'
+import { Box, Tab as MuiTab, Tabs as MuiTabs, Paper } from '@mui/material'
 
 import CabinetsTab from './Cabinets'
 import AccessoriesTab from './Accessories'
@@ -7,71 +7,79 @@ import DealerPlateTab from './DealerPlate'
 import MiniTab from './Mini'
 import MechanicalTab from './Mechanical'
 
+import { Tab } from '../../enums'
 import data from '../../data.json'
+import { useBuildContext } from '../../hooks/useBuildContext'
 
 interface PanelProps {
-  tab: number
   index: number
   children: React.ReactNode
 }
 
 const Panel = (props: PanelProps) => {
-  const { tab, index, children } = props
+  const { index, children } = props
+
+  const { state } = useBuildContext()
 
   return (
-    <div role='tabpanel' hidden={tab !== index} id={`tabpanel-${index}`}>
-      {tab === index && <Box sx={{ p: 3 }}>{children}</Box>}
+    <div
+      role='tabpanel'
+      hidden={state.currentTab !== index}
+      id={`tabpanel-${index}`}
+    >
+      {state.currentTab === index && <Box sx={{ p: 3 }}>{children}</Box>}
     </div>
   )
 }
 
-interface Props {
-  tab: number
-  setTab: (_: number) => void
-}
+const Tabs = () => {
+  const { state, dispatch } = useBuildContext()
 
-const Tabs = ({ tab, setTab }: Props) => (
-  <Paper elevation={2} sx={{ p: 4, pt: 2 }}>
-    <Box sx={{ width: '100%' }}>
-      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <MuiTabs
-          variant='scrollable'
-          scrollButtons='auto'
-          value={tab}
-          onChange={(_, newValue) => setTab(newValue)}
-        >
-          <Tab label='Cabinets' />
-          <Tab label='Hybrids' />
-          <Tab label='DealerPlate' />
-          <Tab label='Mini' />
-          <Tab label='Accessories' />
-          <Tab label='Mechanical' disabled />
-        </MuiTabs>
+  return (
+    <Paper elevation={2} sx={{ p: 4, pt: 2 }}>
+      <Box sx={{ width: '100%' }}>
+        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+          <MuiTabs
+            variant='scrollable'
+            scrollButtons='auto'
+            value={state.currentTab}
+            onChange={(_, newValue) =>
+              dispatch({ type: 'SET_TAB', payload: newValue })
+            }
+          >
+            <MuiTab label='Cabinets' />
+            <MuiTab label='Hybrids' />
+            <MuiTab label='DealerPlate' />
+            <MuiTab label='Mini' />
+            <MuiTab label='Accessories' />
+            <MuiTab label='Mechanical' disabled />
+          </MuiTabs>
+        </Box>
+        <Panel index={Tab.Cabinets}>
+          <CabinetsTab data={data} />
+        </Panel>
+        <Panel index={Tab.Hybrids}>
+          <HybridsTab data={data} />
+        </Panel>
+        <Panel index={Tab.DealerPlate}>
+          <DealerPlateTab data={data} />
+        </Panel>
+        <Panel index={Tab.Mini}>
+          <MiniTab data={data} />
+        </Panel>
+        <Panel index={Tab.Accessories}>
+          <AccessoriesTab
+            wallboards={data.cabinets.map((cab) => cab.wallboard)}
+            stand={data.stand}
+            accessories={data.accessories}
+          />
+        </Panel>
+        <Panel index={Tab.Mechanical}>
+          <MechanicalTab items={data.mechanical} />
+        </Panel>
       </Box>
-      <Panel tab={tab} index={0}>
-        <CabinetsTab data={data} />
-      </Panel>
-      <Panel tab={tab} index={1}>
-        <HybridsTab data={data} />
-      </Panel>
-      <Panel tab={tab} index={2}>
-        <DealerPlateTab data={data} />
-      </Panel>
-      <Panel tab={tab} index={3}>
-        <MiniTab data={data} />
-      </Panel>
-      <Panel tab={tab} index={4}>
-        <AccessoriesTab
-          wallboards={data.cabinets.map((cab) => cab.wallboard)}
-          stand={data.stand}
-          accessories={data.accessories}
-        />
-      </Panel>
-      <Panel tab={tab} index={5}>
-        <MechanicalTab />
-      </Panel>
-    </Box>
-  </Paper>
-)
+    </Paper>
+  )
+}
 
 export default Tabs

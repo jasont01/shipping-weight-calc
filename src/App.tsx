@@ -14,7 +14,6 @@ import Shipment from './Components/Shipment/Shipment'
 
 import BuildContextProvider from './context/BuildContext'
 import ShipmentContextProvider from './context/ShipmentContext'
-//import { useBuildContext } from './hooks/useBuildContext'
 
 const theme = createTheme({
   palette: {
@@ -25,12 +24,9 @@ const theme = createTheme({
 })
 
 const App = () => {
-  //const { dispatch } = useBuildContext()
   const [loading, setLoading] = useState(false)
-  const [tab, setTab] = useState(0)
 
   useEffect(() => {
-    //dispatch({ type: 'SET_DATA', payload: data })
     setLoading(false)
   }, [])
 
@@ -49,8 +45,8 @@ const App = () => {
 
   const Content = () => (
     <Container maxWidth='md' sx={{ mt: 8 }}>
-      <Tabs tab={tab} setTab={setTab} />
-      <Shipment setTab={setTab} />
+      <Tabs />
+      <Shipment />
     </Container>
   )
 

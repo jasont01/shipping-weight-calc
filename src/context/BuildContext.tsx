@@ -3,8 +3,10 @@ import { Dispatch, createContext, useReducer } from 'react'
 import { PanelType, Cabinet, Config, Accessory } from '../types/types'
 import buildReducer, { Action } from './buildReducer'
 import DEFAULT_STATE from './defaultState'
+import { Tab } from '../enums'
 
 export interface State {
+  currentTab: Tab
   panelType: PanelType
   panelCount: number
   hybridType: PanelType

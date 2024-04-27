@@ -1,3 +1,12 @@
+export enum Tab {
+  Cabinets = 0,
+  Hybrids = 1,
+  DealerPlate = 2,
+  Mini = 3,
+  Accessories = 4,
+  Mechanical = 5,
+}
+
 export enum Panel {
   MX = 0,
   HC = 1,
@@ -6,7 +15,7 @@ export enum Panel {
   DP = 4,
 }
 
-export enum Cabinet {
+export enum Cab {
   Large = 0,
   Small = 1,
   Mini = 2,
