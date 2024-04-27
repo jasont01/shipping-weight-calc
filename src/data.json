@@ -98,6 +98,13 @@
       "weight": 29.3
     }
   ],
+  "mechanical": [
+    {
+      "desc": "ITEM_DESC",
+      "part": "PART_NUM",
+      "weight": 0
+    }
+  ],
   "pallets": [
     { "desc": "56x42", "part": "PBX028", "weight": 38.9 },
     { "desc": "48x40", "part": "PBX021", "weight": 28.9 },
