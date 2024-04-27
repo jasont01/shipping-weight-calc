@@ -3,33 +3,16 @@
     { "type": "MX", "weight": 4.5, "positions": 32, "suffix": "X" },
     { "type": "HC", "weight": 2.6, "positions": 56, "suffix": "H" },
     { "type": "Xi", "weight": 8.7, "positions": 32, "suffix": "I" },
-    { "type": "Xu", "weight": 8.0, "positions": 32, "suffix": "U" }
+    { "type": "Xu", "weight": 8.0, "positions": 32, "suffix": "U" },
+    { "type": "DP", "weight": 5.3, "positions": 16, "suffix": "DP" }
   ],
-  "dealerPlate": {
-    "type": "DP",
-    "weight": 5.3,
-    "positions": 16,
-    "suffix": "DP"
-  },
+  "hybrids": [
+    { "type": "DP", "weight": 5.3, "positions": 16, "suffix": "MD" },
+    { "type": "Xi", "weight": 8.7, "positions": 32, "suffix": "MI" }
+  ],
   "blank": {
     "weight": 3.0
   },
-  "hybrids": [
-    {
-      "type": "DP",
-      "weight": 5.3,
-      "positions": 16,
-      "panelSize": 2,
-      "suffix": "1MD"
-    },
-    {
-      "type": "Xi",
-      "weight": 8.7,
-      "positions": 32,
-      "panelSize": 1,
-      "suffix": "1MI"
-    }
-  ],
   "cabinets": [
     {
       "size": "Large",

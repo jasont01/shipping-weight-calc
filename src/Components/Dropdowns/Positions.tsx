@@ -8,12 +8,14 @@ interface Props {
   maxPanels: number
   label?: string
   disabled?: boolean
+  dealerPlate?: boolean
 }
 
 const Dropdown = ({
   maxPanels,
   label = 'Positions',
   disabled = false,
+  dealerPlate,
 }: Props) => {
   const { state, dispatch } = useBuildContext()
 
@@ -25,9 +27,13 @@ const Dropdown = ({
   ])
 
   useEffect(() => {
+    if (dealerPlate) dispatch({ type: 'SET_PANEL_COUNT', payload: 1 })
+  }, [dispatch, dealerPlate])
+
+  useEffect(() => {
     const opts = []
 
-    let i = state.isAddon ? maxPanels + 1 : maxPanels
+    let i = state.isAddon && !dealerPlate ? maxPanels + 1 : maxPanels
 
     for (i; i > 0; i--) {
       opts.push({
@@ -37,7 +43,7 @@ const Dropdown = ({
     }
 
     setOptions(opts)
-  }, [state.panelType, state.isAddon, maxPanels])
+  }, [state.panelType, state.isAddon, maxPanels, dealerPlate])
 
   return (
     <FormControl size='small' sx={{ m: 1 }}>

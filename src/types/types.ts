@@ -2,7 +2,6 @@ export interface PanelType {
   type: string
   weight: number
   positions: number
-  panelSize?: number
   suffix: string
 }
 
@@ -32,9 +31,8 @@ export interface Accessory extends Item {
 
 export interface DataFile {
   panels: PanelType[]
-  dealerPlate: PanelType
-  blank: { weight: number }
   hybrids: PanelType[]
+  blank: { weight: number }
   cabinets: Cabinet[]
   config: Config[]
   mount: string[]

@@ -9,6 +9,8 @@ interface Props {
   label?: string
   hidden?: boolean
   hybrid?: boolean
+  disabled?: boolean
+  dealerPlate?: boolean
 }
 
 const PanelDropdown = ({
@@ -16,13 +18,15 @@ const PanelDropdown = ({
   label = 'Panel',
   hidden = false,
   hybrid = false,
+  disabled = false,
+  dealerPlate = false,
 }: Props) => {
   const { state, dispatch } = useBuildContext()
 
   return (
     <FormControl size='small' sx={hidden ? { display: 'none' } : { m: 1 }}>
       <Box sx={{ minWidth: 80 }}>
-        <FormControl fullWidth>
+        <FormControl fullWidth disabled={disabled}>
           <InputLabel id='panelType-select-label'>{label}</InputLabel>
           <Select
             labelId='panelType-select-label'
@@ -37,11 +41,14 @@ const PanelDropdown = ({
               })
             }
           >
-            {panels.map((panel) => (
-              <MenuItem key={panel.type} value={panel.type}>
-                {panel.type}
-              </MenuItem>
-            ))}
+            {panels.map(
+              (panel) =>
+                (panel.type !== 'DP' || dealerPlate || hybrid) && (
+                  <MenuItem key={panel.type} value={panel.type}>
+                    {panel.type}
+                  </MenuItem>
+                )
+            )}
           </Select>
         </FormControl>
       </Box>

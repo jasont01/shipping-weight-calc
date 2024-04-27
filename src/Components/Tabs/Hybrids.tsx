@@ -36,10 +36,7 @@ const HybridsTab = ({ data }: Props) => {
         <Box>
           <PanelDropdown panels={data.panels} hidden />
           <PanelDropdown panels={data.hybrids} label={'Type'} hybrid />
-          <HybridPositions
-            maxPanels={data.cabinets[Cabinet.Large].maxPanels}
-            mxPanel={data.panels[Panel.MX]}
-          />
+          <HybridPositions maxPanels={data.cabinets[Cabinet.Large].maxPanels} />
           <MountDropdown options={data.mount} />
           <Qty />
         </Box>

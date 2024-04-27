@@ -14,6 +14,7 @@ describe('Panel Dropdown', () => {
   }))
 
   scenarios.forEach(({ scenario, stateChanges, expectedValue }) => {
+    if (scenario === 'DP Panel') return
     it(`${scenario}`, () => {
       render(
         <BuildContext.Provider

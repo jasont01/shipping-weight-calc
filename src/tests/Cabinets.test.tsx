@@ -11,6 +11,9 @@ import Shipment from '../Components/Shipment/Shipment'
 import data from '../data.json'
 import { Panel, Cabinet, Config } from '../enums'
 
+// TODO =====================
+// TODO add tests for: Hybrids, DP, Mini, Accessories
+
 interface Scenario {
   build: string
   panelType: Panel

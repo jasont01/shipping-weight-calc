@@ -3,18 +3,15 @@ import { useState, useEffect } from 'react'
 import { Box, InputLabel, MenuItem, FormControl, Select } from '@mui/material'
 
 import { useBuildContext } from '../../hooks/useBuildContext'
-import { PanelType } from '../../types/types'
 
 interface Props {
   maxPanels: number
-  mxPanel: PanelType
   label?: string
   disabled?: boolean
 }
 
 const Dropdown = ({
   maxPanels,
-  mxPanel,
   label = 'Positions',
   disabled = false,
 }: Props) => {
@@ -30,37 +27,32 @@ const Dropdown = ({
   ])
 
   useEffect(() => {
-    let maxMXPanels =
-      maxPanels - (state.hybridType.panelSize || 1) * state.hybridPanels
-    const minMXPanels = state.hybridType.type === 'DP' ? 2 : 1
+    const panelSize = state.hybridType.type === 'DP' ? 2 : 1
+
+    let maxMXPanels = maxPanels - panelSize * state.hybridPanels
 
     if (state.isAddon) maxMXPanels += 1
 
-    if (state.panelCount > maxMXPanels || state.panelCount < minMXPanels) {
+    if (state.panelCount > maxMXPanels || state.panelCount < panelSize) {
       dispatch({ type: 'SET_PANEL_COUNT', payload: maxMXPanels })
     }
-  }, [state, mxPanel, maxPanels, dispatch])
 
-  useEffect(() => {
     const opts = []
-    if (state.hybridType.panelSize) {
-      let i = state.isAddon ? maxPanels + 1 : maxPanels
-      i = i - state.hybridType.panelSize * state.hybridPanels
 
-      const j = state.hybridType.type === 'DP' ? 1 : 0
+    let i = state.isAddon ? maxPanels + 1 : maxPanels
+    i = i - panelSize * state.hybridPanels
 
-      for (i; i > j; i--) {
-        opts.push({
-          panels: i,
-          positions:
-            state.panelType.positions * i +
-            state.hybridType.positions * state.hybridPanels,
-        })
-      }
+    for (i; i >= panelSize; i--) {
+      opts.push({
+        panels: i,
+        positions:
+          state.panelType.positions * i +
+          state.hybridType.positions * state.hybridPanels,
+      })
     }
 
     setOptions(opts)
-  }, [state, maxPanels])
+  }, [state, maxPanels, dispatch])
 
   return (
     <FormControl size='small' sx={{ m: 1 }}>

@@ -12,16 +12,16 @@ const AddHybrid = () => {
   const addToShipment = () => {
     const buildDesc = `Hybrid ${state.panelCount * state.panelType.positions}${
       state.panelType.type
-    } with ${1 * state.hybridType.positions}${state.hybridType.type} ${
-      state.isAddon ? 'Addon' : 'Complete'
-    }`
+    } with ${state.hybridPanels > 1 ? `(${state.hybridPanels})` : ''}${
+      1 * state.hybridType.positions
+    }${state.hybridType.type} ${state.isAddon ? 'Addon' : 'Complete'}`
 
     const partPrefix = `MKE${String(
       state.panelCount * state.panelType.positions +
         state.hybridType.positions * state.hybridPanels
     )}`
 
-    const partSuffix = `${state.hybridType.suffix}${state.config.suffix}`
+    const partSuffix = `${state.hybridPanels}${state.hybridType.suffix}${state.config.suffix}`
 
     const buildPart = `${partPrefix}${partSuffix}|${state.cabinet.size}`
 
@@ -30,7 +30,6 @@ const AddHybrid = () => {
       : state.cabinet.maxPanels
 
     const box = state.mount === 'stand' ? data.stand.box : state.cabinet.box
-    console.log({ state }, { maxPanels }, { box })
 
     const buildWeight =
       state.panelType.weight * state.panelCount +

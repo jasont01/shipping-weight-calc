@@ -55,7 +55,7 @@ const Tabs = ({ tab, setTab }: Props) => (
         <HybridsTab data={data} />
       </Panel>
       <Panel tab={tab} index={2}>
-        <DealerPlateTab />
+        <DealerPlateTab data={data} />
       </Panel>
       <Panel tab={tab} index={3}>
         <MiniTab data={data} />

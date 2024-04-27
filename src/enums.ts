@@ -3,6 +3,7 @@ export enum Panel {
   HC = 1,
   MXi = 2,
   XU = 3,
+  DP = 4,
 }
 
 export enum Cabinet {

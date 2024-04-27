@@ -12,6 +12,7 @@ import AddCabinet from '../AddCabinet'
 import { useBuildContext } from '../../hooks/useBuildContext'
 
 import { DataFile } from '../../types/types'
+import { Cabinet } from '../../enums'
 
 interface Props {
   data: DataFile
@@ -23,7 +24,9 @@ const CabinetsTab = ({ data }: Props) => {
   const [upgradeAvailable, setUpgradeAvailable] = useState(false)
 
   useEffect(() => {
-    setUpgradeAvailable(state.panelCount <= data.cabinets[1].maxPanels)
+    setUpgradeAvailable(
+      state.panelCount <= data.cabinets[Cabinet.Small].maxPanels
+    )
   }, [state.panelCount, data.cabinets])
 
   return (
@@ -31,7 +34,9 @@ const CabinetsTab = ({ data }: Props) => {
       <Box display={'flex'} justifyContent={'center'}>
         <Box>
           <PanelDropdown panels={data.panels} />
-          <PositionsDropdown maxPanels={data.cabinets[0].maxPanels} />
+          <PositionsDropdown
+            maxPanels={data.cabinets[Cabinet.Large].maxPanels}
+          />
           <MountDropdown options={data.mount} />
           <Qty />
         </Box>
