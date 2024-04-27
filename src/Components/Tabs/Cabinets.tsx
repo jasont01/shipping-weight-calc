@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
 import { Box, Divider } from '@mui/material'
 
-import PanelDropdown from './PanelDropdown'
-import PositionsDropdown from './PositionsDropdown'
-import MountDropdown from './MountDropdown'
-import AddonSwitch from './AddonSwitch'
-import UpgradeSwitch from './UpgradeSwitch'
-import Qty from './Qty'
+import PanelDropdown from '../Dropdowns/Panel'
+import PositionsDropdown from '../Dropdowns/Positions'
+import MountDropdown from '../Dropdowns/Mount'
+import AddonSwitch from '../AddonSwitch'
+import UpgradeSwitch from '../UpgradeSwitch'
+import Qty from '../Dropdowns/Qty'
 import AddCabinet from '../AddCabinet'
 
 import { useBuildContext } from '../../hooks/useBuildContext'

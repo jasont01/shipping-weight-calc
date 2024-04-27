@@ -6,24 +6,32 @@ import { PanelType } from '../../types/types'
 
 interface Props {
   panels: PanelType[]
+  label?: string
+  hidden?: boolean
+  hybrid?: boolean
 }
 
-const PanelDropdown = ({ panels }: Props) => {
+const PanelDropdown = ({
+  panels,
+  label = 'Panel',
+  hidden = false,
+  hybrid = false,
+}: Props) => {
   const { state, dispatch } = useBuildContext()
 
   return (
-    <FormControl size='small' sx={{ m: 1 }}>
+    <FormControl size='small' sx={hidden ? { display: 'none' } : { m: 1 }}>
       <Box sx={{ minWidth: 80 }}>
         <FormControl fullWidth>
-          <InputLabel id='panelType-select-label'>Panel</InputLabel>
+          <InputLabel id='panelType-select-label'>{label}</InputLabel>
           <Select
             labelId='panelType-select-label'
-            value={state.panelType.type}
+            value={hybrid ? state.hybridType.type : state.panelType.type}
             label='Panel'
             size={'small'}
             onChange={(e) =>
               dispatch({
-                type: 'SET_PANEL_TYPE',
+                type: hybrid ? 'SET_HYBRID_TYPE' : 'SET_PANEL_TYPE',
                 payload:
                   panels.find((p) => p.type === e.target.value) ?? panels[0],
               })

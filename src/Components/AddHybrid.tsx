@@ -5,25 +5,23 @@ import { useShipmentContext } from '../hooks/useShipmentContext'
 
 import data from '../data.json'
 
-const AddCabinet = () => {
+const AddHybrid = () => {
   const { state } = useBuildContext()
   const { dispatch } = useShipmentContext()
 
   const addToShipment = () => {
-    const buildDesc = `${state.panelType.type}${
-      state.panelCount * state.panelType.positions
-    } ${state.isAddon ? 'Addon' : 'Complete'}`
-
-    const partPrefix = `MKE${
-      state.cabinet.size === 'Mini'
-        ? '3256'
-        : String(state.panelCount * state.panelType.positions)
+    const buildDesc = `Hybrid ${state.panelCount * state.panelType.positions}${
+      state.panelType.type
+    } with ${1 * state.hybridType.positions}${state.hybridType.type} ${
+      state.isAddon ? 'Addon' : 'Complete'
     }`
 
-    const partSuffix =
-      state.cabinet.size === 'Mini'
-        ? `${state.panelType.type}`
-        : `${state.panelType.suffix}${state.config.suffix}`
+    const partPrefix = `MKE${String(
+      state.panelCount * state.panelType.positions +
+        state.hybridType.positions * state.hybridPanels
+    )}`
+
+    const partSuffix = `${state.hybridType.suffix}${state.config.suffix}`
 
     const buildPart = `${partPrefix}${partSuffix}|${state.cabinet.size}`
 
@@ -31,15 +29,16 @@ const AddCabinet = () => {
       ? state.cabinet.maxPanels + 1
       : state.cabinet.maxPanels
 
-    // TODO =============================
-    // TODO fix issue with stand box
     const box = state.mount === 'stand' ? data.stand.box : state.cabinet.box
+    console.log({ state }, { maxPanels }, { box })
 
     const buildWeight =
       state.panelType.weight * state.panelCount +
+      state.hybridType.weight * state.hybridPanels +
       state.cabinet.weight +
       state.config.weight +
-      (maxPanels - state.panelCount) * data.blank.weight +
+      (maxPanels - (state.panelCount + state.hybridPanels)) *
+        data.blank.weight +
       box.weight
 
     dispatch({
@@ -71,4 +70,4 @@ const AddCabinet = () => {
     </Button>
   )
 }
-export default AddCabinet
+export default AddHybrid

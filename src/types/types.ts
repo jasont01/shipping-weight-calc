@@ -2,6 +2,7 @@ export interface PanelType {
   type: string
   weight: number
   positions: number
+  panelSize?: number
   suffix: string
 }
 

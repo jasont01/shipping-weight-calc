@@ -7,13 +7,14 @@ import DEFAULT_STATE from './defaultState'
 export interface State {
   panelType: PanelType
   panelCount: number
+  hybridType: PanelType
+  hybridPanels: number
   cabinet: Cabinet
   config: Config
   mount: string
   qty: number
   accessories: Accessory[]
   isAddon: boolean
-  isHybrid: boolean
   isUpgrade: boolean
 }
 

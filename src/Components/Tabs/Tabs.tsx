@@ -1,13 +1,13 @@
-import { Box, Tab, Tabs, Paper } from '@mui/material'
+import { Box, Tab, Tabs as MuiTabs, Paper } from '@mui/material'
 
-import CabinetsTab from './Components/CabinetsTab/CabinetsTab'
-import AccessoriesTab from './Components/AccessoriesTab/AccessoriesTab'
-import HybridsTab from './Components/HybridsTab/HybridsTab'
-import DealerPlateTab from './Components/DealerPlateTab/DealerPlateTab'
-import MiniTab from './Components/MiniTab/MiniTab'
-import MechanicalTab from './Components/MechanicalTab/MechanicalTab'
+import CabinetsTab from './Cabinets'
+import AccessoriesTab from './Accessories'
+import HybridsTab from './Hybrids'
+import DealerPlateTab from './DealerPlate'
+import MiniTab from './Mini'
+import MechanicalTab from './Mechanical'
 
-import data from './data.json'
+import data from '../../data.json'
 
 interface PanelProps {
   tab: number
@@ -25,34 +25,34 @@ const Panel = (props: PanelProps) => {
   )
 }
 
-interface TabPanelProps {
+interface Props {
   tab: number
   setTab: (_: number) => void
 }
 
-const TabPanel = ({ tab, setTab }: TabPanelProps) => (
+const Tabs = ({ tab, setTab }: Props) => (
   <Paper elevation={2} sx={{ p: 4, pt: 2 }}>
     <Box sx={{ width: '100%' }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <Tabs
+        <MuiTabs
           variant='scrollable'
           scrollButtons='auto'
           value={tab}
           onChange={(_, newValue) => setTab(newValue)}
         >
           <Tab label='Cabinets' />
-          <Tab label='Hybrid' />
+          <Tab label='Hybrids' />
           <Tab label='DealerPlate' />
           <Tab label='Mini' />
           <Tab label='Accessories' />
-          <Tab label='Mechanical' />
-        </Tabs>
+          <Tab label='Mechanical' disabled />
+        </MuiTabs>
       </Box>
       <Panel tab={tab} index={0}>
         <CabinetsTab data={data} />
       </Panel>
       <Panel tab={tab} index={1}>
-        <HybridsTab />
+        <HybridsTab data={data} />
       </Panel>
       <Panel tab={tab} index={2}>
         <DealerPlateTab />
@@ -74,4 +74,4 @@ const TabPanel = ({ tab, setTab }: TabPanelProps) => (
   </Paper>
 )
 
-export default TabPanel
+export default Tabs

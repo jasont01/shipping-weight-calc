@@ -1,15 +1,15 @@
 import { useEffect } from 'react'
 import { Box, Divider } from '@mui/material'
 
-import PanelDropdown from '../CabinetsTab/PanelDropdown'
-import PositionsDropdown from '../CabinetsTab/PositionsDropdown'
-import MountDropdown from '../CabinetsTab/MountDropdown'
-import Qty from '../CabinetsTab/Qty'
+import PanelDropdown from '../Dropdowns/Panel'
+import PositionsDropdown from '../Dropdowns/Positions'
+import MountDropdown from '../Dropdowns/Mount'
+import Qty from '../Dropdowns/Qty'
 import AddCabinet from '../AddCabinet'
 
 import { useBuildContext } from '../../hooks/useBuildContext'
 
-import DataFile from '../../types/types'
+import { DataFile } from '../../types/types'
 
 interface Props {
   data: DataFile

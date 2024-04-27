@@ -1,6 +1,6 @@
 import { Switch, FormGroup, FormControlLabel } from '@mui/material'
 
-import { useBuildContext } from '../../hooks/useBuildContext'
+import { useBuildContext } from '../hooks/useBuildContext'
 
 interface Props {
   disabled: boolean

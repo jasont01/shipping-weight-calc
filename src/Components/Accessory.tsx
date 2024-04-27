@@ -1,8 +1,8 @@
 import { TextField } from '@mui/material'
 
-import { useBuildContext } from '../../hooks/useBuildContext'
+import { useBuildContext } from '../hooks/useBuildContext'
 
-import { Item } from '../../types/types'
+import { Item } from '../types/types'
 
 interface Props {
   item: Item

@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react'
 
 import DEFAULT_STATE from '../context/defaultState'
 import { BuildContext } from '../context/BuildContext'
-import CabinetsTab from '../Components/CabinetsTab/CabinetsTab'
+import CabinetsTab from '../Components/Tabs/Cabinets'
 import { Panel } from '../enums'
 import data from '../data.json'
 

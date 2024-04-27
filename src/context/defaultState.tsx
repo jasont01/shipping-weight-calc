@@ -1,9 +1,11 @@
 import data from '../data.json'
-import { Panel, Cabinet, Config, Mount } from '../enums'
+import { Panel, Cabinet, Config, Mount, Hybrid } from '../enums'
 
 const DEFAULT_STATE = {
   panelType: data.panels[Panel.MX],
   panelCount: data.cabinets[Panel.MX].maxPanels,
+  hybridType: data.hybrids[Hybrid.DP],
+  hybridPanels: 1,
   cabinet: data.cabinets[Cabinet.Large],
   config: data.config[Config.Kiosk],
   mount: data.mount[Mount.Wall],
@@ -14,7 +16,6 @@ const DEFAULT_STATE = {
     ...data.accessories.map((item) => ({ ...item, qty: 0 })),
   ],
   isAddon: false,
-  isHybrid: false,
   isUpgrade: false,
 }
 
