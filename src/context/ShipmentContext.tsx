@@ -2,12 +2,21 @@ import { Dispatch, createContext, useReducer } from 'react'
 
 import shipmentReducer, { Action } from './shipmentReducer'
 
+export interface Details {
+  desc: string
+  weight?: number
+  qty?: number
+  totalWeight: number
+  isVisible: boolean
+}
+
 export type Item = {
   desc: string
   size?: string
   part: string
   weight: number
   qty: number
+  details?: Details[]
 }
 
 export interface State {

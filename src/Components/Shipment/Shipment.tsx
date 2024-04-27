@@ -18,11 +18,7 @@ import Summary from './Summary'
 import { useShipmentContext } from '../../hooks/useShipmentContext'
 import { useBuildContext } from '../../hooks/useBuildContext'
 
-interface Props {
-  setTab: React.Dispatch<React.SetStateAction<number>>
-}
-
-const Shipment = ({ setTab }: Props) => {
+const Shipment = () => {
   const { state, dispatch: resetShipment } = useShipmentContext()
   const { dispatch: resetBuild } = useBuildContext()
 
@@ -40,7 +36,6 @@ const Shipment = ({ setTab }: Props) => {
   const handleReset = () => {
     resetShipment({ type: 'RESET' })
     resetBuild({ type: 'RESET' })
-    setTab(0)
   }
 
   if (!state.items || state.items.length === 0) return
@@ -52,6 +47,7 @@ const Shipment = ({ setTab }: Props) => {
         <Table sx={{ minWidth: 700 }} size='small'>
           <TableHead>
             <TableRow>
+              <TableCell></TableCell>
               <TableCell>Desc</TableCell>
               <TableCell>Size</TableCell>
               <TableCell align='right'>Part</TableCell>
