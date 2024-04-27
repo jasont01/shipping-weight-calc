@@ -41,14 +41,19 @@ const PanelDropdown = ({
               })
             }
           >
-            {panels.map(
-              (panel) =>
-                (panel.type !== 'DP' || dealerPlate || hybrid) && (
-                  <MenuItem key={panel.type} value={panel.type}>
-                    {panel.type}
-                  </MenuItem>
-                )
-            )}
+            {panels.map((panel) => (
+              <MenuItem
+                key={panel.type}
+                value={panel.type}
+                sx={
+                  panel.type !== 'DP' || dealerPlate || hybrid
+                    ? {}
+                    : { display: 'none' }
+                }
+              >
+                {panel.type}
+              </MenuItem>
+            ))}
           </Select>
         </FormControl>
       </Box>

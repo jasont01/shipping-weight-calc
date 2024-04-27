@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { Box, Divider } from '@mui/material'
 
 import PanelDropdown from '../Dropdowns/Panel'
@@ -12,31 +12,36 @@ import AddCabinet from '../AddCabinet'
 import { useBuildContext } from '../../hooks/useBuildContext'
 
 import { DataFile } from '../../types/types'
-import { Cabinet } from '../../enums'
+import { Cab } from '../../enums'
+import { isLargeCab } from '../../context/buildReducer'
 
 interface Props {
   data: DataFile
 }
 
 const CabinetsTab = ({ data }: Props) => {
-  const { state } = useBuildContext()
+  const { state, dispatch } = useBuildContext()
 
-  const [upgradeAvailable, setUpgradeAvailable] = useState(false)
+  const cabSize =
+    isLargeCab(state) || state.isUpgrade
+      ? data.cabinets[Cab.Large]
+      : data.cabinets[Cab.Small]
 
   useEffect(() => {
-    setUpgradeAvailable(
-      state.panelCount <= data.cabinets[Cabinet.Small].maxPanels
-    )
-  }, [state.panelCount, data.cabinets])
+    if (cabSize !== state.cabinet) {
+      dispatch({
+        type: 'SET_CABINET',
+        payload: cabSize,
+      })
+    }
+  }, [state.cabinet, cabSize, data, dispatch])
 
   return (
     <Box>
       <Box display={'flex'} justifyContent={'center'}>
         <Box>
           <PanelDropdown panels={data.panels} />
-          <PositionsDropdown
-            maxPanels={data.cabinets[Cabinet.Large].maxPanels}
-          />
+          <PositionsDropdown maxPanels={data.cabinets[Cab.Large].maxPanels} />
           <MountDropdown options={data.mount} />
           <Qty />
         </Box>
@@ -47,7 +52,7 @@ const CabinetsTab = ({ data }: Props) => {
           marginLeft={'2em'}
         >
           <AddonSwitch />
-          <UpgradeSwitch disabled={!upgradeAvailable} />
+          <UpgradeSwitch disabled={isLargeCab(state)} />
         </Box>
       </Box>
       <Divider sx={{ m: 3 }} />

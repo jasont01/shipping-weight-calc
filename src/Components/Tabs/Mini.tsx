@@ -10,6 +10,7 @@ import AddCabinet from '../AddCabinet'
 import { useBuildContext } from '../../hooks/useBuildContext'
 
 import { DataFile } from '../../types/types'
+import { Cab } from '../../enums'
 
 interface Props {
   data: DataFile
@@ -20,7 +21,14 @@ const MiniTab = ({ data }: Props) => {
 
   useEffect(() => {
     dispatch({ type: 'LOAD_MINI' })
-  }, [dispatch])
+
+    return () => {
+      dispatch({
+        type: 'SET_CABINET',
+        payload: data.cabinets[Cab.Small],
+      })
+    }
+  }, [data, dispatch])
 
   return (
     <Box>
