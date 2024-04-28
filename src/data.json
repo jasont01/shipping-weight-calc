@@ -2,13 +2,13 @@
   "panels": [
     { "type": "MX", "weight": 4.5, "positions": 32, "suffix": "X" },
     { "type": "HC", "weight": 2.6, "positions": 56, "suffix": "H" },
-    { "type": "Xi", "weight": 8.7, "positions": 32, "suffix": "I" },
-    { "type": "Xu", "weight": 8.0, "positions": 32, "suffix": "U" },
+    { "type": "MXi", "weight": 8.7, "positions": 32, "suffix": "I" },
+    { "type": "MXu", "weight": 8.0, "positions": 32, "suffix": "U" },
     { "type": "DP", "weight": 5.3, "positions": 16, "suffix": "DP" }
   ],
   "hybrids": [
     { "type": "DP", "weight": 5.3, "positions": 16, "suffix": "MD" },
-    { "type": "Xi", "weight": 8.7, "positions": 32, "suffix": "MI" }
+    { "type": "MXi", "weight": 8.7, "positions": 32, "suffix": "MI" }
   ],
   "blank": {
     "weight": 3.0

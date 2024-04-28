@@ -3,20 +3,14 @@ import { useState, useEffect } from 'react'
 import { Box, InputLabel, MenuItem, FormControl, Select } from '@mui/material'
 
 import { useBuildContext } from '../../hooks/useBuildContext'
+import { Tab } from '../../enums'
 
 interface Props {
-  maxPanels: number
   label?: string
   disabled?: boolean
-  dealerPlate?: boolean
 }
 
-const Dropdown = ({
-  maxPanels,
-  label = 'Positions',
-  disabled = false,
-  dealerPlate,
-}: Props) => {
+const Dropdown = ({ label = 'Positions', disabled = false }: Props) => {
   const { state, dispatch } = useBuildContext()
 
   const [options, setOptions] = useState([
@@ -27,13 +21,9 @@ const Dropdown = ({
   ])
 
   useEffect(() => {
-    if (dealerPlate) dispatch({ type: 'SET_PANEL_COUNT', payload: 1 })
-  }, [dispatch, dealerPlate])
-
-  useEffect(() => {
     const opts = []
 
-    let i = state.isAddon && !dealerPlate ? maxPanels + 1 : maxPanels
+    let i = state.currentTab === Tab.DealerPlate ? 3 : state.maxPanels //FIXME
 
     for (i; i > 0; i--) {
       opts.push({
@@ -43,7 +33,7 @@ const Dropdown = ({
     }
 
     setOptions(opts)
-  }, [state.panelType, state.isAddon, maxPanels, dealerPlate])
+  }, [state])
 
   return (
     <FormControl size='small' sx={{ m: 1 }}>

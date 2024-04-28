@@ -35,7 +35,7 @@ const MiniTab = ({ data }: Props) => {
       <Box display={'flex'} justifyContent={'center'}>
         <Box>
           <PanelDropdown panels={data.panels} />
-          <PositionsDropdown maxPanels={1} disabled={true} />
+          <PositionsDropdown disabled={true} />
           <MountDropdown options={data.mount} />
           <Qty />
         </Box>

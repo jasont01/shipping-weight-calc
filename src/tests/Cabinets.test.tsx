@@ -9,16 +9,15 @@ import AddCabinet from '../Components/AddCabinet'
 import Shipment from '../Components/Shipment/Shipment'
 
 import data from '../data.json'
-import { Panel, Cabinet, Config } from '../enums'
+import { Panel, Cab, Config } from '../enums'
 
-// TODO =====================
 // TODO add tests for: Hybrids, DP, Mini, Accessories
 
 interface Scenario {
   build: string
   panelType: Panel
   panelCount: number
-  size: Cabinet
+  size: Cab
   config: Config
   isAddon: boolean
 }
@@ -86,7 +85,7 @@ describe('Cabinet Weights', () => {
         >
           <ShipmentProvider>
             <AddCabinet />
-            <Shipment setTab={() => {}} />
+            <Shipment />
           </ShipmentProvider>
         </BuildContext.Provider>
       )

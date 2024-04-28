@@ -7,12 +7,12 @@ import MountDropdown from '../Dropdowns/Mount'
 import AddonSwitch from '../AddonSwitch'
 import UpgradeSwitch from '../UpgradeSwitch'
 import Qty from '../Dropdowns/Qty'
-import AddHybrid from '../AddHybrid'
+import AddCabinet from '../AddCabinet'
 
 import { useBuildContext } from '../../hooks/useBuildContext'
 
 import { DataFile } from '../../types/types'
-import { Panel, Cab } from '../../enums'
+import { Panel } from '../../enums'
 import { isLargeCab } from '../../context/buildReducer'
 
 interface Props {
@@ -32,7 +32,7 @@ const HybridsTab = ({ data }: Props) => {
         <Box>
           <PanelDropdown panels={data.panels} hidden />
           <PanelDropdown panels={data.hybrids} label={'Type'} hybrid />
-          <HybridPositions maxPanels={data.cabinets[Cab.Large].maxPanels} />
+          <HybridPositions />
           <MountDropdown options={data.mount} />
           <Qty />
         </Box>
@@ -48,7 +48,7 @@ const HybridsTab = ({ data }: Props) => {
       </Box>
       <Divider sx={{ m: 3 }} />
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-        <AddHybrid />
+        <AddCabinet />
       </Box>
     </Box>
   )

@@ -7,6 +7,7 @@ const DEFAULT_STATE = {
   panelCount: data.cabinets[Panel.MX].maxPanels,
   hybridType: data.hybrids[Hybrid.DP],
   hybridPanels: 1,
+  maxPanels: data.cabinets[Cab.Large].maxPanels,
   cabinet: data.cabinets[Cab.Large],
   config: data.config[Config.Kiosk],
   mount: data.mount[Mount.Wall],

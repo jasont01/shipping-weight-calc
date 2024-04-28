@@ -5,44 +5,35 @@ import { Box, InputLabel, MenuItem, FormControl, Select } from '@mui/material'
 import { useBuildContext } from '../../hooks/useBuildContext'
 
 interface Props {
-  maxPanels: number
   label?: string
   disabled?: boolean
 }
 
-const Dropdown = ({
-  maxPanels,
-  label = 'Positions',
-  disabled = false,
-}: Props) => {
+const Dropdown = ({ label = 'Positions', disabled = false }: Props) => {
   const { state, dispatch } = useBuildContext()
 
   const [options, setOptions] = useState([
     {
       panels: state.panelCount,
       positions:
-        state.panelType.positions * (state.panelCount - state.hybridPanels) +
-        state.hybridType.positions,
+        state.panelType.positions * state.panelCount +
+        state.hybridType.positions * state.hybridPanels,
     },
   ])
-
+  //FIXME - Hybrids Tab -> DP small -> MXi type, posisions dropdown doesn't show all options
   useEffect(() => {
-    const panelSize = state.hybridType.type === 'DP' ? 2 : 1
+    //TODO - refactor ?
+    const hybridPanelSize = state.hybridType.type === 'DP' ? 2 : 1
 
-    let maxMXPanels = maxPanels - panelSize * state.hybridPanels
+    const maxMXPanels = state.maxPanels - hybridPanelSize * state.hybridPanels
 
-    if (state.isAddon) maxMXPanels += 1
-
-    if (state.panelCount > maxMXPanels || state.panelCount < panelSize) {
+    if (state.panelCount > maxMXPanels || state.panelCount < hybridPanelSize) {
       dispatch({ type: 'SET_PANEL_COUNT', payload: maxMXPanels })
     }
 
     const opts = []
-
-    let i = state.isAddon ? maxPanels + 1 : maxPanels
-    i = i - panelSize * state.hybridPanels
-
-    for (i; i >= panelSize; i--) {
+    console.log({ maxMXPanels }, { hybridPanelSize })
+    for (let i = maxMXPanels; i >= hybridPanelSize; i--) {
       opts.push({
         panels: i,
         positions:
@@ -52,7 +43,7 @@ const Dropdown = ({
     }
 
     setOptions(opts)
-  }, [state, maxPanels, dispatch])
+  }, [state, dispatch])
 
   return (
     <FormControl size='small' sx={{ m: 1 }}>

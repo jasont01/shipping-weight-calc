@@ -41,7 +41,7 @@ const CabinetsTab = ({ data }: Props) => {
       <Box display={'flex'} justifyContent={'center'}>
         <Box>
           <PanelDropdown panels={data.panels} />
-          <PositionsDropdown maxPanels={data.cabinets[Cab.Large].maxPanels} />
+          <PositionsDropdown />
           <MountDropdown options={data.mount} />
           <Qty />
         </Box>

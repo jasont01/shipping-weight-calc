@@ -23,6 +23,7 @@ const DealerPlateTab = ({ data }: Props) => {
 
   useEffect(() => {
     dispatch({ type: 'SET_PANEL_TYPE', payload: data.panels[Panel.DP] })
+    dispatch({ type: 'SET_PANEL_COUNT', payload: 1 })
 
     return () => {
       dispatch({ type: 'SET_PANEL_TYPE', payload: data.panels[Panel.MX] })
@@ -34,7 +35,7 @@ const DealerPlateTab = ({ data }: Props) => {
       <Box display={'flex'} justifyContent={'center'}>
         <Box>
           <PanelDropdown panels={data.panels} dealerPlate disabled />
-          <PositionsDropdown maxPanels={3} dealerPlate />
+          <PositionsDropdown />
           <MountDropdown options={data.mount} />
           <Qty />
         </Box>

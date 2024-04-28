@@ -11,6 +11,7 @@ export interface State {
   panelCount: number
   hybridType: PanelType
   hybridPanels: number
+  maxPanels: number
   cabinet: Cabinet
   config: Config
   mount: string
