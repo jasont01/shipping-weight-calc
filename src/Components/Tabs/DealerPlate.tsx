@@ -19,7 +19,7 @@ interface Props {
 }
 
 const DealerPlateTab = ({ data }: Props) => {
-  const { state, dispatch } = useBuildContext()
+  const { dispatch } = useBuildContext()
 
   useEffect(() => {
     dispatch({ type: 'SET_PANEL_TYPE', payload: data.panels[Panel.DP] })
@@ -35,7 +35,7 @@ const DealerPlateTab = ({ data }: Props) => {
       <Box display={'flex'} justifyContent={'center'}>
         <Box>
           <PanelDropdown panels={data.panels} dealerPlate disabled />
-          <PositionsDropdown />
+          <PositionsDropdown maxPanels={3} />
           <MountDropdown options={data.mount} />
           <Qty />
         </Box>
@@ -46,7 +46,7 @@ const DealerPlateTab = ({ data }: Props) => {
           marginLeft={'2em'}
         >
           <AddonSwitch />
-          <UpgradeSwitch disabled={state.panelCount !== 1} />
+          <UpgradeSwitch />
         </Box>
       </Box>
       <Divider sx={{ m: 3 }} />

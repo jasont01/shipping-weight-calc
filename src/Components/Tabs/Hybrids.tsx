@@ -12,18 +12,22 @@ import AddCabinet from '../AddCabinet'
 import { useBuildContext } from '../../hooks/useBuildContext'
 
 import { DataFile } from '../../types/types'
-import { Panel } from '../../enums'
-import { isLargeCab } from '../../context/buildReducer'
+import { Cab, Panel } from '../../enums'
 
 interface Props {
   data: DataFile
 }
 
 const HybridsTab = ({ data }: Props) => {
-  const { state, dispatch } = useBuildContext()
+  const { dispatch } = useBuildContext()
 
   useEffect(() => {
     dispatch({ type: 'SET_PANEL_TYPE', payload: data.panels[Panel.MX] })
+    dispatch({ type: 'SET_HYBRID_PANELS', payload: 1 })
+
+    return () => {
+      dispatch({ type: 'SET_HYBRID_PANELS', payload: 0 })
+    }
   }, [data, dispatch])
 
   return (
@@ -32,7 +36,7 @@ const HybridsTab = ({ data }: Props) => {
         <Box>
           <PanelDropdown panels={data.panels} hidden />
           <PanelDropdown panels={data.hybrids} label={'Type'} hybrid />
-          <HybridPositions />
+          <HybridPositions maxPanels={data.cabinets[Cab.Large].maxPanels} />
           <MountDropdown options={data.mount} />
           <Qty />
         </Box>
@@ -43,7 +47,7 @@ const HybridsTab = ({ data }: Props) => {
           marginLeft={'2em'}
         >
           <AddonSwitch />
-          <UpgradeSwitch disabled={isLargeCab(state)} />
+          <UpgradeSwitch />
         </Box>
       </Box>
       <Divider sx={{ m: 3 }} />

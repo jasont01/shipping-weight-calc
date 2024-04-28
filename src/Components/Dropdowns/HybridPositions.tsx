@@ -5,11 +5,16 @@ import { Box, InputLabel, MenuItem, FormControl, Select } from '@mui/material'
 import { useBuildContext } from '../../hooks/useBuildContext'
 
 interface Props {
+  maxPanels: number
   label?: string
   disabled?: boolean
 }
 
-const Dropdown = ({ label = 'Positions', disabled = false }: Props) => {
+const Dropdown = ({
+  maxPanels,
+  label = 'Positions',
+  disabled = false,
+}: Props) => {
   const { state, dispatch } = useBuildContext()
 
   const [options, setOptions] = useState([
@@ -20,19 +25,19 @@ const Dropdown = ({ label = 'Positions', disabled = false }: Props) => {
         state.hybridType.positions * state.hybridPanels,
     },
   ])
-  //FIXME - Hybrids Tab -> DP small -> MXi type, posisions dropdown doesn't show all options
+
   useEffect(() => {
-    //TODO - refactor ?
+    //TODO - refactor and combine with normal Positions component
     const hybridPanelSize = state.hybridType.type === 'DP' ? 2 : 1
 
-    const maxMXPanels = state.maxPanels - hybridPanelSize * state.hybridPanels
+    const maxMXPanels = maxPanels - hybridPanelSize * state.hybridPanels
 
     if (state.panelCount > maxMXPanels || state.panelCount < hybridPanelSize) {
       dispatch({ type: 'SET_PANEL_COUNT', payload: maxMXPanels })
     }
 
     const opts = []
-    console.log({ maxMXPanels }, { hybridPanelSize })
+
     for (let i = maxMXPanels; i >= hybridPanelSize; i--) {
       opts.push({
         panels: i,
@@ -43,7 +48,7 @@ const Dropdown = ({ label = 'Positions', disabled = false }: Props) => {
     }
 
     setOptions(opts)
-  }, [state, dispatch])
+  }, [state, maxPanels, dispatch])
 
   return (
     <FormControl size='small' sx={{ m: 1 }}>

@@ -37,6 +37,29 @@ export type Action =
   | { type: 'LOAD_MINI' }
   | { type: 'RESET' }
 
+const validateState = (prevState: State, action: Action) => {
+  const state = buildReducer(prevState, action)
+
+  if (state.currentTab === Tab.Mini) return state
+
+  const isLarge = isLargeCab(state)
+
+  const isUpgrade = state.isUpgrade && isLarge ? false : state.isUpgrade
+
+  const cabinet =
+    isLarge || isUpgrade ? data.cabinets[Cab.Large] : data.cabinets[Cab.Small]
+
+  const panelCount =
+    state.panelCount > cabinet.maxPanels ? cabinet.maxPanels : state.panelCount
+
+  return {
+    ...state,
+    panelCount,
+    cabinet,
+    isUpgrade,
+  }
+}
+
 const buildReducer = (state: State, action: Action) => {
   switch (action.type) {
     case 'SET_TAB':
@@ -45,49 +68,17 @@ const buildReducer = (state: State, action: Action) => {
     case 'SET_PANEL_TYPE':
       return { ...state, panelType: action.payload }
 
-    case 'SET_PANEL_COUNT': {
-      const isLarge = isLargeCab({ ...state, panelCount: action.payload })
-      const cab =
-        isLarge || state.isUpgrade
-          ? data.cabinets[Cab.Large]
-          : data.cabinets[Cab.Small]
+    case 'SET_PANEL_COUNT':
+      return { ...state, panelCount: action.payload }
 
-      return {
-        ...state,
-        panelCount: action.payload,
-        cabinet: cab,
-        maxPanels: state.isAddon ? cab.maxPanels + 1 : cab.maxPanels,
-        isUpgrade: state.isUpgrade && isLarge ? false : state.isUpgrade,
-      }
-    }
-
-    case 'SET_HYBRID_TYPE': {
-      const isLarge = isLargeCab({ ...state, hybridType: action.payload })
-      const cab =
-        isLarge || state.isUpgrade
-          ? data.cabinets[Cab.Large]
-          : data.cabinets[Cab.Small]
-
-      return {
-        ...state,
-        hybridType: action.payload,
-        cabinet: cab,
-        maxPanels: state.isAddon ? cab.maxPanels + 1 : cab.maxPanels, //TODO adj for DP
-        isUpgrade: state.isUpgrade && isLarge ? false : state.isUpgrade,
-      }
-    }
+    case 'SET_HYBRID_TYPE':
+      return { ...state, hybridType: action.payload }
 
     case 'SET_HYBRID_PANELS':
       return { ...state, hybridPanels: action.payload }
 
     case 'SET_CABINET':
-      return {
-        ...state,
-        cabinet: action.payload,
-        maxPanels: state.isAddon
-          ? action.payload.maxPanels + 1
-          : action.payload.maxPanels,
-      }
+      return { ...state, cabinet: action.payload }
 
     case 'SET_MOUNT':
       return { ...state, mount: action.payload }
@@ -106,13 +97,6 @@ const buildReducer = (state: State, action: Action) => {
     case 'SET_ADDON':
       return {
         ...state,
-        panelCount:
-          state.panelCount > state.cabinet.maxPanels
-            ? state.cabinet.maxPanels
-            : state.panelCount,
-        maxPanels: action.payload
-          ? state.cabinet.maxPanels + 1
-          : state.cabinet.maxPanels,
         config: action.payload
           ? data.config[Config.Addon]
           : data.config[Config.Kiosk],
@@ -120,17 +104,7 @@ const buildReducer = (state: State, action: Action) => {
       }
 
     case 'SET_UPGRADE': {
-      const cab =
-        action.payload || isLargeCab(state)
-          ? data.cabinets[Cab.Large]
-          : data.cabinets[Cab.Small]
-
-      return {
-        ...state,
-        cabinet: cab,
-        maxPanels: state.isAddon ? cab.maxPanels + 1 : cab.maxPanels,
-        isUpgrade: action.payload,
-      }
+      return { ...state, isUpgrade: action.payload }
     }
 
     case 'LOAD_MINI':
@@ -138,7 +112,6 @@ const buildReducer = (state: State, action: Action) => {
         ...state,
         panelCount: data.cabinets[Cab.Mini].maxPanels,
         cabinet: data.cabinets[Cab.Mini],
-        maxPanels: data.cabinets[Cab.Mini].maxPanels,
         config: data.config[Config.Kiosk],
         isAddon: false,
         isUpgrade: false,
@@ -152,4 +125,4 @@ const buildReducer = (state: State, action: Action) => {
   }
 }
 
-export default buildReducer
+export default validateState

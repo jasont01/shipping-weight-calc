@@ -1,12 +1,9 @@
 import { Switch, FormGroup, FormControlLabel } from '@mui/material'
 
 import { useBuildContext } from '../hooks/useBuildContext'
+import { isLargeCab } from '../context/buildReducer'
 
-interface Props {
-  disabled: boolean
-}
-
-const UpgradeSwitch = ({ disabled }: Props) => {
+const UpgradeSwitch = () => {
   const { state, dispatch } = useBuildContext()
 
   const toggleUpgrade = () => {
@@ -20,7 +17,7 @@ const UpgradeSwitch = ({ disabled }: Props) => {
           <Switch
             checked={state.isUpgrade}
             onChange={toggleUpgrade}
-            disabled={disabled}
+            disabled={isLargeCab(state)}
             size='small'
           />
         }

@@ -46,21 +46,17 @@ const AddCabinet = () => {
     }
   }
 
-  // FIXME small DP hybrids are invalid. switching tabs
-
   // TODO  add stand / wallboard to cabinet item. keep accessory stand for standalone
   const addToShipment = () => {
-    const panelBlanks =
-      state.currentTab === Tab.Hybrids
-        ? state.maxPanels - (state.panelCount + state.hybridPanels)
-        : state.maxPanels - state.panelCount
+    const maxPanels = state.isAddon
+      ? state.cabinet.maxPanels + 1
+      : state.cabinet.maxPanels
+
+    const panelBlanks = maxPanels - (state.panelCount + state.hybridPanels)
 
     const panelWeight = state.panelType.weight * state.panelCount
 
-    const hybridPanelWeight =
-      state.currentTab === Tab.Hybrids
-        ? state.hybridType.weight * state.hybridPanels
-        : 0
+    const hybridPanelWeight = state.hybridType.weight * state.hybridPanels
 
     const box =
       state.mount === data.mount[Mount.Stand]
