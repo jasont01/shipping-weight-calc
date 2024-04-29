@@ -64,7 +64,7 @@
     { "type": "Kiosk", "weight": 9.0, "suffix": "C" },
     { "type": "Addon", "weight": 0.2, "suffix": "A" }
   ],
-  "mount": ["wall", "stand", "none"],
+  "mount": ["Wall", "Stand", "None"],
   "stand": {
     "desc": "Stand",
     "part": "A600",

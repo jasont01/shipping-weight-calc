@@ -50,6 +50,7 @@ const Shipment = () => {
               <TableCell></TableCell>
               <TableCell>Desc</TableCell>
               <TableCell>Size</TableCell>
+              <TableCell>Mount</TableCell>
               <TableCell align='right'>Part</TableCell>
               <TableCell align='right' sx={{ pr: '4em' }}>
                 Qty

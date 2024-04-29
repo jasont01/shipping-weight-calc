@@ -15,7 +15,9 @@ interface Props {
   item: ItemType
 }
 
-const Item = ({ item: { part, size, desc, qty, weight, details } }: Props) => {
+const Item = ({
+  item: { desc, size, mount, part, qty, weight, details },
+}: Props) => {
   const [open, setOpen] = useState(false)
 
   const { dispatch } = useShipmentContext()
@@ -40,6 +42,7 @@ const Item = ({ item: { part, size, desc, qty, weight, details } }: Props) => {
         </TableCell>
         <TableCell>{desc}</TableCell>
         <TableCell>{size}</TableCell>
+        <TableCell>{mount}</TableCell>
         <TableCell align='right'>{part.split('|')[0]}</TableCell>
         <TableCell align='right'>
           <Counter part={part} qty={qty} />

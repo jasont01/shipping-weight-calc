@@ -46,7 +46,17 @@ const AddCabinet = () => {
     }
   }
 
-  // TODO  add stand / wallboard to cabinet item. keep accessory stand for standalone
+  const getMountData = () => {
+    switch (state.mount) {
+      case data.mount[Mount.Wall]:
+        return state.cabinet.wallboard
+      case data.mount[Mount.Stand]:
+        return data.stand
+      default:
+        return { desc: 'n/a', part: '', weight: 0 }
+    }
+  }
+
   const addToShipment = () => {
     const maxPanels = state.isAddon
       ? state.cabinet.maxPanels + 1
@@ -63,9 +73,7 @@ const AddCabinet = () => {
         ? data.stand.box
         : state.cabinet.box
 
-    const partSuffix = `|${state.cabinet.size}${
-      state.mount === data.mount[Mount.Stand] ? '-Stand' : ''
-    }`
+    const mount = getMountData()
 
     const buildWeight =
       panelWeight +
@@ -73,14 +81,16 @@ const AddCabinet = () => {
       state.cabinet.weight +
       state.config.weight +
       panelBlanks * data.blank.weight +
-      box.weight
+      box.weight +
+      mount.weight
 
     dispatch({
       type: 'ADD_ITEM',
       payload: {
         desc: buildDesc(),
         size: state.cabinet.size,
-        part: buildPart() + partSuffix,
+        mount: state.mount,
+        part: `${buildPart()}|${state.cabinet.size}${state.mount}`,
         qty: state.qty,
         weight: buildWeight,
         details: [
@@ -120,28 +130,14 @@ const AddCabinet = () => {
             totalWeight: box.weight,
             isVisible: true,
           },
+          {
+            desc: mount.desc,
+            totalWeight: mount.weight,
+            isVisible: mount.weight > 0,
+          },
         ],
       },
     })
-
-    switch (state.mount) {
-      case data.mount[Mount.Wall]:
-        dispatch({
-          type: 'ADD_ITEM',
-          payload: { ...state.cabinet.wallboard, qty: state.qty },
-        })
-        break
-
-      case data.mount[Mount.Stand]:
-        dispatch({
-          type: 'ADD_ITEM',
-          payload: { ...data.stand, qty: state.qty },
-        })
-        break
-
-      default:
-        break
-    }
   }
 
   return (

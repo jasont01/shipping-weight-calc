@@ -13,6 +13,7 @@ export interface Details {
 export type Item = {
   desc: string
   size?: string
+  mount?: string
   part: string
   weight: number
   qty: number
