@@ -5,16 +5,11 @@ import { Box, InputLabel, MenuItem, FormControl, Select } from '@mui/material'
 import { useBuildContext } from '../../hooks/useBuildContext'
 
 interface Props {
-  maxPanels: number
   label?: string
   disabled?: boolean
 }
 
-const Dropdown = ({
-  maxPanels,
-  label = 'Positions',
-  disabled = false,
-}: Props) => {
+const Dropdown = ({ label = 'Positions', disabled = false }: Props) => {
   const { state, dispatch } = useBuildContext()
 
   const [options, setOptions] = useState([
@@ -27,15 +22,17 @@ const Dropdown = ({
   useEffect(() => {
     const opts = []
 
-    for (let i = maxPanels; i > 0; i--) {
+    for (let i = state.maxPanels; i > 0; i--) {
       opts.push({
         panels: i,
-        positions: state.panelType.positions * i,
+        positions:
+          state.panelType.positions * i +
+          state.hybridType.positions * state.hybridPanels,
       })
     }
 
     setOptions(opts)
-  }, [state, maxPanels])
+  }, [state])
 
   return (
     <FormControl size='small' sx={{ m: 1 }}>

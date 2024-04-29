@@ -35,7 +35,7 @@ const DealerPlateTab = ({ data }: Props) => {
       <Box display={'flex'} justifyContent={'center'}>
         <Box>
           <PanelDropdown panels={data.panels} dealerPlate disabled />
-          <PositionsDropdown maxPanels={3} />
+          <PositionsDropdown />
           <MountDropdown options={data.mount} />
           <Qty />
         </Box>

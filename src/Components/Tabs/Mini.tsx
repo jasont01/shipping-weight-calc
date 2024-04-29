@@ -10,7 +10,6 @@ import AddCabinet from '../AddCabinet'
 import { useBuildContext } from '../../hooks/useBuildContext'
 
 import { DataFile } from '../../types/types'
-import { Cab } from '../../enums'
 
 interface Props {
   data: DataFile
@@ -20,25 +19,15 @@ const MiniTab = ({ data }: Props) => {
   const { dispatch } = useBuildContext()
 
   useEffect(() => {
-    dispatch({ type: 'LOAD_MINI' })
-
-    return () => {
-      dispatch({
-        type: 'SET_CABINET',
-        payload: data.cabinets[Cab.Small],
-      })
-    }
-  }, [data, dispatch])
+    dispatch({ type: 'SET_ADDON', payload: false })
+  }, [dispatch])
 
   return (
     <Box>
       <Box display={'flex'} justifyContent={'center'}>
         <Box>
           <PanelDropdown panels={data.panels} />
-          <PositionsDropdown
-            maxPanels={data.cabinets[Cab.Mini].maxPanels}
-            disabled={true}
-          />
+          <PositionsDropdown disabled={true} />
           <MountDropdown options={data.mount} />
           <Qty />
         </Box>

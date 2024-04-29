@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { Box, Divider } from '@mui/material'
 
 import PanelDropdown from '../Dropdowns/Panel'
-import HybridPositions from '../Dropdowns/HybridPositions'
+import Positions from '../Dropdowns/Positions'
 import MountDropdown from '../Dropdowns/Mount'
 import AddonSwitch from '../AddonSwitch'
 import UpgradeSwitch from '../UpgradeSwitch'
@@ -12,7 +12,7 @@ import AddCabinet from '../AddCabinet'
 import { useBuildContext } from '../../hooks/useBuildContext'
 
 import { DataFile } from '../../types/types'
-import { Cab, Panel } from '../../enums'
+import { Panel } from '../../enums'
 
 interface Props {
   data: DataFile
@@ -36,7 +36,7 @@ const HybridsTab = ({ data }: Props) => {
         <Box>
           <PanelDropdown panels={data.panels} hidden />
           <PanelDropdown panels={data.hybrids} label={'Type'} hybrid />
-          <HybridPositions maxPanels={data.cabinets[Cab.Large].maxPanels} />
+          <Positions />
           <MountDropdown options={data.mount} />
           <Qty />
         </Box>
