@@ -29,7 +29,7 @@ const Item = ({
   return (
     <>
       <TableRow key={part}>
-        <TableCell>
+        <TableCell sx={{ padding: 0 }}>
           {details && (
             <IconButton
               aria-label='expand row'
@@ -40,10 +40,12 @@ const Item = ({
             </IconButton>
           )}
         </TableCell>
-        <TableCell>{desc}</TableCell>
+        <TableCell sx={{ paddingLeft: 0 }}>{desc}</TableCell>
         <TableCell>{size}</TableCell>
         <TableCell>{mount}</TableCell>
-        <TableCell align='right'>{part.split('|')[0]}</TableCell>
+        <TableCell sx={{ paddingX: 0 }} align='right'>
+          {part.split('|')[0]}
+        </TableCell>
         <TableCell align='right'>
           <Counter part={part} qty={qty} />
         </TableCell>

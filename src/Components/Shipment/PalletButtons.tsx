@@ -45,7 +45,7 @@ const PalletButtons = () => (
         display: 'flex',
         borderRadius: '10px 10px 0 0',
         backgroundColor: '#fff',
-        pl: 3,
+        pl: 6.5,
         pt: 2,
         pb: 1,
         pr: 3,

@@ -12,13 +12,18 @@ import { DataFile } from '../../types/types'
 
 interface Props {
   data: DataFile
+  isMobile: boolean
 }
 
-const CabinetsTab = ({ data }: Props) => {
+const CabinetsTab = ({ data, isMobile }: Props) => {
   return (
     <Box>
-      <Box display={'flex'} justifyContent={'center'}>
-        <Box>
+      <Box
+        display={'flex'}
+        justifyContent={'center'}
+        flexDirection={isMobile ? 'column' : 'row'}
+      >
+        <Box sx={isMobile ? { display: 'flex', flexDirection: 'column' } : {}}>
           <PanelDropdown panels={data.panels} />
           <PositionsDropdown />
           <MountDropdown options={data.mount} />

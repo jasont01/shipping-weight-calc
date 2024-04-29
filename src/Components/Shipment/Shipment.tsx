@@ -44,14 +44,16 @@ const Shipment = () => {
     <Box sx={{ mt: 4 }}>
       <PalletButtons />
       <TableContainer component={Paper} sx={{ p: 1, pb: 0 }}>
-        <Table sx={{ minWidth: 700 }} size='small'>
+        <Table size='small'>
           <TableHead>
             <TableRow>
-              <TableCell></TableCell>
-              <TableCell>Desc</TableCell>
+              <TableCell sx={{ padding: 0 }}></TableCell>
+              <TableCell sx={{ paddingLeft: 0 }}>Desc</TableCell>
               <TableCell>Size</TableCell>
               <TableCell>Mount</TableCell>
-              <TableCell align='right'>Part</TableCell>
+              <TableCell sx={{ paddingX: 0 }} align='right'>
+                Part
+              </TableCell>
               <TableCell align='right' sx={{ pr: '4em' }}>
                 Qty
               </TableCell>

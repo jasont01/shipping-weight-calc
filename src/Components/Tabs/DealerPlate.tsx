@@ -16,9 +16,10 @@ import { Panel } from '../../enums'
 
 interface Props {
   data: DataFile
+  isMobile: boolean
 }
 
-const DealerPlateTab = ({ data }: Props) => {
+const DealerPlateTab = ({ data, isMobile }: Props) => {
   const { dispatch } = useBuildContext()
 
   useEffect(() => {
@@ -32,8 +33,12 @@ const DealerPlateTab = ({ data }: Props) => {
 
   return (
     <Box>
-      <Box display={'flex'} justifyContent={'center'}>
-        <Box>
+      <Box
+        display={'flex'}
+        justifyContent={'center'}
+        flexDirection={isMobile ? 'column' : 'row'}
+      >
+        <Box sx={isMobile ? { display: 'flex', flexDirection: 'column' } : {}}>
           <PanelDropdown panels={data.panels} dealerPlate disabled />
           <PositionsDropdown />
           <MountDropdown options={data.mount} />

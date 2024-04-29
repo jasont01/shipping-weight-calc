@@ -1,4 +1,10 @@
-import { Box, Tab as MuiTab, Tabs as MuiTabs, Paper } from '@mui/material'
+import {
+  Box,
+  Tab as MuiTab,
+  Tabs as MuiTabs,
+  Paper,
+  useMediaQuery,
+} from '@mui/material'
 
 import CabinetsTab from './Cabinets'
 import AccessoriesTab from './Accessories'
@@ -33,6 +39,7 @@ const Panel = (props: PanelProps) => {
 }
 
 const Tabs = () => {
+  const isMobile = useMediaQuery('(max-width: 600px)')
   const { state, dispatch } = useBuildContext()
 
   return (
@@ -56,16 +63,16 @@ const Tabs = () => {
           </MuiTabs>
         </Box>
         <Panel index={Tab.Cabinets}>
-          <CabinetsTab data={data} />
+          <CabinetsTab data={data} isMobile={isMobile} />
         </Panel>
         <Panel index={Tab.Hybrids}>
-          <HybridsTab data={data} />
+          <HybridsTab data={data} isMobile={isMobile} />
         </Panel>
         <Panel index={Tab.DealerPlate}>
-          <DealerPlateTab data={data} />
+          <DealerPlateTab data={data} isMobile={isMobile} />
         </Panel>
         <Panel index={Tab.Mini}>
-          <MiniTab data={data} />
+          <MiniTab data={data} isMobile={isMobile} />
         </Panel>
         <Panel index={Tab.Accessories}>
           <AccessoriesTab

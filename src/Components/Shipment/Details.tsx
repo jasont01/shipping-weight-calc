@@ -7,6 +7,7 @@ import {
   Table,
   TableHead,
   TableBody,
+  useMediaQuery,
 } from '@mui/material'
 
 import { Details as DetailsType } from '../../context/ShipmentContext'
@@ -17,11 +18,19 @@ interface Props {
 }
 
 const Details = ({ details, open }: Props) => {
+  const isMobile = useMediaQuery('(max-width: 600px)')
+
   return (
     <TableRow>
       <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={7}>
         <Collapse in={open} timeout='auto' unmountOnExit>
-          <Box sx={{ margin: '0', marginLeft: '25em', marginBottom: '1em' }}>
+          <Box
+            sx={{
+              margin: '0',
+              marginLeft: isMobile ? '5em' : '25em',
+              marginBottom: '1em',
+            }}
+          >
             <Typography variant='subtitle2' marginTop={'1em'}>
               Details
             </Typography>
