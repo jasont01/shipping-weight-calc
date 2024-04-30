@@ -24,7 +24,7 @@ const MiniTab = ({ data, isMobile }: Props) => {
   }, [dispatch])
 
   return (
-    <Box>
+    <Box data-testid='mini-tab'>
       <Box
         display={'flex'}
         justifyContent={'center'}

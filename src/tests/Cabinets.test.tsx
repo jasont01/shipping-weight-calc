@@ -55,6 +55,7 @@ const scenarios = data.cabinets.flatMap((cab, cabIdx) =>
         size: cabIdx,
         config: cfgIdx,
         isAddon: cfgIdx === Config.Addon,
+        mount: 'none',
       }))
     })
   )
