@@ -56,10 +56,18 @@ const getCabinet = (state: State) => {
 
 const getMaxPanels = (state: State) => {
   switch (state.currentTab) {
-    case Tab.Hybrids:
-      return state.hybridType === data.hybrids[Hybrid.DP]
-        ? data.cabinets[Cab.Large].maxPanels - state.hybridPanels * 2
-        : data.cabinets[Cab.Large].maxPanels - state.hybridPanels
+    case Tab.Hybrids: {
+      const maxPanels = state.isAddon
+        ? data.cabinets[Cab.Large].maxPanels + 1
+        : data.cabinets[Cab.Large].maxPanels
+
+      const hybridPanels =
+        state.hybridType === data.hybrids[Hybrid.DP]
+          ? state.hybridPanels * 2
+          : state.hybridPanels
+
+      return maxPanels - hybridPanels
+    }
 
     case Tab.DealerPlate:
       return 3
@@ -68,7 +76,9 @@ const getMaxPanels = (state: State) => {
       return data.cabinets[Cab.Mini].maxPanels
 
     default:
-      return data.cabinets[Cab.Large].maxPanels
+      return state.isAddon
+        ? data.cabinets[Cab.Large].maxPanels + 1
+        : data.cabinets[Cab.Large].maxPanels
   }
 }
 
