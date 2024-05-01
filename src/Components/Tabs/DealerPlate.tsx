@@ -16,10 +16,10 @@ import { Panel } from '../../enums'
 
 interface Props {
   data: DataFile
-  isMobile: boolean
+  isMobile?: boolean
 }
 
-const DealerPlateTab = ({ data, isMobile }: Props) => {
+const DealerPlateTab = ({ data, isMobile = false }: Props) => {
   const { dispatch } = useBuildContext()
 
   useEffect(() => {

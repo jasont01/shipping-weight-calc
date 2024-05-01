@@ -12,10 +12,10 @@ import { DataFile } from '../../types/types'
 
 interface Props {
   data: DataFile
-  isMobile: boolean
+  isMobile?: boolean
 }
 
-const CabinetsTab = ({ data, isMobile }: Props) => {
+const CabinetsTab = ({ data, isMobile = false }: Props) => {
   return (
     <Box>
       <Box

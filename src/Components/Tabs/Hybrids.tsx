@@ -16,10 +16,10 @@ import { Panel } from '../../enums'
 
 interface Props {
   data: DataFile
-  isMobile: boolean
+  isMobile?: boolean
 }
 
-const HybridsTab = ({ data, isMobile }: Props) => {
+const HybridsTab = ({ data, isMobile = false }: Props) => {
   const { dispatch } = useBuildContext()
 
   useEffect(() => {

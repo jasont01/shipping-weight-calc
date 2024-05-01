@@ -13,10 +13,10 @@ import { DataFile } from '../../types/types'
 
 interface Props {
   data: DataFile
-  isMobile: boolean
+  isMobile?: boolean
 }
 
-const MiniTab = ({ data, isMobile }: Props) => {
+const MiniTab = ({ data, isMobile = false }: Props) => {
   const { dispatch } = useBuildContext()
 
   useEffect(() => {
