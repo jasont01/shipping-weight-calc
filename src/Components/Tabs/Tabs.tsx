@@ -59,7 +59,7 @@ const Tabs = () => {
             <MuiTab label='DealerPlate' />
             <MuiTab label='Mini' />
             <MuiTab label='Accessories' />
-            <MuiTab label='Mechanical' disabled />
+            {/* <MuiTab label='Mechanical' disabled /> */}
           </MuiTabs>
         </Box>
         <Panel index={Tab.Cabinets}>
@@ -81,9 +81,9 @@ const Tabs = () => {
             accessories={data.accessories}
           />
         </Panel>
-        <Panel index={Tab.Mechanical}>
+        {/* <Panel index={Tab.Mechanical}>
           <MechanicalTab items={data.mechanical} />
-        </Panel>
+        </Panel> */}
       </Box>
     </Paper>
   )
