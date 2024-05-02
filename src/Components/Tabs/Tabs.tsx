@@ -11,7 +11,7 @@ import AccessoriesTab from './Accessories'
 import HybridsTab from './Hybrids'
 import DealerPlateTab from './DealerPlate'
 import MiniTab from './Mini'
-import MechanicalTab from './Mechanical'
+//import MechanicalTab from './Mechanical'
 
 import { Tab } from '../../enums'
 import data from '../../data.json'
