@@ -37,7 +37,8 @@ describe('Positions Dropdown', () => {
 
   scenarios.push({
     scenario: 'MX 320 Addon',
-    stateChanges: { panelCount: 10, isAddon: true },
+    stateChanges: { panelCount: 10, maxPanels: 10, isAddon: true },
+
     expectedValue: '320',
   })
 
@@ -53,6 +54,7 @@ describe('Positions Dropdown', () => {
     scenario: 'HC 560 Addon',
     stateChanges: {
       panelType: data.panels[Panel.HC],
+      maxPanels: 10,
       panelCount: 10,
       isAddon: true,
     },

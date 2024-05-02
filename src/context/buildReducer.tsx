@@ -102,7 +102,7 @@ const validatePanelCount = (state: State) => {
   }
 }
 
-const validateState = (prevState: State, action: Action) => {
+export const validateState = (prevState: State, action: Action) => {
   const state = buildReducer(prevState, action)
 
   const maxPanels = getMaxPanels(state)

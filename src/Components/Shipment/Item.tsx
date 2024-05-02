@@ -16,6 +16,7 @@ interface Props {
 }
 
 const Item = ({
+  item,
   item: { desc, size, mount, part, qty, weight, details },
 }: Props) => {
   const [open, setOpen] = useState(false)
@@ -25,7 +26,7 @@ const Item = ({
   const handleRemove = () => {
     dispatch({ type: 'REMOVE_ITEM', payload: part })
   }
-
+  console.log(item)
   return (
     <>
       <TableRow key={part}>
