@@ -7,10 +7,13 @@ import {
   Container,
   CircularProgress,
 } from '@mui/material'
-import Main from './Main'
+
+import Tabs from './Components/Tabs/Tabs'
 import Header from './Components/Header'
-import Shipment from './Components/Shipment'
-//import { useBuildContext } from './hooks/useBuildContext'
+import Shipment from './Components/Shipment/Shipment'
+
+import BuildContextProvider from './context/BuildContext'
+import ShipmentContextProvider from './context/ShipmentContext'
 
 const theme = createTheme({
   palette: {
@@ -21,12 +24,9 @@ const theme = createTheme({
 })
 
 const App = () => {
-  //const { dispatch } = useBuildContext()
   const [loading, setLoading] = useState(false)
-  const [tab, setTab] = useState(0)
 
   useEffect(() => {
-    //dispatch({ type: 'SET_DATA', payload: data })
     setLoading(false)
   }, [])
 
@@ -44,20 +44,24 @@ const App = () => {
   )
 
   const Content = () => (
-    <Container maxWidth='lg' sx={{ mt: 8 }}>
-      <Main tab={tab} setTab={setTab} />
-      <Shipment setTab={setTab} />
+    <Container maxWidth='md' sx={{ mt: 8 }}>
+      <Tabs />
+      <Shipment />
     </Container>
   )
 
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Box>
-        <Header />
-        {loading ? <Spinner /> : <Content />}
-      </Box>
-    </ThemeProvider>
+    <BuildContextProvider>
+      <ShipmentContextProvider>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <Box>
+            <Header />
+            {loading ? <Spinner /> : <Content />}
+          </Box>
+        </ThemeProvider>
+      </ShipmentContextProvider>
+    </BuildContextProvider>
   )
 }
 

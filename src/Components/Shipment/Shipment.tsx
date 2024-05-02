@@ -10,40 +10,50 @@ import {
   Button,
   useMediaQuery,
 } from '@mui/material'
+
 import Item from './Item'
 import PalletButtons from './PalletButtons'
 import Summary from './Summary'
 
-import { useShipmentContext } from '../hooks/useShipmentContext'
-import { useBuildContext } from '../hooks/useBuildContext'
+import { useShipmentContext } from '../../hooks/useShipmentContext'
+import { useBuildContext } from '../../hooks/useBuildContext'
 
-const Shipment = ({ setTab }) => {
-  const { items, dispatch: resetShipment } = useShipmentContext()
+const Shipment = () => {
+  const { state, dispatch: resetShipment } = useShipmentContext()
   const { dispatch: resetBuild } = useBuildContext()
 
   const isMobile = useMediaQuery('(max-width: 600px)')
 
   const resetBtnStyles = isMobile
     ? { display: 'flex', justifyContent: 'center' }
-    : { display: 'block', position: 'relative', bottom: '8em' }
+    : {
+        display: 'block',
+        justifyContent: '',
+        position: 'relative',
+        bottom: '8em',
+      }
 
   const handleReset = () => {
     resetShipment({ type: 'RESET' })
     resetBuild({ type: 'RESET' })
-    setTab(0)
   }
 
-  if (!items || items.length === 0) return
+  if (!state.items || state.items.length === 0) return
 
   return (
     <Box sx={{ mt: 4 }}>
       <PalletButtons />
       <TableContainer component={Paper} sx={{ p: 1, pb: 0 }}>
-        <Table sx={{ minWidth: 700 }} size='small'>
+        <Table size='small'>
           <TableHead>
             <TableRow>
-              <TableCell>Desc</TableCell>
-              <TableCell align='right'>Part</TableCell>
+              <TableCell sx={{ padding: 0 }}></TableCell>
+              <TableCell sx={{ paddingLeft: 0 }}>Desc</TableCell>
+              <TableCell>Size</TableCell>
+              <TableCell>Mount</TableCell>
+              <TableCell sx={{ paddingX: 0 }} align='right'>
+                Part
+              </TableCell>
               <TableCell align='right' sx={{ pr: '4em' }}>
                 Qty
               </TableCell>
@@ -52,7 +62,7 @@ const Shipment = ({ setTab }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {items.map((item) => (
+            {state.items.map((item) => (
               <Item key={item.part} item={item} />
             ))}
           </TableBody>

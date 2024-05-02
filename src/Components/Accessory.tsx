@@ -1,10 +1,17 @@
 import { TextField } from '@mui/material'
+
 import { useBuildContext } from '../hooks/useBuildContext'
 
-const Accessory = ({ item }) => {
-  const { accessories, dispatch } = useBuildContext()
+import { Item } from '../types/types'
 
-  const handleChange = (e) => {
+interface Props {
+  item: Item
+}
+
+const Accessory = ({ item }: Props) => {
+  const { state, dispatch } = useBuildContext()
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch({
       type: 'SET_ACCESSORIES',
       payload: { ...item, qty: parseInt(e.target.value) },
@@ -17,7 +24,7 @@ const Accessory = ({ item }) => {
       label={item.part}
       type='number'
       InputProps={{ inputProps: { min: 0 } }}
-      value={accessories.find((accs) => accs.part === item.part).qty}
+      value={state.accessories.find((accs) => accs.part === item.part)?.qty}
       sx={{ width: '5em', m: 1 }}
       size={'small'}
       onChange={handleChange}

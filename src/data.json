@@ -2,91 +2,107 @@
   "panels": [
     { "type": "MX", "weight": 4.5, "positions": 32, "suffix": "X" },
     { "type": "HC", "weight": 2.6, "positions": 56, "suffix": "H" },
-    { "type": "Xi", "weight": 8.7, "positions": 32, "suffix": "I" },
-    { "type": "XU", "weight": 8.0, "positions": 32, "suffix": "U" },
-    {
-      "type": "DP",
-      "weight": 5.3,
-      "positions": 16,
-      "panelSize": 2,
-      "interiorOnly": true,
-      "suffix": "D"
-    },
-    {
-      "type": "Blank",
-      "weight": 3.0,
-      "positions": null,
-      "suffix": null,
-      "hidden": true
-    }
+    { "type": "MXi", "weight": 8.7, "positions": 32, "suffix": "I" },
+    { "type": "MXu", "weight": 8.0, "positions": 32, "suffix": "U" },
+    { "type": "DP", "weight": 5.3, "positions": 16, "suffix": "DP" }
   ],
+  "hybrids": [
+    { "type": "DP", "weight": 5.3, "positions": 16, "suffix": "MD" },
+    { "type": "MXi", "weight": 8.7, "positions": 32, "suffix": "MI" }
+  ],
+  "blank": {
+    "weight": 3.0
+  },
   "cabinets": [
     {
-      "type": "Large",
+      "size": "Large",
       "weight": 103.1,
-      "interiorPanels": 5,
-      "doorPanels": 4,
-      "mount": { "wall": "AAX010", "stand": "A600" },
-      "box": "PBX015"
+      "maxPanels": 9,
+      "wallboard": {
+        "desc": "Large Wallboard",
+        "part": "AAX010",
+        "weight": 29.4
+      },
+      "box": {
+        "desc": "Large Box",
+        "part": "PBX015",
+        "weight": 12.4
+      }
     },
     {
-      "type": "Small",
+      "size": "Small",
       "weight": 56.6,
-      "interiorPanels": 3,
-      "doorPanels": 1,
-      "mount": { "wall": "AAX020", "stand": "A600" },
-      "box": "PBX016"
+      "maxPanels": 4,
+      "wallboard": {
+        "desc": "Small Wallboard",
+        "part": "AAX020",
+        "weight": 17.3
+      },
+      "box": {
+        "desc": "Small Box",
+        "part": "PBX016",
+        "weight": 7.3
+      }
     },
     {
-      "type": "Mini",
+      "size": "Mini",
       "weight": 44.8,
-      "interiorPanels": 1,
-      "doorPanels": 0,
-      "mount": { "wall": "AAX056", "stand": "A600" },
-      "box": "PBX0xx"
+      "maxPanels": 1,
+      "wallboard": {
+        "desc": "Mini Wallboard",
+        "part": "AAX056",
+        "weight": 12.6
+      },
+      "box": {
+        "desc": "Mini Box",
+        "part": "PBX0xx",
+        "weight": 6.7
+      }
     }
   ],
   "config": [
-    { "type": "Kiosk", "weight": 9.0, "extraPanels": null, "suffix": "C" },
-    { "type": "Addon", "weight": 0.2, "extraPanels": 1, "suffix": "A" }
+    { "type": "Kiosk", "weight": 9.0, "suffix": "C" },
+    { "type": "Addon", "weight": 0.2, "suffix": "A" }
   ],
-  "mount": [
-    { "type": "wall", "accessoryType": "Wallboard" },
-    { "type": "stand", "accessoryType": "Stand" },
-    { "type": "none", "accessoryType": null }
-  ],
+  "mount": ["Wall", "Stand", "None"],
+  "stand": {
+    "desc": "Stand",
+    "part": "A600",
+    "weight": 60.4,
+    "box": { "desc": "Stand Box", "part": "PBX020", "weight": 20.2 }
+  },
   "accessories": [
     {
-      "type": "Wallboard",
-      "items": [
-        { "desc": "Large Wallboard", "part": "AAX010", "weight": 29.4 },
-        { "desc": "Small Wallboard", "part": "AAX020", "weight": 17.3 },
-        { "desc": "Mini Wallboard", "part": "AAX056", "weight": 12.6 }
-      ]
+      "desc": "APC",
+      "part": "ATX020",
+      "weight": 6
     },
     {
-      "type": "Stand",
-      "items": [{ "desc": "Stand", "part": "A600", "weight": 60.4 }]
+      "desc": "APC Shelf",
+      "part": "AMX169",
+      "weight": 10.8
     },
     {
-      "type": "APC",
-      "items": [{ "desc": "APC", "part": "ATX020", "weight": 6 }]
+      "desc": "Zebra",
+      "part": "ATM015",
+      "weight": 10
     },
     {
-      "type": "APC Shelf",
-      "items": [{ "desc": "APC Shelf", "part": "AMX169", "weight": 10.8 }]
+      "desc": "Puck Lock",
+      "part": "AMX152",
+      "weight": 4.0
     },
     {
-      "type": "Zebra",
-      "items": [{ "desc": "Zebra Printer", "part": "ATM015", "weight": 10 }]
-    },
+      "desc": "Pelican",
+      "part": "MPT006",
+      "weight": 29.3
+    }
+  ],
+  "mechanical": [
     {
-      "type": "Puck Lock",
-      "items": [{ "desc": "Puck Lock", "part": "AMX152", "weight": 4.0 }]
-    },
-    {
-      "type": "Pelican",
-      "items": [{ "desc": "Pelican", "part": "MPT006", "weight": 29.3 }]
+      "desc": "ITEM_DESC",
+      "part": "PART_NUM",
+      "weight": 0
     }
   ],
   "pallets": [
@@ -94,11 +110,5 @@
     { "desc": "48x40", "part": "PBX021", "weight": 28.9 },
     { "desc": "36x36", "part": "PBX003", "weight": 29.5 },
     { "desc": "Int'l", "part": "N/A", "weight": 35 }
-  ],
-  "boxes": [
-    { "size": "Stand", "part": "PBX020", "weight": 20.2 },
-    { "size": "Large", "part": "PBX015", "weight": 12.4 },
-    { "size": "Small", "part": "PBX016", "weight": 7.3 },
-    { "size": "Mini", "part": "PBX0xx", "weight": 6.7 }
   ]
 }

@@ -1,8 +1,9 @@
 import { FormControl, TextField } from '@mui/material'
-import { useBuildContext } from '../hooks/useBuildContext'
+
+import { useBuildContext } from '../../hooks/useBuildContext'
 
 const Qty = () => {
-  const { qty, dispatch } = useBuildContext()
+  const { state, dispatch } = useBuildContext()
 
   return (
     <FormControl>
@@ -11,7 +12,7 @@ const Qty = () => {
         label='Qty'
         type='number'
         InputProps={{ inputProps: { min: 1 } }}
-        value={qty}
+        value={state.qty}
         onChange={(e) =>
           dispatch({ type: 'SET_QTY', payload: parseInt(e.target.value) })
         }
