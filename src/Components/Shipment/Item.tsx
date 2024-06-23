@@ -26,7 +26,7 @@ const Item = ({
   const handleRemove = () => {
     dispatch({ type: 'REMOVE_ITEM', payload: part })
   }
-  console.log(item)
+
   return (
     <>
       <TableRow key={part}>
