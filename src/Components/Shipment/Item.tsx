@@ -16,7 +16,6 @@ interface Props {
 }
 
 const Item = ({
-  item,
   item: { desc, size, mount, part, qty, weight, details },
 }: Props) => {
   const [open, setOpen] = useState(false)
